@@ -1,5 +1,5 @@
-<!-- Fichier Change log master pour les migrations liquibase -->
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Fichier Change log master pour les migrations liquibase -->
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
@@ -7,4 +7,6 @@
 
     <!-- Include all changelog files from the "changelogs" directory -->
 
+
+    <include file="db/changelog/2023/12/23-01-changelog.xml"/>
 </databaseChangeLog>
