@@ -1,6 +1,7 @@
 package fr.nicolas.godin.shoot_training_api.api.controller;
 
 import fr.nicolas.godin.shoot_training_api.api.dto.RegistrationDto;
+import fr.nicolas.godin.shoot_training_api.api.dto.ValidationCodeDto;
 import fr.nicolas.godin.shoot_training_api.api.service.RegistrationService;
 import fr.nicolas.godin.shoot_training_api.database.entity.Shooter;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -34,5 +35,38 @@ public class RegistrationController {
 
         }
 
+    }
+
+    @GetMapping("authorize-validation/{email}")
+    public ResponseEntity<String> emailVerification(@PathVariable("email") String email) {
+        try {
+
+            Boolean isAuthorize = this.registrationService.emailVerification(email);
+            HttpStatus status = isAuthorize ? HttpStatus.OK : HttpStatus.BAD_REQUEST;
+            String message = isAuthorize ? "code is valid" : "code is invalid";
+            return new ResponseEntity<>(message,status);
+
+        } catch (Exception e) {
+
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
+
+        }
+
+    }
+
+    @PostMapping("validation-code")
+    public ResponseEntity<String> codeValidation(@Valid @RequestBody ValidationCodeDto code) {
+        try {
+
+            boolean accountActivated = this.registrationService.validationCode(code);
+            HttpStatus status = accountActivated ? HttpStatus.OK : HttpStatus.BAD_REQUEST;
+            String message = accountActivated ? "code is valid" : "code is invalid please retry";
+            return new ResponseEntity<>(message,status);
+
+        } catch (Exception e) {
+
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
+
+        }
     }
 }

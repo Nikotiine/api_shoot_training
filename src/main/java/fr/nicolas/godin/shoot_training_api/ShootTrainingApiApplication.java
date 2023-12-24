@@ -14,6 +14,7 @@ public class ShootTrainingApiApplication {
 		return new ModelMapper();
 	}
 
+
 	public static void main(String[] args) {
 
 		SpringApplication.run(ShootTrainingApiApplication.class, args);

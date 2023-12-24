@@ -1,5 +1,6 @@
 package fr.nicolas.godin.shoot_training_api.api.service;
 
+import fr.nicolas.godin.shoot_training_api.api.dto.ValidationCodeDto;
 import fr.nicolas.godin.shoot_training_api.database.UserRole;
 import fr.nicolas.godin.shoot_training_api.database.entity.Shooter;
 import fr.nicolas.godin.shoot_training_api.database.entity.ValidationCode;
@@ -37,5 +38,25 @@ public class RegistrationService {
 
     }
 
+    public Boolean emailVerification(String email) {
+        Shooter shooter = this.shooterRepository.findByEmail(email);
+        return this.validationCodeService.emailVerificationAndValidityCode(shooter);
 
+    }
+
+    public Boolean validationCode(ValidationCodeDto code) {
+        boolean isActivate = false;
+        Shooter shooter = this.shooterRepository.findByEmail(code.getShooterEmail());
+        ValidationCode validationCode = this.validationCodeService.getGenerateValidationCode(shooter);
+        if (code.getCode() == validationCode.getCode()) {
+            // Active le compte
+            shooter.setActive(true);
+            // Valide le status actif du compte
+            this.shooterRepository.save(shooter);
+            // Supprime le code en base de données
+            this.validationCodeService.deleteActivatedCode(validationCode);
+            isActivate = true;
+        }
+        return isActivate;
+    }
 }
