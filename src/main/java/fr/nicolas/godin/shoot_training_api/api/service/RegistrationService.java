@@ -1,5 +1,6 @@
 package fr.nicolas.godin.shoot_training_api.api.service;
 
+import fr.nicolas.godin.shoot_training_api.api.dto.RefreshCodeRequest;
 import fr.nicolas.godin.shoot_training_api.api.dto.ValidationCodeDto;
 import fr.nicolas.godin.shoot_training_api.database.UserRole;
 import fr.nicolas.godin.shoot_training_api.database.entity.Shooter;
@@ -8,7 +9,6 @@ import fr.nicolas.godin.shoot_training_api.database.repository.ShooterRepository
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
 
 
 @Service
@@ -21,6 +21,7 @@ public class RegistrationService {
     private final MailerService mailerService;
 
     public void register(Shooter newShooter){
+
 
         Shooter shooter =  this.createNewShooter(newShooter);
         ValidationCode code = this.validationCodeService.generateValidationCode(shooter);
@@ -38,7 +39,8 @@ public class RegistrationService {
 
     }
 
-    public Boolean emailVerification(String email) {
+    public Boolean emailVerification(String email) throws NullPointerException {
+
         Shooter shooter = this.shooterRepository.findByEmail(email);
         return this.validationCodeService.emailVerificationAndValidityCode(shooter);
 
@@ -58,5 +60,11 @@ public class RegistrationService {
             isActivate = true;
         }
         return isActivate;
+    }
+
+    public void refreshValidationCode(RefreshCodeRequest refreshCodeRequest) throws NullPointerException {
+        Shooter shooter = this.shooterRepository.findByEmail(refreshCodeRequest.email());
+        ValidationCode code = this.validationCodeService.generateValidationCode(shooter);
+        this.mailerService.sendValidationCode(code);
     }
 }

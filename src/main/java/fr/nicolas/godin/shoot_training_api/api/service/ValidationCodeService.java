@@ -23,7 +23,7 @@ public class ValidationCodeService {
     public ValidationCode generateValidationCode(Shooter shooter) {
 
         ValidationCode code = new ValidationCode();
-        Date createdAt =  shooter.getCreatedAT();
+        Date createdAt =  new Date();
         // Temps de validité du code en milisecondes
         int timeOfValidity = 60 * 1000* 10;
         code.setShooter(shooter);
@@ -42,6 +42,10 @@ public class ValidationCodeService {
 
         Date now = new Date();
         ValidationCode code = validationCodeRepository.findByShooter(shooter);
+        boolean isCodeValidityTime = now.before(code.getTimeOfValidity());
+        if (!isCodeValidityTime){
+            this.deleteActivatedCode(code);
+        }
         return now.before(code.getTimeOfValidity());
 
     }
