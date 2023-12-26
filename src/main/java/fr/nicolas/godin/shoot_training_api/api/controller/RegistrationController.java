@@ -20,7 +20,7 @@ import static org.springframework.http.HttpStatus.CREATED;
 
 @RestController
 @Tag(name = "Registration",description = "Registration Controller")
-@RequestMapping("/api")
+@RequestMapping("/api/registration")
 @AllArgsConstructor
 public class RegistrationController {
 
