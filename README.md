@@ -24,6 +24,8 @@ SECURITY_PASSWORD=
 OPEN_API_EMAIL=
 OPEN_API_USERNAME=
 OPEN_API_WEBSITE_URL=
+
+JWT_SECRET_KEY=
 ```
 * Demarrer le projet.
 * Pour les utilisateur de Intellij telecharger le plugin JPA BUDDY

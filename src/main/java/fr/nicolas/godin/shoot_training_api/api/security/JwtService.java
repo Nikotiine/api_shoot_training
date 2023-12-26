@@ -1,20 +1,15 @@
-package fr.nicolas.godin.shoot_training_api.api.service;
+package fr.nicolas.godin.shoot_training_api.api.security;
 
 import fr.nicolas.godin.shoot_training_api.api.dto.Token;
+import fr.nicolas.godin.shoot_training_api.api.service.AuthenticationService;
 import fr.nicolas.godin.shoot_training_api.database.entity.Shooter;
 import io.github.cdimascio.dotenv.Dotenv;
 import io.jsonwebtoken.Jwts;
-
-import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import lombok.AllArgsConstructor;
-
 import org.springframework.stereotype.Service;
-
-import javax.crypto.SecretKey;
 import java.security.Key;
-
 import java.util.Date;
 import java.util.Map;
 
