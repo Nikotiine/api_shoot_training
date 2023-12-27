@@ -12,7 +12,9 @@ import org.springframework.context.annotation.Configuration;
 public class OpenApiConfig {
     @Bean
     public OpenAPI myOpenAPI() {
+        //Configuration de open api
         Dotenv dotenv = Dotenv.load();
+
         Contact contact = new Contact();
         contact.setEmail(dotenv.get("OPEN_API_EMAIL"));
         contact.setName(dotenv.get("OPEN_API_USERNAME"));
@@ -28,5 +30,6 @@ public class OpenApiConfig {
                 .license(mitLicense);
 
         return new OpenAPI().info(info);
+
     }
 }

@@ -14,18 +14,18 @@ DB_PASSWORD=postgres
 DB_USERNAME=postgres
 DB_HOST=localhost
 DB_PORT=5432
-DB_NAME=
-EMAIL_USERNAME=
-EMAIL_PASSWORD=
-EMAIL_HOST=
-SECURITY_USERNAME=
-SECURITY_PASSWORD=
+DB_NAME=db_shoot_training
+EMAIL_USERNAME= votre email associer au serveur smtp
+EMAIL_PASSWORD= le password du serveur smtp
+EMAIL_HOST= le serveur smtp
+SECURITY_USERNAME= user pour connection a springboot security
+SECURITY_PASSWORD= password pour connection a springboot security
 
-OPEN_API_EMAIL=
-OPEN_API_USERNAME=
-OPEN_API_WEBSITE_URL=
+OPEN_API_EMAIL=contact@nicolas-godin.fr
+OPEN_API_USERNAME=Nicolas
+OPEN_API_WEBSITE_URL=https://nicolas-godin.fr/
 
-JWT_SECRET_KEY=
+JWT_SECRET_KEY= clef secrete pour signature du token HS512
 ```
 * Demarrer le projet.
 * Pour les utilisateur de Intellij telecharger le plugin JPA BUDDY
