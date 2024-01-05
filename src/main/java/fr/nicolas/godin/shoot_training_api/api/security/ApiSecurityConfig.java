@@ -65,7 +65,7 @@ public class ApiSecurityConfig {
                 .authorizeHttpRequests(
                 authorize -> authorize
                         .requestMatchers("/swagger-ui/**").permitAll()
-                        .requestMatchers("api/registration/**-").permitAll()
+                        .requestMatchers("api/registration/**").permitAll()
                         .requestMatchers(HttpMethod.POST,"api/authentication/login").permitAll()
                         .anyRequest().authenticated()
                 )
