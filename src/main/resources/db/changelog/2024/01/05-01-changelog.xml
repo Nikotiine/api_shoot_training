@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1704480963160-1" author="niko (generated)">
+        <addColumn tableName="shooter">
+            <column defaultValueBoolean="true" name="active" type="boolean"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="1704480963160-2" author="niko (generated)">
+        <addColumn tableName="validation_code">
+            <column defaultValueBoolean="true" name="active" type="boolean"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="1704480963160-3" author="niko (generated)">
+        <dropColumn columnName="is_active" tableName="shooter"/>
+    </changeSet>
+    <changeSet id="1704480963160-4" author="niko (generated)">
+        <dropColumn columnName="is_active" tableName="validation_code"/>
+    </changeSet>
+
+</databaseChangeLog>

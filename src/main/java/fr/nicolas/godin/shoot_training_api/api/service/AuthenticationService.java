@@ -18,7 +18,7 @@ public class AuthenticationService implements UserDetailsService {
     @Override
     public Shooter loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        return this.shooterRepository.findByEmail(username);
+        return this.shooterRepository.findByEmailAndActiveIsTrue(username);
 
     }
 }

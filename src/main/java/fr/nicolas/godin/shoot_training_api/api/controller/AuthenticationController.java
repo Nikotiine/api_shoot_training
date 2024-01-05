@@ -10,12 +10,11 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
-import static org.springframework.http.HttpStatus.OK;
+
 
 @RestController
 @Tag(name = "Authentication",description = "Authentication Controller")
@@ -37,7 +36,6 @@ public class AuthenticationController {
     );
     return this.jwtService.generate(credentials.getEmail());
 
-
     }
 
     @GetMapping(value ="me",produces = MediaType.APPLICATION_JSON_VALUE)
@@ -46,9 +44,7 @@ public class AuthenticationController {
 
         // Lors de la connection retourne le profil user et permet de verifier que le token est bon
         Shooter shooter =(Shooter) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
         return this.modelMapper.map(shooter,ShooterProfileDto.class);
-
 
     }
 }

@@ -6,5 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.Optional;
 
 public interface ShooterRepository extends CrudRepository<Shooter,Integer> {
+
+  Shooter findByEmailAndActiveIsTrue(String email);
   Shooter findByEmail(String email);
 }
