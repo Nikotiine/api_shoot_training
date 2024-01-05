@@ -40,12 +40,15 @@ public class AuthenticationController {
 
     }
 
-    @GetMapping("me")
-    public ResponseEntity<ShooterProfileDto> me(){
+    @GetMapping(value ="me",produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ShooterProfileDto me(){
+
         // Lors de la connection retourne le profil user et permet de verifier que le token est bon
         Shooter shooter =(Shooter) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        ShooterProfileDto profile = this.modelMapper.map(shooter,ShooterProfileDto.class);
-        return ResponseEntity.status(OK).body(profile);
+
+        return this.modelMapper.map(shooter,ShooterProfileDto.class);
+
 
     }
 }
