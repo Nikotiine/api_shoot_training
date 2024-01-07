@@ -1,6 +1,6 @@
 package fr.nicolas.godin.shoot_training_api.api.controller;
 
-import fr.nicolas.godin.shoot_training_api.api.dto.ErrorMessage;
+import fr.nicolas.godin.shoot_training_api.api.dto.ResponseMessage;
 import fr.nicolas.godin.shoot_training_api.api.dto.RefreshCodeRequest;
 import fr.nicolas.godin.shoot_training_api.api.dto.RegistrationDto;
 import fr.nicolas.godin.shoot_training_api.api.dto.ValidationCodeDto;
@@ -12,6 +12,7 @@ import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,35 +27,39 @@ public class RegistrationController {
 
     private RegistrationService registrationService;
     private ModelMapper modelMapper;
-    @PostMapping("register")
-    public ResponseEntity<?> register(@Valid @RequestBody RegistrationDto shooterEntityDto){
+    @PostMapping(value="register",produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public ResponseEntity<ResponseMessage> register(@Valid @RequestBody RegistrationDto shooterEntityDto){
 
         try {
 
             Shooter shooter = this.modelMapper.map(shooterEntityDto, Shooter.class);
             this.registrationService.register(shooter);
-            return ResponseEntity.status(CREATED).build();
+            return ResponseEntity.status(CREATED).body(new ResponseMessage(1,"Please active your account"));
 
         } catch (DataIntegrityViolationException e) {
 
-            return  ResponseEntity.status(BAD_REQUEST).body(new ErrorMessage(1,"Email already use"));
+            return  ResponseEntity.status(BAD_REQUEST).body(new ResponseMessage(100,"Email already use"));
 
         }
 
     }
 
-    @GetMapping("authorize-validation/{email}")
-    public ResponseEntity<?> emailVerification(@PathVariable("email") String email) {
+    @GetMapping(value ="authorize-validation/{email}",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ResponseMessage> emailVerification(@PathVariable("email") String email) {
+        System.out.println(email);
         try {
 
             Boolean isAuthorize = this.registrationService.emailVerification(email);
-            HttpStatus status = isAuthorize ? HttpStatus.OK : BAD_REQUEST;
+          //  HttpStatus status = isAuthorize ? HttpStatus.OK : BAD_REQUEST;
             String message = isAuthorize ? "code is valid" : "code is out of time";
-            return  ResponseEntity.status(status).body(message);
+            int code = isAuthorize ? 2 : 3;
+            return  ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(code,message));
 
         } catch (NullPointerException e) {
 
-            return ResponseEntity.status(BAD_REQUEST).body(new ErrorMessage(2,"Email is not valid"));
+            return ResponseEntity.status(BAD_REQUEST).body(new ResponseMessage(102,"Email is not valid"));
 
         }
 
@@ -86,7 +91,7 @@ public class RegistrationController {
 
         } catch (NullPointerException e) {
 
-            return ResponseEntity.status(BAD_REQUEST).body(new ErrorMessage(2,"Email is not valid"));
+            return ResponseEntity.status(BAD_REQUEST).body(new ResponseMessage(2,"Email is not valid"));
 
         }
 

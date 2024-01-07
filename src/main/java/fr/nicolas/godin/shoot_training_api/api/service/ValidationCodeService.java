@@ -42,10 +42,7 @@ public class ValidationCodeService {
 
         Date now = new Date();
         ValidationCode code = validationCodeRepository.findByShooter(shooter);
-        boolean isCodeValidityTime = now.before(code.getTimeOfValidity());
-        if (!isCodeValidityTime){
-            this.deleteActivatedCode(code);
-        }
+       // boolean isCodeValidityTime = now.before(code.getTimeOfValidity());
         return now.before(code.getTimeOfValidity());
 
     }

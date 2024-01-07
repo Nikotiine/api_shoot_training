@@ -19,10 +19,10 @@ public class MailerService {
         Dotenv dotenv = Dotenv.load();
         SimpleMailMessage message = new SimpleMailMessage();
         String shooterEmail = code.getShooter().getEmail();
-        message.setFrom("no-replyt@nicolas-godin.fr");
+        message.setFrom(dotenv.get("EMAIL_USERNAME"));
         message.setTo(shooterEmail);
         message.setSubject("Code de validation");
-        message.setText("Lien de validation "+ dotenv.get("WEBSITE_URL")+shooterEmail+" Votre code de validation : "+ code.getCode());
+        message.setText("Lien de validation "+ dotenv.get("WEBSITE_URL")+"account-activation/"+shooterEmail+"/activate"+" Votre code de validation : "+ code.getCode());
         this.javaMailSender.send(message);
 
     }
