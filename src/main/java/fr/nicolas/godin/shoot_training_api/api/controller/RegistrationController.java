@@ -1,9 +1,7 @@
 package fr.nicolas.godin.shoot_training_api.api.controller;
 
-import fr.nicolas.godin.shoot_training_api.api.dto.ResponseMessage;
-import fr.nicolas.godin.shoot_training_api.api.dto.RefreshCodeRequest;
-import fr.nicolas.godin.shoot_training_api.api.dto.RegistrationDto;
-import fr.nicolas.godin.shoot_training_api.api.dto.ValidationCodeDto;
+import fr.nicolas.godin.shoot_training_api.api.dto.*;
+import fr.nicolas.godin.shoot_training_api.api.enums.CodeMessageResponse;
 import fr.nicolas.godin.shoot_training_api.api.service.RegistrationService;
 import fr.nicolas.godin.shoot_training_api.database.entity.Shooter;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -35,11 +33,12 @@ public class RegistrationController {
 
             Shooter shooter = this.modelMapper.map(shooterEntityDto, Shooter.class);
             this.registrationService.register(shooter);
-            return ResponseEntity.status(CREATED).body(new ResponseMessage(1,"Please active your account"));
+            return ResponseEntity.status(CREATED).body(new ResponseMessage(CodeMessageResponse.REGISTER_SUCCESS));
 
         } catch (DataIntegrityViolationException e) {
 
-            return  ResponseEntity.status(BAD_REQUEST).body(new ResponseMessage(101,"Email already use"));
+            return ResponseEntity.status(BAD_REQUEST)
+                    .body(new ResponseMessage(CodeMessageResponse.EMAIL_IS_ALREADY_USE));
 
         }
 
@@ -49,35 +48,44 @@ public class RegistrationController {
     @PostMapping(value ="validation-code",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResponseMessage> codeValidation(@Valid @RequestBody ValidationCodeDto validationCodeDto) {
         try {
-            int code = 105;
-            HttpStatus status =  BAD_REQUEST;
-            String message = "Account is already active";
+
+            CodeMessageResponse codeMessageResponse = CodeMessageResponse.ACCOUNT_IS_ALREADY_ACTIVE;
+            HttpStatus status = BAD_REQUEST;
             boolean accountIsActive = this.registrationService.accountIsAlreadyActivated(validationCodeDto.getShooterEmail());
-            if (!accountIsActive){
+
+            if (!accountIsActive) {
 
                 boolean isInValidityTime = this.registrationService.emailVerification(validationCodeDto.getShooterEmail());
 
-                if (isInValidityTime){
+                if (isInValidityTime) {
 
                     boolean accountActivated = this.registrationService.validationCode(validationCodeDto);
-                    status = accountActivated ? HttpStatus.OK : BAD_REQUEST;
-                    code = accountActivated ? 3 : 103;
-                    message = accountActivated ? "code is valid / account active" : "code is invalid please retry";
+
+                    if (accountActivated) {
+
+                        status = HttpStatus.OK;
+                        codeMessageResponse = CodeMessageResponse.ACCOUNT_ACTIVATED;
+
+                    } else {
+
+                        codeMessageResponse = CodeMessageResponse.BAD_ACTIVATION_CODE;
+                    }
+
 
                 }else {
 
-                    code = 102;
-                    message = "Code is out of time";
+                    codeMessageResponse = CodeMessageResponse.CODE_IS_OUT_OF_TIME;
+
 
                 }
             }
 
 
-            return  ResponseEntity.status(status).body(new ResponseMessage(code,message));
+            return  ResponseEntity.status(status).body(new ResponseMessage(codeMessageResponse));
 
         } catch (NullPointerException e) {
 
-            return ResponseEntity.status(BAD_REQUEST).body(new ResponseMessage(100,"Email is not valid"));
+            return ResponseEntity.status(BAD_REQUEST).body(new ResponseMessage(CodeMessageResponse.EMAIL_IS_INVALID));
 
         }
     }
@@ -87,12 +95,13 @@ public class RegistrationController {
 
        try {
 
-            this.registrationService.refreshValidationCode(refreshCodeRequest);
-            return ResponseEntity.status(OK).body(new ResponseMessage(4,"New code is send"));
+           this.registrationService.refreshValidationCode(refreshCodeRequest);
+           return ResponseEntity.status(OK).body(new ResponseMessage(CodeMessageResponse.NEW_CODE_SENT));
 
         } catch (NullPointerException e) {
 
-            return ResponseEntity.status(BAD_REQUEST).body(new ResponseMessage(100,"Email is not valid"));
+
+           return ResponseEntity.status(BAD_REQUEST).body(new ResponseMessage(CodeMessageResponse.EMAIL_IS_INVALID));
 
         }
 
