@@ -46,6 +46,11 @@ public class RegistrationService {
 
     }
 
+    public Boolean accountIsAlreadyActivated(String email) throws NullPointerException {
+        Shooter shooter = this.shooterRepository.findByEmail(email);
+        return shooter.isActive();
+    }
+
     public Boolean validationCode(ValidationCodeDto code) {
         boolean isActivate = false;
         Shooter shooter = this.shooterRepository.findByEmail(code.getShooterEmail());
@@ -64,6 +69,11 @@ public class RegistrationService {
 
     public void refreshValidationCode(RefreshCodeRequest refreshCodeRequest) throws NullPointerException {
         Shooter shooter = this.shooterRepository.findByEmail(refreshCodeRequest.email());
+        boolean codeIsInValidityTime = this.validationCodeService.emailVerificationAndValidityCode(shooter);
+        if (!codeIsInValidityTime){
+            ValidationCode oldCode = this.validationCodeService.getGenerateValidationCode(shooter);
+            this.validationCodeService.deleteActivatedCode(oldCode);
+        }
         ValidationCode code = this.validationCodeService.generateValidationCode(shooter);
         this.mailerService.sendValidationCode(code);
     }

@@ -16,8 +16,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import static org.springframework.http.HttpStatus.BAD_REQUEST;
-import static org.springframework.http.HttpStatus.CREATED;
+import static org.springframework.http.HttpStatus.*;
 
 @RestController
 @Tag(name = "Registration",description = "Registration Controller")
@@ -40,58 +39,60 @@ public class RegistrationController {
 
         } catch (DataIntegrityViolationException e) {
 
-            return  ResponseEntity.status(BAD_REQUEST).body(new ResponseMessage(100,"Email already use"));
+            return  ResponseEntity.status(BAD_REQUEST).body(new ResponseMessage(101,"Email already use"));
 
         }
 
     }
 
-    @GetMapping(value ="authorize-validation/{email}",produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ResponseMessage> emailVerification(@PathVariable("email") String email) {
-        System.out.println(email);
-        try {
 
-            Boolean isAuthorize = this.registrationService.emailVerification(email);
-          //  HttpStatus status = isAuthorize ? HttpStatus.OK : BAD_REQUEST;
-            String message = isAuthorize ? "code is valid" : "code is out of time";
-            int code = isAuthorize ? 2 : 3;
-            return  ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(code,message));
+    @PostMapping(value ="validation-code",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ResponseMessage> codeValidation(@Valid @RequestBody ValidationCodeDto validationCodeDto) {
+        try {
+            int code = 105;
+            HttpStatus status =  BAD_REQUEST;
+            String message = "Account is already active";
+            boolean accountIsActive = this.registrationService.accountIsAlreadyActivated(validationCodeDto.getShooterEmail());
+            if (!accountIsActive){
+
+                boolean isInValidityTime = this.registrationService.emailVerification(validationCodeDto.getShooterEmail());
+
+                if (isInValidityTime){
+
+                    boolean accountActivated = this.registrationService.validationCode(validationCodeDto);
+                    status = accountActivated ? HttpStatus.OK : BAD_REQUEST;
+                    code = accountActivated ? 3 : 103;
+                    message = accountActivated ? "code is valid / account active" : "code is invalid please retry";
+
+                }else {
+
+                    code = 102;
+                    message = "Code is out of time";
+
+                }
+            }
+
+
+            return  ResponseEntity.status(status).body(new ResponseMessage(code,message));
 
         } catch (NullPointerException e) {
 
-            return ResponseEntity.status(BAD_REQUEST).body(new ResponseMessage(102,"Email is not valid"));
-
-        }
-
-    }
-
-    @PostMapping("validation-code")
-    public ResponseEntity<String> codeValidation(@Valid @RequestBody ValidationCodeDto code) {
-        try {
-
-            boolean accountActivated = this.registrationService.validationCode(code);
-            HttpStatus status = accountActivated ? HttpStatus.OK : BAD_REQUEST;
-            String message = accountActivated ? "code is valid" : "code is invalid please retry";
-            return new ResponseEntity<>(message,status);
-
-        } catch (Exception e) {
-
-            return new ResponseEntity<>(e.getMessage(), BAD_REQUEST);
+            return ResponseEntity.status(BAD_REQUEST).body(new ResponseMessage(100,"Email is not valid"));
 
         }
     }
 
-    @PostMapping("refresh-code")
-    public ResponseEntity<?> refreshCode(@Valid @RequestBody RefreshCodeRequest refreshCodeRequest) {
+    @PostMapping(value ="refresh-code",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ResponseMessage> refreshCode(@Valid @RequestBody RefreshCodeRequest refreshCodeRequest) {
 
        try {
 
             this.registrationService.refreshValidationCode(refreshCodeRequest);
-            return ResponseEntity.ok().build();
+            return ResponseEntity.status(OK).body(new ResponseMessage(4,"New code is send"));
 
         } catch (NullPointerException e) {
 
-            return ResponseEntity.status(BAD_REQUEST).body(new ResponseMessage(2,"Email is not valid"));
+            return ResponseEntity.status(BAD_REQUEST).body(new ResponseMessage(100,"Email is not valid"));
 
         }
 

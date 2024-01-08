@@ -1,8 +1,6 @@
 package fr.nicolas.godin.shoot_training_api.api.dto;
 
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.*;
 import lombok.Value;
 
 import java.io.Serializable;
@@ -16,5 +14,10 @@ public class ValidationCodeDto implements Serializable {
     @Max(999999)
     @Positive
     int code;
+
+    @Email(message = "Email is not valid", regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")
+    @NotNull(message = "Can not be null")
+    @NotEmpty(message = "Can not be empty")
+    @NotBlank(message = "Can not be blank")
     String shooterEmail;
 }
