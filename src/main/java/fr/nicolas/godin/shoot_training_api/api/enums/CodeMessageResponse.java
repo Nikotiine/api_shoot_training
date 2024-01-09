@@ -6,15 +6,15 @@ import lombok.Getter;
 
 public enum CodeMessageResponse {
     //Success
-    REGISTER_SUCCESS(1,"Please active your account"),
-    ACCOUNT_ACTIVATED(2,"Your account is active"),
-    NEW_CODE_SENT(3,"New code sent"),
+    REGISTER_SUCCESS(1,"Activez votre compte"),
+    ACCOUNT_ACTIVATED(2,"Votre compte est actif"),
+    NEW_CODE_SENT(3,"Nouveau code envoyé"),
     //Error
-    EMAIL_IS_ALREADY_USE(101,"Email is used"),
-    ACCOUNT_IS_ALREADY_ACTIVE(102,"Account is active"),
-    CODE_IS_OUT_OF_TIME(103,"Code is out of time"),
-    BAD_ACTIVATION_CODE(104,"Code is invalid"),
-    EMAIL_IS_INVALID(105,"Email is invalid");;
+    EMAIL_IS_ALREADY_USE(101,"Cet email est deja utilisé"),
+    ACCOUNT_IS_ALREADY_ACTIVE(102,"Ce compte est déjà actif"),
+    CODE_IS_OUT_OF_TIME(103,"Le code n'est plus valide"),
+    BAD_ACTIVATION_CODE(104,"Code invalide, merci de retapper le code"),
+    EMAIL_IS_INVALID(105,"Cet email est invalide");;
 
     private final int code;
     private final String message;

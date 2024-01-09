@@ -12,7 +12,7 @@ public class CustomRestExceptionHandler{
     @ExceptionHandler(AuthenticationException.class)
     public ResponseEntity<Map<String, String>> invalidCredential(AuthenticationException e) {
         Map<String, String> errors = new HashMap<>();
-        errors.put("message", "invalid credentials");
+        errors.put("message", "Indentifiants invalides");
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
 }
