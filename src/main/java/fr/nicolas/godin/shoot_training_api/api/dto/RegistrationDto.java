@@ -9,29 +9,31 @@ import lombok.Value;
 
 import java.io.Serializable;
 
+
 /**
  * DTO for {@link Shooter}
  */
 @Value
 public class RegistrationDto implements Serializable {
-    @NotNull(message = "Can not be null")
-    @NotEmpty(message = "Can not be empty")
-    @NotBlank(message = "Can not be blank")
+
+    @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)
+    @NotEmpty(message = DtoDecoratorConfiguration.NOT_EMPTY_MESSAGE)
+    @NotBlank(message = DtoDecoratorConfiguration.NOT_BLACK_MESSAGE)
     String firstName;
 
-    @NotNull(message = "Can not be null")
-    @NotEmpty(message = "Can not be empty")
-    @NotBlank(message = "Can not be blank")
+    @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)
+    @NotEmpty(message = DtoDecoratorConfiguration.NOT_EMPTY_MESSAGE)
+    @NotBlank(message = DtoDecoratorConfiguration.NOT_BLACK_MESSAGE)
     String lastName;
 
-    @Email(message = "Email is not valid", regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")
-    @NotNull(message = "Can not be null")
-    @NotEmpty(message = "Can not be empty")
-    @NotBlank(message = "Can not be blank")
+    @Email(message = DtoDecoratorConfiguration.INVALID_EMAIL_MESSAGE, regexp = DtoDecoratorConfiguration.EMAIL_REGEX)
+    @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)
+    @NotEmpty(message = DtoDecoratorConfiguration.NOT_EMPTY_MESSAGE)
+    @NotBlank(message = DtoDecoratorConfiguration.NOT_BLACK_MESSAGE)
     String email;
 
-    @NotNull(message = "Can not be null")
-    @NotEmpty(message = "Can not be empty")
-    @NotBlank(message = "Can not be blank")
+    @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)
+    @NotEmpty(message = DtoDecoratorConfiguration.NOT_EMPTY_MESSAGE)
+    @NotBlank(message = DtoDecoratorConfiguration.NOT_BLACK_MESSAGE)
     String password;
 }

@@ -6,9 +6,9 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
 public record RefreshCodeRequest(
-        @Email(message = "Not valid email format", regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")
-        @NotNull(message = "Can not be null")
-        @NotEmpty(message = "Can not be empty")
-        @NotBlank(message = "Can not be blank")
+        @Email(message = DtoDecoratorConfiguration.INVALID_EMAIL_MESSAGE, regexp = DtoDecoratorConfiguration.EMAIL_REGEX)
+        @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)
+        @NotEmpty(message = DtoDecoratorConfiguration.NOT_EMPTY_MESSAGE)
+        @NotBlank(message = DtoDecoratorConfiguration.NOT_BLACK_MESSAGE)
         String email
         ) {}

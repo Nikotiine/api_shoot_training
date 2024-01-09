@@ -53,7 +53,7 @@ public class RegistrationService {
 
     public Boolean validationCode(ValidationCodeDto code) {
         boolean isActivate = false;
-        Shooter shooter = this.shooterRepository.findByEmail(code.getShooterEmail());
+        Shooter shooter = this.shooterRepository.findByEmail(code.getEmail());
         ValidationCode validationCode = this.validationCodeService.getGenerateValidationCode(shooter);
         if (code.getCode() == validationCode.getCode()) {
             // Active le compte

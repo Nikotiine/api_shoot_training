@@ -51,11 +51,11 @@ public class RegistrationController {
 
             CodeMessageResponse codeMessageResponse = CodeMessageResponse.ACCOUNT_IS_ALREADY_ACTIVE;
             HttpStatus status = BAD_REQUEST;
-            boolean accountIsActive = this.registrationService.accountIsAlreadyActivated(validationCodeDto.getShooterEmail());
+            boolean accountIsActive = this.registrationService.accountIsAlreadyActivated(validationCodeDto.getEmail());
 
             if (!accountIsActive) {
 
-                boolean isInValidityTime = this.registrationService.emailVerification(validationCodeDto.getShooterEmail());
+                boolean isInValidityTime = this.registrationService.emailVerification(validationCodeDto.getEmail());
 
                 if (isInValidityTime) {
 

@@ -29,12 +29,12 @@ public class AuthenticationController {
     @ResponseBody
     public Token login(@Valid @RequestBody CredentialsDto credentials) {
 
-    this.authenticationManager.authenticate(
-            new UsernamePasswordAuthenticationToken(
-                    credentials.getEmail(), credentials.getPassword()
-            )
-    );
-    return this.jwtService.generate(credentials.getEmail());
+        this.authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        credentials.getEmail(), credentials.getPassword()
+                )
+        );
+        return this.jwtService.generate(credentials.getEmail());
 
     }
 

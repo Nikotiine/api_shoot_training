@@ -10,8 +10,8 @@ import lombok.Value;
 @Value
 public class ResponseMessage {
     @NotNull
-
     int code;
+
     @NotNull
     @NotEmpty
     String message;
