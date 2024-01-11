@@ -10,12 +10,14 @@ public enum CodeMessageResponse {
     ACCOUNT_ACTIVATED(2,"Votre compte est actif"),
     NEW_CODE_SENT(3,"Nouveau code envoyé"),
     RESET_PASSWORD_CODE_SENT(4,"Code de réinitialisation envoyé"),
+    NEW_PASSWORD_CHANGE(5,"Nouveau mot de passe active"),
     //Error
     EMAIL_IS_ALREADY_USE(101,"Cet email est deja utilisé"),
     ACCOUNT_IS_ALREADY_ACTIVE(102,"Ce compte est déjà actif"),
     CODE_IS_OUT_OF_TIME(103,"Le code n'est plus valide"),
     BAD_ACTIVATION_CODE(104,"Code invalide, merci de retapper le code"),
-    EMAIL_IS_INVALID(105,"Cet email est invalide");;
+    EMAIL_IS_INVALID(105,"Cet email est invalide"),
+    CODE_IS_ALREADY_SEND(106,"Votre code a deja etait envoye, merci de verifier vos email et vos spams");
 
     private final int code;
     private final String message;
