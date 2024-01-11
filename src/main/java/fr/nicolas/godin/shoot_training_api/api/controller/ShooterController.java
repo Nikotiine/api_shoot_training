@@ -39,7 +39,7 @@ public class ShooterController {
 
         } catch (NullPointerException e) {
 
-            return ResponseEntity.status(BAD_REQUEST).body(new ResponseMessage(CodeMessageResponse.EMAIL_IS_INVALID));
+            return ResponseEntity.status(BAD_REQUEST).body(new ResponseMessage(CodeMessageResponse.EMAIL_IS_INVALID_OR_ACCOUNT_INACTIVE));
 
         }
 

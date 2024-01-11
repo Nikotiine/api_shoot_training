@@ -14,13 +14,21 @@ public class MailerService {
 
     private final JavaMailSender javaMailSender;
 
-
+    /**
+     * Envoie un code d'activation du compte
+     * @param code ActivationCode
+     */
     public void sendValidationCode(ActivationCode code) {
+
         SimpleMailMessage message = this.generateMessage(1,code);
         this.javaMailSender.send(message);
 
     }
 
+    /**
+     *  Envoie un code pour mot de passe oublié
+     * @param code ActivationCode
+     */
     public void sendNewPasswordCode(ActivationCode code) {
 
         SimpleMailMessage message = this.generateMessage(2,code);
@@ -28,6 +36,14 @@ public class MailerService {
 
     }
 
+    /**
+     * Creer et envoie l'email avec le code suivant le cas
+     * 1 -> activation
+     * 2 -> mot de passe oublié
+     * @param type type de mail a envoye
+     * @param code le code
+     * @return SimpleMailMessage
+     */
     private SimpleMailMessage generateMessage(int type,ActivationCode code) {
         String shooterEmail = code.getShooter().getEmail();
         Dotenv dotenv = Dotenv.load();
@@ -38,7 +54,6 @@ public class MailerService {
         message.setFrom(dotenv.get("EMAIL_USERNAME"));
         message.setTo(shooterEmail);
         message.setSubject(subject);
-
         message.setText(startText+ dotenv.get("WEBSITE_URL")+url+shooterEmail+"/activate"+" Votre code  : "+ code.getCode());
         return message;
     }

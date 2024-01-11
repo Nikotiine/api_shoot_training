@@ -44,7 +44,6 @@ public class ActivationCodeService {
 
         Date now = new Date();
         ActivationCode code = activationCodeRepository.findByShooter(shooter);
-       // boolean isCodeValidityTime = now.before(code.getTimeOfValidity());
         return now.before(code.getTimeOfValidity());
 
     }

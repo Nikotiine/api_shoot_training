@@ -21,8 +21,11 @@ public class RegistrationService {
     private final BCryptPasswordEncoder passwordEncoder;
     private final MailerService mailerService;
 
+    /**
+     * Enregistre un nouvel utilisateur en bdd et envoie le code d'activation du compte
+     * @param newShooter Shooter
+     */
     public void register(Shooter newShooter){
-
 
         Shooter shooter =  this.createNewShooter(newShooter);
         ActivationCode code = this.activationCodeService.generateValidationCode(shooter, ActivationCodeType.ACTIVATION);
@@ -30,6 +33,11 @@ public class RegistrationService {
 
     }
 
+    /**
+     * Creer l utilisateur en bdd
+     * @param newShooter Shooter
+     * @return Shooter
+     */
     private Shooter createNewShooter(Shooter newShooter) {
 
         String hash = this.passwordEncoder.encode(newShooter.getPassword());
@@ -40,6 +48,12 @@ public class RegistrationService {
 
     }
 
+    /**
+     * Verifie que le mail existe bien en bdd
+     * @param email mail
+     * @return Boolean
+     * @throws NullPointerException si le mail fournis n'existe pas en bdd
+     */
     public Boolean emailVerification(String email) throws NullPointerException {
 
         Shooter shooter = this.shooterRepository.findByEmail(email);
@@ -47,15 +61,30 @@ public class RegistrationService {
 
     }
 
+    /**
+     * Verifie que le compte est deja actif
+     * @param email email
+     * @return Boolean
+     * @throws NullPointerException si le mail fournis n'existe pas en bdd
+     */
     public Boolean accountIsAlreadyActivated(String email) throws NullPointerException {
+
         Shooter shooter = this.shooterRepository.findByEmail(email);
         return shooter.isActive();
+
     }
 
+    /**
+     * Valide le compte de l'utilisateur apres verification du code
+     * @param code le code envoye par mail
+     * @return Boolean
+     */
     public Boolean validationCode(ActivationCodeDto code) {
+
         boolean isActivate = false;
         Shooter shooter = this.shooterRepository.findByEmail(code.getEmail());
         ActivationCode activationCode = this.activationCodeService.getGenerateValidationCode(shooter);
+
         if (code.getCode() == activationCode.getCode() && activationCode.getType() == ActivationCodeType.ACTIVATION) {
             // Active le compte
             shooter.setActive(true);
@@ -64,17 +93,29 @@ public class RegistrationService {
             // Supprime le code en base de données
             this.activationCodeService.deleteActivatedCode(activationCode);
             isActivate = true;
+
         }
         return isActivate;
+
     }
 
+    /**
+     * Renvoie un code a la demande de l'utlisateur si il a depasser le temps impati avant d'activer son compte
+     * @param refreshCodeRequest RefreshCodeRequest
+     * @throws NullPointerException si le mail fournis n'existe pas en bdd
+     */
     public void refreshValidationCode(RefreshCodeRequest refreshCodeRequest) throws NullPointerException {
+
         Shooter shooter = this.shooterRepository.findByEmail(refreshCodeRequest.email());
         boolean codeIsInValidityTime = this.activationCodeService.emailVerificationAndValidityCode(shooter);
+
         if (!codeIsInValidityTime){
+
             ActivationCode oldCode = this.activationCodeService.getGenerateValidationCode(shooter);
             this.activationCodeService.deleteActivatedCode(oldCode);
+
         }
+
         ActivationCode code = this.activationCodeService.generateValidationCode(shooter,ActivationCodeType.ACTIVATION);
         this.mailerService.sendValidationCode(code);
     }
