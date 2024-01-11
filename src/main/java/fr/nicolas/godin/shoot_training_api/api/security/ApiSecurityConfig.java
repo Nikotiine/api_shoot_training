@@ -67,6 +67,7 @@ public class ApiSecurityConfig {
                         .requestMatchers("/swagger-ui/**").permitAll()
                         .requestMatchers("api/registration/**").permitAll()
                         .requestMatchers(HttpMethod.POST,"api/authentication/login").permitAll()
+                        .requestMatchers(HttpMethod.POST,"api/shooter/forgot-password").permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(

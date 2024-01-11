@@ -1,15 +1,16 @@
 package fr.nicolas.godin.shoot_training_api.api.dto;
 
+import fr.nicolas.godin.shoot_training_api.database.entity.ActivationCode;
 import jakarta.validation.constraints.*;
 import lombok.Value;
 
 import java.io.Serializable;
 
 /**
- * DTO for {@link fr.nicolas.godin.shoot_training_api.database.entity.ValidationCode}
+ * DTO for {@link ActivationCode}
  */
 @Value
-public class ValidationCodeDto implements Serializable {
+public class ActivationCodeDto implements Serializable {
 
     @Min(DtoDecoratorConfiguration.MIN_LENGTH_CODE)
     @Max(DtoDecoratorConfiguration.MAX_LENGTH_CODE)

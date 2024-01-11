@@ -1,6 +1,6 @@
 package fr.nicolas.godin.shoot_training_api.database.entity;
 
-import fr.nicolas.godin.shoot_training_api.database.repository.ShooterRepository;
+import fr.nicolas.godin.shoot_training_api.database.ActivationCodeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToOne;
@@ -17,7 +17,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class ValidationCode extends BaseEntity implements Serializable {
+public class ActivationCode extends BaseEntity implements Serializable {
 
     @Column
     private int code;
@@ -27,4 +27,7 @@ public class ValidationCode extends BaseEntity implements Serializable {
 
     @OneToOne
     private Shooter shooter;
+
+    @Column
+    private ActivationCodeType type;
 }

@@ -27,11 +27,11 @@ public class RegistrationController {
     @PostMapping(value="register",produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public ResponseEntity<ResponseMessage> register(@Valid @RequestBody RegistrationDto shooterEntityDto){
+    public ResponseEntity<ResponseMessage> register(@Valid @RequestBody RegistrationDto registrationDto){
 
         try {
 
-            Shooter shooter = this.modelMapper.map(shooterEntityDto, Shooter.class);
+            Shooter shooter = this.modelMapper.map(registrationDto, Shooter.class);
             this.registrationService.register(shooter);
             return ResponseEntity.status(CREATED).body(new ResponseMessage(CodeMessageResponse.REGISTER_SUCCESS));
 
@@ -46,20 +46,20 @@ public class RegistrationController {
 
 
     @PostMapping(value ="validation-code",produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ResponseMessage> codeValidation(@Valid @RequestBody ValidationCodeDto validationCodeDto) {
+    public ResponseEntity<ResponseMessage> codeValidation(@Valid @RequestBody ActivationCodeDto activationCodeDto) {
         try {
 
             CodeMessageResponse codeMessageResponse = CodeMessageResponse.ACCOUNT_IS_ALREADY_ACTIVE;
             HttpStatus status = BAD_REQUEST;
-            boolean accountIsActive = this.registrationService.accountIsAlreadyActivated(validationCodeDto.getEmail());
+            boolean accountIsActive = this.registrationService.accountIsAlreadyActivated(activationCodeDto.getEmail());
 
             if (!accountIsActive) {
 
-                boolean isInValidityTime = this.registrationService.emailVerification(validationCodeDto.getEmail());
+                boolean isInValidityTime = this.registrationService.emailVerification(activationCodeDto.getEmail());
 
                 if (isInValidityTime) {
 
-                    boolean accountActivated = this.registrationService.validationCode(validationCodeDto);
+                    boolean accountActivated = this.registrationService.validationCode(activationCodeDto);
 
                     if (accountActivated) {
 
@@ -91,11 +91,11 @@ public class RegistrationController {
     }
 
     @PostMapping(value ="refresh-code",produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ResponseMessage> refreshCode(@Valid @RequestBody RefreshCodeRequest refreshCodeRequest) {
+    public ResponseEntity<ResponseMessage> refreshCode(@Valid @RequestBody RefreshCodeRequest request) {
 
        try {
 
-           this.registrationService.refreshValidationCode(refreshCodeRequest);
+           this.registrationService.refreshValidationCode(request);
            return ResponseEntity.status(OK).body(new ResponseMessage(CodeMessageResponse.NEW_CODE_SENT));
 
         } catch (NullPointerException e) {

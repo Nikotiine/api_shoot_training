@@ -9,6 +9,7 @@ public enum CodeMessageResponse {
     REGISTER_SUCCESS(1,"Activez votre compte"),
     ACCOUNT_ACTIVATED(2,"Votre compte est actif"),
     NEW_CODE_SENT(3,"Nouveau code envoyé"),
+    RESET_PASSWORD_CODE_SENT(4,"Code de réinitialisation envoyé"),
     //Error
     EMAIL_IS_ALREADY_USE(101,"Cet email est deja utilisé"),
     ACCOUNT_IS_ALREADY_ACTIVE(102,"Ce compte est déjà actif"),

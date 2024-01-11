@@ -1,8 +1,9 @@
 package fr.nicolas.godin.shoot_training_api.api.service;
 
+import fr.nicolas.godin.shoot_training_api.database.ActivationCodeType;
 import fr.nicolas.godin.shoot_training_api.database.entity.Shooter;
-import fr.nicolas.godin.shoot_training_api.database.entity.ValidationCode;
-import fr.nicolas.godin.shoot_training_api.database.repository.ValidationCodeRepository;
+import fr.nicolas.godin.shoot_training_api.database.entity.ActivationCode;
+import fr.nicolas.godin.shoot_training_api.database.repository.ActivationCodeRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,25 +12,26 @@ import java.util.Random;
 
 @Service
 @AllArgsConstructor
-public class ValidationCodeService {
+public class ActivationCodeService {
 
-    private final ValidationCodeRepository validationCodeRepository;
+    private final ActivationCodeRepository activationCodeRepository;
 
     /**
      * Genere le code de validation du compte utilisateur qui viens de s'inscire
      * @param shooter Shooter nouvel utlisateur
      * @return ValidationCode le code de validation pour l'envoie par email
      */
-    public ValidationCode generateValidationCode(Shooter shooter) {
+    public ActivationCode generateValidationCode(Shooter shooter, ActivationCodeType type) {
 
-        ValidationCode code = new ValidationCode();
+        ActivationCode code = new ActivationCode();
         Date createdAt =  new Date();
         // Temps de validité du code en milisecondes
         int timeOfValidity = 60 * 1000* 10;
         code.setShooter(shooter);
         code.setTimeOfValidity(new Date(createdAt.getTime()+(timeOfValidity)));
         code.setCode(this.generateRandomNumber());
-        return this.validationCodeRepository.save(code);
+        code.setType(type);
+        return this.activationCodeRepository.save(code);
 
     }
 
@@ -41,7 +43,7 @@ public class ValidationCodeService {
     public boolean emailVerificationAndValidityCode(Shooter shooter) {
 
         Date now = new Date();
-        ValidationCode code = validationCodeRepository.findByShooter(shooter);
+        ActivationCode code = activationCodeRepository.findByShooter(shooter);
        // boolean isCodeValidityTime = now.before(code.getTimeOfValidity());
         return now.before(code.getTimeOfValidity());
 
@@ -63,17 +65,17 @@ public class ValidationCodeService {
      * @param shooter Shooter
      * @return le code de validation associer au compte utilisateur
      */
-    public ValidationCode getGenerateValidationCode(Shooter shooter) {
-        return this.validationCodeRepository.findByShooter(shooter);
+    public ActivationCode getGenerateValidationCode(Shooter shooter) {
+        return this.activationCodeRepository.findByShooter(shooter);
     }
 
     /**
      * Supprime le code de la bdd une fois le compte activé
-     * @param validationCode ValidationCodes
+     * @param activationCode ValidationCodes
      */
-    public void deleteActivatedCode(ValidationCode validationCode) {
+    public void deleteActivatedCode(ActivationCode activationCode) {
 
-        this.validationCodeRepository.delete(validationCode);
+        this.activationCodeRepository.delete(activationCode);
 
     }
 }
