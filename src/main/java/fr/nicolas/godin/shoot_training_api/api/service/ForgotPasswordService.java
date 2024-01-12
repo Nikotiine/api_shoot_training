@@ -14,7 +14,7 @@ import java.util.Date;
 
 @Service
 @AllArgsConstructor
-public class ShooterService {
+public class ForgotPasswordService {
     private final ShooterRepository shooterRepository;
     private final ActivationCodeService activationCodeService;
     private final MailerService mailerService;

@@ -4,7 +4,7 @@ import fr.nicolas.godin.shoot_training_api.api.dto.NewPasswordRequestDto;
 import fr.nicolas.godin.shoot_training_api.api.dto.RefreshCodeRequest;
 import fr.nicolas.godin.shoot_training_api.api.dto.ResponseMessage;
 import fr.nicolas.godin.shoot_training_api.api.enums.CodeMessageResponse;
-import fr.nicolas.godin.shoot_training_api.api.service.ShooterService;
+import fr.nicolas.godin.shoot_training_api.api.service.ForgotPasswordService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -16,21 +16,21 @@ import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.OK;
 
 @RestController
-@Tag(name = "Shooter",description = "Shooter Controller")
-@RequestMapping("/api/shooter")
+@Tag(name = "ForgotPassword",description = "ForgotPassword Controller")
+@RequestMapping("/api/forgot-password")
 @AllArgsConstructor
-public class ShooterController {
-    private ShooterService shooterService;
+public class ForgotPasswordController {
+    private ForgotPasswordService forgotPasswordService;
 
-    @PostMapping(value="forgot-password",produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ResponseMessage> forgotPassword(@RequestBody RefreshCodeRequest request) {
+    @PostMapping(value="request-new-password",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ResponseMessage> requestNewPassword(@RequestBody RefreshCodeRequest request) {
         try {
 
-            boolean codeIsAlreadySend = this.shooterService.codeIsAlreadySend(request.email());
+            boolean codeIsAlreadySend = this.forgotPasswordService.codeIsAlreadySend(request.email());
             CodeMessageResponse codeMessageResponse = CodeMessageResponse.CODE_IS_ALREADY_SEND;
             HttpStatus status = BAD_REQUEST;
             if (!codeIsAlreadySend){
-                this.shooterService.sendCodeForNewPassword(request);
+                this.forgotPasswordService.sendCodeForNewPassword(request);
                 codeMessageResponse = CodeMessageResponse.RESET_PASSWORD_CODE_SENT;
                 status = OK;
             }
@@ -45,18 +45,18 @@ public class ShooterController {
 
     }
 
-    @PostMapping(value="new-password",produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ResponseMessage> newPassword(@RequestBody NewPasswordRequestDto newPasswordRequestDto) {
+    @PostMapping(value="save-new-password",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ResponseMessage> saveNewPassword(@RequestBody NewPasswordRequestDto newPasswordRequestDto) {
         try {
 
             String email = newPasswordRequestDto.getEmail();
             HttpStatus status = BAD_REQUEST;
             CodeMessageResponse codeMessageResponse = CodeMessageResponse.CODE_IS_OUT_OF_TIME;
-            boolean isInValidityTime = this.shooterService.emailVerificationAndValidityCode(email);
+            boolean isInValidityTime = this.forgotPasswordService.emailVerificationAndValidityCode(email);
 
             if (isInValidityTime) {
 
-                boolean isPasswordChange = this.shooterService.changePassword(newPasswordRequestDto);
+                boolean isPasswordChange = this.forgotPasswordService.changePassword(newPasswordRequestDto);
 
                 if (!isPasswordChange) {
                     codeMessageResponse = CodeMessageResponse.BAD_ACTIVATION_CODE;
