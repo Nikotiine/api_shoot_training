@@ -7,6 +7,7 @@ import lombok.Setter;
 import lombok.Value;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * DTO for {@link fr.nicolas.godin.shoot_training_api.database.entity.Shooter}
@@ -21,5 +22,7 @@ public class ShooterProfileDto implements Serializable {
     String lastName;
     String email;
     UserRole role;
+    Date createdAT;
+
 
 }
