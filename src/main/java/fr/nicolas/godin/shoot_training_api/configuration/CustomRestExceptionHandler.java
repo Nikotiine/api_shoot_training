@@ -10,17 +10,20 @@ import java.util.Map;
 
 @ControllerAdvice
 public class CustomRestExceptionHandler{
+
+    private static final String KEY = "message";
+
     @ExceptionHandler(AuthenticationException.class)
     public ResponseEntity<Map<String, String>> invalidCredential(AuthenticationException e) {
         Map<String, String> errors = new HashMap<>();
-        errors.put("message", "Indentifiants invalides");
+        errors.put(KEY, "Indentifiants invalides");
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(BadCredentialsException.class)
     public ResponseEntity<Map<String, String>> invalidCredential(BadCredentialsException e) {
         Map<String, String> errors = new HashMap<>();
-        errors.put("message", e.getMessage());
-        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+        errors.put(KEY, e.getMessage());
+        return new ResponseEntity<>(errors, HttpStatus.FORBIDDEN);
     }
 }
