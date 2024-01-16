@@ -64,7 +64,7 @@ public class ActivationCodeService {
      * @param user user
      * @return le code de validation associer au compte utilisateur
      */
-    public ActivationCode getGenerateValidationCode(User user) {
+    public ActivationCode getGeneratedValidationCode(User user) {
         return this.activationCodeRepository.findByuser(user);
     }
 

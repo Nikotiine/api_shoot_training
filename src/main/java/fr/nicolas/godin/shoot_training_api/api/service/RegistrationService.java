@@ -83,7 +83,7 @@ public class RegistrationService {
 
         boolean isActivate = false;
         User user = this.userRepository.findByEmail(code.getEmail());
-        ActivationCode activationCode = this.activationCodeService.getGenerateValidationCode(user);
+        ActivationCode activationCode = this.activationCodeService.getGeneratedValidationCode(user);
 
         if (code.getCode() == activationCode.getCode() && activationCode.getType() == ActivationCodeType.ACTIVATION) {
             // Active le compte
@@ -111,7 +111,7 @@ public class RegistrationService {
 
         if (!codeIsInValidityTime){
 
-            ActivationCode oldCode = this.activationCodeService.getGenerateValidationCode(user);
+            ActivationCode oldCode = this.activationCodeService.getGeneratedValidationCode(user);
             this.activationCodeService.deleteActivatedCode(oldCode);
 
         }

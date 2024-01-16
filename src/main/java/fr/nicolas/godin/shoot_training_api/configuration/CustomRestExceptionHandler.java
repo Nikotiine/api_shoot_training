@@ -26,4 +26,11 @@ public class CustomRestExceptionHandler{
         errors.put(KEY, e.getMessage());
         return new ResponseEntity<>(errors, HttpStatus.FORBIDDEN);
     }
+
+    @ExceptionHandler(CustomException.class)
+    public ResponseEntity<Map<String, String>> invalidCredential(CustomException e) {
+        Map<String, String> errors = new HashMap<>();
+        errors.put(KEY, e.getMessage());
+        return new ResponseEntity<>(errors, HttpStatus.FORBIDDEN);
+    }
 }

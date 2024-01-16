@@ -24,24 +24,11 @@ public class ForgotPasswordController {
 
     @PostMapping(value="request-new-password",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResponseMessage> requestNewPassword(@RequestBody RefreshCodeRequest request) {
-        try {
 
-            boolean codeIsAlreadySend = this.forgotPasswordService.codeIsAlreadySend(request.email());
-            CodeMessageResponse codeMessageResponse = CodeMessageResponse.CODE_IS_ALREADY_SEND;
-            HttpStatus status = BAD_REQUEST;
-            if (!codeIsAlreadySend){
-                this.forgotPasswordService.sendCodeForNewPassword(request);
-                codeMessageResponse = CodeMessageResponse.RESET_PASSWORD_CODE_SENT;
-                status = OK;
-            }
 
-            return ResponseEntity.status(status).body(new ResponseMessage(codeMessageResponse));
+            this.forgotPasswordService.requestValidationCodeForNewPassword(request);
+            return ResponseEntity.status(OK).body(new ResponseMessage( CodeMessageResponse.RESET_PASSWORD_CODE_SENT));
 
-        } catch (NullPointerException e) {
-
-            return ResponseEntity.status(BAD_REQUEST).body(new ResponseMessage(CodeMessageResponse.EMAIL_IS_INVALID_OR_ACCOUNT_INACTIVE));
-
-        }
 
     }
 
