@@ -26,7 +26,7 @@ public class ActivationCode extends BaseEntity implements Serializable {
     private Date timeOfValidity;
 
     @OneToOne
-    private Shooter shooter;
+    private User user;
 
     @Column
     private ActivationCodeType type;

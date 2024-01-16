@@ -4,8 +4,8 @@ import fr.nicolas.godin.shoot_training_api.api.dto.NewPasswordRequestDto;
 import fr.nicolas.godin.shoot_training_api.api.dto.RefreshCodeRequest;
 import fr.nicolas.godin.shoot_training_api.database.ActivationCodeType;
 import fr.nicolas.godin.shoot_training_api.database.entity.ActivationCode;
-import fr.nicolas.godin.shoot_training_api.database.entity.Shooter;
-import fr.nicolas.godin.shoot_training_api.database.repository.ShooterRepository;
+import fr.nicolas.godin.shoot_training_api.database.entity.User;
+import fr.nicolas.godin.shoot_training_api.database.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ import java.util.Date;
 @Service
 @AllArgsConstructor
 public class ForgotPasswordService {
-    private final ShooterRepository shooterRepository;
+    private final UserRepository userRepository;
     private final ActivationCodeService activationCodeService;
     private final MailerService mailerService;
     private final BCryptPasswordEncoder passwordEncoder;
@@ -26,8 +26,8 @@ public class ForgotPasswordService {
      */
     public void sendCodeForNewPassword(RefreshCodeRequest request) {
 
-        Shooter shooter = this.shooterRepository.findByEmailAndActiveIsTrue(request.email());
-        ActivationCode code =  this.activationCodeService.generateValidationCode(shooter, ActivationCodeType.RESET_PASSWORD);
+        User user = this.userRepository.findByEmailAndActiveIsTrue(request.email());
+        ActivationCode code =  this.activationCodeService.generateValidationCode(user, ActivationCodeType.RESET_PASSWORD);
         this.mailerService.sendNewPasswordCode(code);
 
     }
@@ -40,14 +40,14 @@ public class ForgotPasswordService {
     public boolean changePassword(NewPasswordRequestDto newPasswordRequestDto) {
 
         boolean isPasswordChange= false;
-        Shooter shooter = this.shooterRepository.findByEmail(newPasswordRequestDto.getEmail());
-        ActivationCode code = this.activationCodeService.getGenerateValidationCode(shooter);
+        User user = this.userRepository.findByEmail(newPasswordRequestDto.getEmail());
+        ActivationCode code = this.activationCodeService.getGenerateValidationCode(user);
 
         if (code.getType() == ActivationCodeType.RESET_PASSWORD && code.getCode() == newPasswordRequestDto.getCode() ){
 
             String hash = this.passwordEncoder.encode(newPasswordRequestDto.getPassword());
-            shooter.setPassword(hash);
-            this.shooterRepository.save(shooter);
+            user.setPassword(hash);
+            this.userRepository.save(user);
             this.activationCodeService.deleteActivatedCode(code);
             isPasswordChange = true;
 
@@ -62,8 +62,8 @@ public class ForgotPasswordService {
      * @return boolean
      */
     public boolean emailVerificationAndValidityCode(String email) {
-        Shooter shooter = this.shooterRepository.findByEmail(email);
-        return this.activationCodeService.emailVerificationAndValidityCode(shooter);
+        User user = this.userRepository.findByEmail(email);
+        return this.activationCodeService.emailVerificationAndValidityCode(user);
     }
 
     /**
@@ -75,8 +75,8 @@ public class ForgotPasswordService {
     public boolean codeIsAlreadySend(String email) {
         boolean isAlreadySend = true;
         Date now = new Date();
-        Shooter shooter = this.shooterRepository.findByEmail(email);
-        ActivationCode code = this.activationCodeService.getGenerateValidationCode(shooter);
+        User user = this.userRepository.findByEmail(email);
+        ActivationCode code = this.activationCodeService.getGenerateValidationCode(user);
         if (code == null){
             isAlreadySend = false;
         }

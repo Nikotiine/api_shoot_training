@@ -1,5 +1,6 @@
 package fr.nicolas.godin.shoot_training_api.api.dto;
 
+import fr.nicolas.godin.shoot_training_api.database.entity.User;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
@@ -9,7 +10,7 @@ import lombok.Value;
 import java.io.Serializable;
 
 /**
- * DTO for {@link fr.nicolas.godin.shoot_training_api.database.entity.Shooter}
+ * DTO for {@link User}
  */
 @Value
 public class CredentialsDto implements Serializable {

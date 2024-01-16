@@ -2,18 +2,16 @@ package fr.nicolas.godin.shoot_training_api.api.security;
 
 import fr.nicolas.godin.shoot_training_api.api.dto.Token;
 import fr.nicolas.godin.shoot_training_api.api.service.AuthenticationService;
-import fr.nicolas.godin.shoot_training_api.database.entity.Shooter;
+import fr.nicolas.godin.shoot_training_api.database.entity.User;
 import io.github.cdimascio.dotenv.Dotenv;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
-import java.security.Key;
 import java.util.Date;
 import java.util.Map;
 import java.util.function.Function;
@@ -32,8 +30,8 @@ public class JwtService {
      */
     public Token generate(String email) {
 
-        Shooter shooter = this.authenticationService.loadUserByUsername(email);
-        return this.generateToken(shooter);
+        User user = this.authenticationService.loadUserByUsername(email);
+        return this.generateToken(user);
 
     }
 
@@ -42,7 +40,7 @@ public class JwtService {
      * @param token Token
      * @return l'objet utilisateur sous forme de UserDetails (springboot security)
      */
-    public UserDetails getShooterWithTokenPayload(String token){
+    public UserDetails getUserWithTokenPayload(String token){
 
         String userName = this.getClaim(token,Claims::getSubject);
         return this.authenticationService.loadUserByUsername(userName);
@@ -94,14 +92,14 @@ public class JwtService {
 
     /**
      * Genere le token 
-     * @param shooter Utilisateur connecter
+     * @param user Utilisateur connecter
      * @return Token
      */
-    private Token generateToken(Shooter shooter) {
+    private Token generateToken(User user) {
 
         Map<String,?> claims = Map.of(
-                "role",shooter.getRole(),
-                "id",shooter.getId()
+                "role", user.getRole(),
+                "id", user.getId()
         );
 
         Date issuedAt =  new Date();
@@ -115,7 +113,7 @@ public class JwtService {
                 .issuedAt(new Date())
                 .expiration(new Date(issuedAt.getTime() + expiration))
                 .claims(claims)
-                .subject(shooter.getEmail())
+                .subject(user.getEmail())
                 .signWith(getKey())
                 .compact();
         return new Token(jwt);

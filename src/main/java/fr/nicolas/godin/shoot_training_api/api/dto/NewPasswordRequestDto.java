@@ -1,12 +1,13 @@
 package fr.nicolas.godin.shoot_training_api.api.dto;
 
+import fr.nicolas.godin.shoot_training_api.database.entity.User;
 import jakarta.validation.constraints.*;
 import lombok.Value;
 
 import java.io.Serializable;
 
 /**
- * DTO for {@link fr.nicolas.godin.shoot_training_api.database.entity.Shooter}
+ * DTO for {@link User}
  */
 @Value
 public class NewPasswordRequestDto implements Serializable {

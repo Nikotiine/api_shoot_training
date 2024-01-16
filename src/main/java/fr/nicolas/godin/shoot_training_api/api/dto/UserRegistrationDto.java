@@ -1,6 +1,6 @@
 package fr.nicolas.godin.shoot_training_api.api.dto;
 
-import fr.nicolas.godin.shoot_training_api.database.entity.Shooter;
+import fr.nicolas.godin.shoot_training_api.database.entity.User;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
@@ -11,10 +11,10 @@ import java.io.Serializable;
 
 
 /**
- * DTO for {@link Shooter}
+ * DTO for {@link User}
  */
 @Value
-public class RegistrationDto implements Serializable {
+public class UserRegistrationDto implements Serializable {
 
     @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)
     @NotEmpty(message = DtoDecoratorConfiguration.NOT_EMPTY_MESSAGE)

@@ -3,7 +3,7 @@ package fr.nicolas.godin.shoot_training_api.api.controller;
 import fr.nicolas.godin.shoot_training_api.api.dto.*;
 import fr.nicolas.godin.shoot_training_api.api.enums.CodeMessageResponse;
 import fr.nicolas.godin.shoot_training_api.api.service.RegistrationService;
-import fr.nicolas.godin.shoot_training_api.database.entity.Shooter;
+import fr.nicolas.godin.shoot_training_api.database.entity.User;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -27,12 +27,12 @@ public class RegistrationController {
     @PostMapping(value="register",produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public ResponseEntity<ResponseMessage> register(@Valid @RequestBody RegistrationDto registrationDto){
+    public ResponseEntity<ResponseMessage> register(@Valid @RequestBody UserRegistrationDto userRegistrationDto){
 
         try {
 
-            Shooter shooter = this.modelMapper.map(registrationDto, Shooter.class);
-            this.registrationService.register(shooter);
+            User user = this.modelMapper.map(userRegistrationDto, User.class);
+            this.registrationService.register(user);
             return ResponseEntity.status(CREATED).body(new ResponseMessage(CodeMessageResponse.REGISTER_SUCCESS));
 
         } catch (DataIntegrityViolationException e) {

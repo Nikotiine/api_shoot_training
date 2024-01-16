@@ -45,16 +45,16 @@ public class MailerService {
      * @return SimpleMailMessage
      */
     private SimpleMailMessage generateMessage(int type,ActivationCode code) {
-        String shooterEmail = code.getShooter().getEmail();
+        String userEmail = code.getUser().getEmail();
         Dotenv dotenv = Dotenv.load();
         String startText = type == 1 ? "Lien de validation " : "Lien de réinitialisation ";
         String url = type == 1 ? "authentication/account-activation/" : "authentication/new-password/";
         String subject = type == 1 ? "Code de validation" : "Code de réinitialisation";
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(dotenv.get("EMAIL_USERNAME"));
-        message.setTo(shooterEmail);
+        message.setTo(userEmail);
         message.setSubject(subject);
-        message.setText(startText+ dotenv.get("WEBSITE_URL")+url+shooterEmail+"/activate"+" Votre code  : "+ code.getCode());
+        message.setText(startText+ dotenv.get("WEBSITE_URL")+url+userEmail+"/activate"+" Votre code  : "+ code.getCode());
         return message;
     }
 

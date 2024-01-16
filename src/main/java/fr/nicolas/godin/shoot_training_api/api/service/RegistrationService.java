@@ -4,9 +4,9 @@ import fr.nicolas.godin.shoot_training_api.api.dto.RefreshCodeRequest;
 import fr.nicolas.godin.shoot_training_api.api.dto.ActivationCodeDto;
 import fr.nicolas.godin.shoot_training_api.database.ActivationCodeType;
 import fr.nicolas.godin.shoot_training_api.database.UserRole;
-import fr.nicolas.godin.shoot_training_api.database.entity.Shooter;
+import fr.nicolas.godin.shoot_training_api.database.entity.User;
 import fr.nicolas.godin.shoot_training_api.database.entity.ActivationCode;
-import fr.nicolas.godin.shoot_training_api.database.repository.ShooterRepository;
+import fr.nicolas.godin.shoot_training_api.database.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -16,35 +16,35 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class RegistrationService {
 
-    private final ShooterRepository shooterRepository;
+    private final UserRepository userRepository;
     private final ActivationCodeService activationCodeService;
     private final BCryptPasswordEncoder passwordEncoder;
     private final MailerService mailerService;
 
     /**
      * Enregistre un nouvel utilisateur en bdd et envoie le code d'activation du compte
-     * @param newShooter Shooter
+     * @param newUser user
      */
-    public void register(Shooter newShooter){
+    public void register(User newUser){
 
-        Shooter shooter =  this.createNewShooter(newShooter);
-        ActivationCode code = this.activationCodeService.generateValidationCode(shooter, ActivationCodeType.ACTIVATION);
+        User user =  this.createNewuser(newUser);
+        ActivationCode code = this.activationCodeService.generateValidationCode(user, ActivationCodeType.ACTIVATION);
         this.mailerService.sendValidationCode(code);
 
     }
 
     /**
      * Creer l utilisateur en bdd
-     * @param newShooter Shooter
-     * @return Shooter
+     * @param newUser user
+     * @return user
      */
-    private Shooter createNewShooter(Shooter newShooter) {
+    private User createNewuser(User newUser) {
 
-        String hash = this.passwordEncoder.encode(newShooter.getPassword());
-        newShooter.setPassword(hash);
-        newShooter.setRole(UserRole.USER);
-        newShooter.setActive(false);
-        return this.shooterRepository.save(newShooter);
+        String hash = this.passwordEncoder.encode(newUser.getPassword());
+        newUser.setPassword(hash);
+        newUser.setRole(UserRole.USER);
+        newUser.setActive(false);
+        return this.userRepository.save(newUser);
 
     }
 
@@ -56,8 +56,8 @@ public class RegistrationService {
      */
     public Boolean emailVerification(String email) throws NullPointerException {
 
-        Shooter shooter = this.shooterRepository.findByEmail(email);
-        return this.activationCodeService.emailVerificationAndValidityCode(shooter);
+        User user = this.userRepository.findByEmail(email);
+        return this.activationCodeService.emailVerificationAndValidityCode(user);
 
     }
 
@@ -69,8 +69,8 @@ public class RegistrationService {
      */
     public Boolean accountIsAlreadyActivated(String email) throws NullPointerException {
 
-        Shooter shooter = this.shooterRepository.findByEmail(email);
-        return shooter.isActive();
+        User user = this.userRepository.findByEmail(email);
+        return user.isActive();
 
     }
 
@@ -82,14 +82,14 @@ public class RegistrationService {
     public Boolean validationCode(ActivationCodeDto code) {
 
         boolean isActivate = false;
-        Shooter shooter = this.shooterRepository.findByEmail(code.getEmail());
-        ActivationCode activationCode = this.activationCodeService.getGenerateValidationCode(shooter);
+        User user = this.userRepository.findByEmail(code.getEmail());
+        ActivationCode activationCode = this.activationCodeService.getGenerateValidationCode(user);
 
         if (code.getCode() == activationCode.getCode() && activationCode.getType() == ActivationCodeType.ACTIVATION) {
             // Active le compte
-            shooter.setActive(true);
+            user.setActive(true);
             // Valide le status actif du compte
-            this.shooterRepository.save(shooter);
+            this.userRepository.save(user);
             // Supprime le code en base de données
             this.activationCodeService.deleteActivatedCode(activationCode);
             isActivate = true;
@@ -106,17 +106,17 @@ public class RegistrationService {
      */
     public void refreshValidationCode(RefreshCodeRequest refreshCodeRequest) throws NullPointerException {
 
-        Shooter shooter = this.shooterRepository.findByEmail(refreshCodeRequest.email());
-        boolean codeIsInValidityTime = this.activationCodeService.emailVerificationAndValidityCode(shooter);
+        User user = this.userRepository.findByEmail(refreshCodeRequest.email());
+        boolean codeIsInValidityTime = this.activationCodeService.emailVerificationAndValidityCode(user);
 
         if (!codeIsInValidityTime){
 
-            ActivationCode oldCode = this.activationCodeService.getGenerateValidationCode(shooter);
+            ActivationCode oldCode = this.activationCodeService.getGenerateValidationCode(user);
             this.activationCodeService.deleteActivatedCode(oldCode);
 
         }
 
-        ActivationCode code = this.activationCodeService.generateValidationCode(shooter,ActivationCodeType.ACTIVATION);
+        ActivationCode code = this.activationCodeService.generateValidationCode(user,ActivationCodeType.ACTIVATION);
         this.mailerService.sendValidationCode(code);
     }
 }

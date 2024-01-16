@@ -1,10 +1,10 @@
 package fr.nicolas.godin.shoot_training_api.api.controller;
 
 import fr.nicolas.godin.shoot_training_api.api.dto.CredentialsDto;
-import fr.nicolas.godin.shoot_training_api.api.dto.ShooterProfileDto;
+import fr.nicolas.godin.shoot_training_api.api.dto.UserProfileDto;
 import fr.nicolas.godin.shoot_training_api.api.dto.Token;
 import fr.nicolas.godin.shoot_training_api.api.security.JwtService;
-import fr.nicolas.godin.shoot_training_api.database.entity.Shooter;
+import fr.nicolas.godin.shoot_training_api.database.entity.User;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -40,11 +40,11 @@ public class AuthenticationController {
 
     @GetMapping(value ="me",produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ShooterProfileDto me(){
+    public UserProfileDto me(){
 
         // Lors de la connection retourne le profil user et permet de verifier que le token est bon
-        Shooter shooter =(Shooter) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return this.modelMapper.map(shooter,ShooterProfileDto.class);
+        User user =(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return this.modelMapper.map(user, UserProfileDto.class);
 
     }
 }

@@ -1,7 +1,7 @@
 package fr.nicolas.godin.shoot_training_api.api.service;
 
 import fr.nicolas.godin.shoot_training_api.database.ActivationCodeType;
-import fr.nicolas.godin.shoot_training_api.database.entity.Shooter;
+import fr.nicolas.godin.shoot_training_api.database.entity.User;
 import fr.nicolas.godin.shoot_training_api.database.entity.ActivationCode;
 import fr.nicolas.godin.shoot_training_api.database.repository.ActivationCodeRepository;
 import lombok.AllArgsConstructor;
@@ -18,16 +18,16 @@ public class ActivationCodeService {
 
     /**
      * Genere le code de validation du compte utilisateur qui viens de s'inscire
-     * @param shooter Shooter nouvel utlisateur
+     * @param user user nouvel utlisateur
      * @return ValidationCode le code de validation pour l'envoie par email
      */
-    public ActivationCode generateValidationCode(Shooter shooter, ActivationCodeType type) {
+    public ActivationCode generateValidationCode(User user, ActivationCodeType type) {
 
         ActivationCode code = new ActivationCode();
         Date createdAt =  new Date();
         // Temps de validité du code en milisecondes
         int timeOfValidity = 60 * 1000* 10;
-        code.setShooter(shooter);
+        code.setUser(user);
         code.setTimeOfValidity(new Date(createdAt.getTime()+(timeOfValidity)));
         code.setCode(this.generateRandomNumber());
         code.setType(type);
@@ -37,13 +37,13 @@ public class ActivationCodeService {
 
     /**
      * Verifie que le code associe au compte qui viens d'etre passer en parametre est encore valide
-     * @param shooter Shooter
+     * @param user user
      * @return boolean
      */
-    public boolean emailVerificationAndValidityCode(Shooter shooter) {
+    public boolean emailVerificationAndValidityCode(User user) {
 
         Date now = new Date();
-        ActivationCode code = activationCodeRepository.findByShooter(shooter);
+        ActivationCode code = activationCodeRepository.findByuser(user);
         return now.before(code.getTimeOfValidity());
 
     }
@@ -61,11 +61,11 @@ public class ActivationCodeService {
 
     /**
      *
-     * @param shooter Shooter
+     * @param user user
      * @return le code de validation associer au compte utilisateur
      */
-    public ActivationCode getGenerateValidationCode(Shooter shooter) {
-        return this.activationCodeRepository.findByShooter(shooter);
+    public ActivationCode getGenerateValidationCode(User user) {
+        return this.activationCodeRepository.findByuser(user);
     }
 
     /**

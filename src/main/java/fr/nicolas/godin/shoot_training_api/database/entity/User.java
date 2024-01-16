@@ -3,6 +3,7 @@ package fr.nicolas.godin.shoot_training_api.database.entity;
 import fr.nicolas.godin.shoot_training_api.database.UserRole;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,11 +17,12 @@ import java.util.Collection;
 import java.util.Collections;
 
 @Entity
+@Table(name = "users")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Shooter extends BaseEntity implements Serializable, UserDetails {
+public class User extends BaseEntity implements Serializable, UserDetails {
 
     @Column
     private String firstName;

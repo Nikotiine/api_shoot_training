@@ -32,20 +32,20 @@ public class JwtFilter extends OncePerRequestFilter {
 
         final String authorization = request.getHeader("Authorization");
         String token = null;
-        UserDetails shooter = null;
+        UserDetails user = null;
         boolean isTokenExpired = true;
         //Si le header est vide ne laisse pas continuer la methode
         if (authorization != null && authorization.startsWith("Bearer ")){
 
             token = authorization.substring(7);
             isTokenExpired = this.jwtService.verifyTokenValidity(token);
-            shooter = this.jwtService.getShooterWithTokenPayload(token);
+            user = this.jwtService.getUserWithTokenPayload(token);
 
         }
         //Si le token est exprirer ne continue pas le filtre
-        if (!isTokenExpired && shooter != null && SecurityContextHolder.getContext().getAuthentication() == null){
+        if (!isTokenExpired && user != null && SecurityContextHolder.getContext().getAuthentication() == null){
 
-            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(shooter,null,shooter.getAuthorities());
+            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(user,null,user.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authenticationToken);
 
         }

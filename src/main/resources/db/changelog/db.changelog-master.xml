@@ -8,8 +8,5 @@
     <!-- Include all changelog files from the "changelogs" directory -->
 
 
-    <include file="db/changelog/2023/12/23-01-changelog.xml"/>
-    <include file="db/changelog/2024/01/05-01-changelog.xml"/>
-    <include file="db/changelog/2024/01/11-01-changelog.xml"/>
-    <include file="db/changelog/2024/01/11-02-changelog.xml"/>
+    <include file="db/changelog/2024/01/16-01-changelog.xml"/>
 </databaseChangeLog>
