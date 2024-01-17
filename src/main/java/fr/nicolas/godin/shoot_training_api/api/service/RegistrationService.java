@@ -2,6 +2,7 @@ package fr.nicolas.godin.shoot_training_api.api.service;
 
 import fr.nicolas.godin.shoot_training_api.api.dto.RefreshCodeRequest;
 import fr.nicolas.godin.shoot_training_api.api.dto.ActivationCodeDto;
+import fr.nicolas.godin.shoot_training_api.api.enums.CustomExceptionMessage;
 import fr.nicolas.godin.shoot_training_api.configuration.CustomException;
 import fr.nicolas.godin.shoot_training_api.database.ActivationCodeType;
 import fr.nicolas.godin.shoot_training_api.database.UserRole;
@@ -51,7 +52,7 @@ public class RegistrationService {
         try {
            return this.userRepository.save(newUser);
         }catch (DataIntegrityViolationException e){
-            throw new CustomException("Cet email est deja utiliser");
+            throw new CustomException(CustomExceptionMessage.EMAIL_IS_ALREADY_USE.getMessage());
         }
 
 
@@ -68,13 +69,13 @@ public class RegistrationService {
         Date now = new Date();
         User user = this.userRepository.findByEmail(code.getEmail());
         if (user==null){
-            throw new CustomException("Email invalide validation code");
+            throw new CustomException(CustomExceptionMessage.EMAIL_IS_INVALID.getMessage());
         }else if (user.isActive()){
-            throw new CustomException("Compte deja actif validation code");
+            throw new CustomException(CustomExceptionMessage.ACCOUNT_IS_ALREADY_ACTIVE.getMessage());
         }else {
             ActivationCode activationCode = this.activationCodeService.getGeneratedValidationCode(user);
             if (!now.before(activationCode.getTimeOfValidity())){
-                throw new CustomException("invalid custom code");
+                throw new CustomException(CustomExceptionMessage.BAD_ACTIVATION_CODE.getMessage());
             }else {
                 if (code.getCode() == activationCode.getCode() && activationCode.getType() == ActivationCodeType.ACTIVATION) {
                     // Active le compte
@@ -101,7 +102,7 @@ public class RegistrationService {
         User user = this.userRepository.findByEmail(refreshCodeRequest.email());
         if (user==null){
 
-            throw new CustomException("email invalid refresh");
+            throw new CustomException(CustomExceptionMessage.EMAIL_IS_ALREADY_USE.getMessage());
 
         }
         else {
@@ -116,7 +117,7 @@ public class RegistrationService {
                 this.mailerService.sendValidationCode(code);
             }else {
 
-                throw new CustomException("Code encore valide");
+                throw new CustomException(CustomExceptionMessage.CODE_IS_ACTIVE.getMessage());
 
             }
 

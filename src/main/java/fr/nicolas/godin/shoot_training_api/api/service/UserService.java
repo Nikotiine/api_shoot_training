@@ -1,6 +1,8 @@
 package fr.nicolas.godin.shoot_training_api.api.service;
 
 import fr.nicolas.godin.shoot_training_api.api.dto.UserEditDto;
+import fr.nicolas.godin.shoot_training_api.api.enums.CustomExceptionMessage;
+import fr.nicolas.godin.shoot_training_api.configuration.CustomException;
 import fr.nicolas.godin.shoot_training_api.database.entity.User;
 import fr.nicolas.godin.shoot_training_api.database.repository.UserRepository;
 import lombok.AllArgsConstructor;
@@ -24,7 +26,7 @@ public class UserService {
                 String hash = this.passwordEncoder.encode(userEditDto.getPassword());
                 user.setPassword(hash);
             }else {
-                throw new BadCredentialsException("Mot de passe invalide");
+                throw new CustomException(CustomExceptionMessage.BAD_PASSWORD.getMessage());
             }
         }
         return this.userRepository.save(user);

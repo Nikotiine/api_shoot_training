@@ -2,6 +2,7 @@ package fr.nicolas.godin.shoot_training_api.api.service;
 
 import fr.nicolas.godin.shoot_training_api.api.dto.NewPasswordRequestDto;
 import fr.nicolas.godin.shoot_training_api.api.dto.RefreshCodeRequest;
+import fr.nicolas.godin.shoot_training_api.api.enums.CustomExceptionMessage;
 import fr.nicolas.godin.shoot_training_api.configuration.CustomException;
 import fr.nicolas.godin.shoot_training_api.database.ActivationCodeType;
 import fr.nicolas.godin.shoot_training_api.database.entity.ActivationCode;
@@ -40,7 +41,7 @@ public class ForgotPasswordService {
 
 
         }else {
-            throw new CustomException("Code invalide");
+            throw new CustomException(CustomExceptionMessage.BAD_ACTIVATION_CODE.getMessage());
         }
 
     }
@@ -53,7 +54,7 @@ public class ForgotPasswordService {
     public void save(NewPasswordRequestDto newPasswordRequestDto) {
         User user = this.userRepository.findByEmail(newPasswordRequestDto.getEmail());
         if (user == null){
-            throw new CustomException("email invalide");
+            throw new CustomException(CustomExceptionMessage.EMAIL_IS_INVALID.getMessage());
         }else {
             this.changePassword(user,newPasswordRequestDto);
         }
@@ -69,7 +70,7 @@ public class ForgotPasswordService {
         Date now = new Date();
         User user = this.userRepository.findByEmailAndActiveIsTrue(request.email());
         if (user == null){
-            throw new CustomException("Email inconnu");
+            throw new CustomException(CustomExceptionMessage.EMAIL_IS_INVALID.getMessage());
         }else {
             ActivationCode code = this.activationCodeService.getGeneratedValidationCode(user);
             if (code == null){
@@ -78,7 +79,7 @@ public class ForgotPasswordService {
                 this.activationCodeService.deleteActivatedCode(code);
                 this.sendValidationCodeForNewPassword(user);
             }else {
-                throw new CustomException("Code deja Envoyé");
+                throw new CustomException(CustomExceptionMessage.CODE_IS_ALREADY_SEND.getMessage());
             }
 
         }

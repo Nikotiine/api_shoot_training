@@ -1,4 +1,5 @@
 package fr.nicolas.godin.shoot_training_api.configuration;
+import fr.nicolas.godin.shoot_training_api.api.enums.CustomExceptionMessage;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -30,7 +31,8 @@ public class CustomRestExceptionHandler{
     @ExceptionHandler(CustomException.class)
     public ResponseEntity<Map<String, String>> customException(CustomException e) {
         Map<String, String> errors = new HashMap<>();
+        HttpStatus status = CustomExceptionMessage.findByMessage(e.getMessage());
         errors.put(KEY, e.getMessage());
-        return new ResponseEntity<>(errors, HttpStatus.FORBIDDEN);
+        return new ResponseEntity<>(errors, status);
     }
 }
