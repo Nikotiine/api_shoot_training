@@ -25,13 +25,10 @@ public class ForgotPasswordService {
 
     /**
      * Changement du mot de passe et verification du code transmis par email
-     * @param newPasswordRequestDto NewPasswordRequestDto
-     * @return boolean
+     * @param newPasswordRequestDto NewPasswordRequestDto , user
      */
-    public boolean changePassword(NewPasswordRequestDto newPasswordRequestDto) {
+    public void changePassword(User user,NewPasswordRequestDto newPasswordRequestDto) {
 
-        boolean isPasswordChange= false;
-        User user = this.userRepository.findByEmail(newPasswordRequestDto.getEmail());
         ActivationCode code = this.activationCodeService.getGeneratedValidationCode(user);
 
         if (code.getType() == ActivationCodeType.RESET_PASSWORD && code.getCode() == newPasswordRequestDto.getCode() ){
@@ -40,25 +37,27 @@ public class ForgotPasswordService {
             user.setPassword(hash);
             this.userRepository.save(user);
             this.activationCodeService.deleteActivatedCode(code);
-            isPasswordChange = true;
 
+
+        }else {
+            throw new CustomException("Code invalide");
         }
 
-        return isPasswordChange;
     }
 
     /**
      * Verifie que le code est valide
-     * @param email email de l'utilisateur
-     * @return boolean
+     * @param newPasswordRequestDto email de l'utilisateur
      */
 
-    public boolean emailVerificationAndValidityCode(String email) {
-        User user = this.userRepository.findByEmail(email);
+    public void emailVerificationAndValidityCode(NewPasswordRequestDto newPasswordRequestDto) {
+        User user = this.userRepository.findByEmail(newPasswordRequestDto.getEmail());
         if (user == null){
             throw new CustomException("email invalide");
+        }else {
+            this.changePassword(user,newPasswordRequestDto);
         }
-        return this.activationCodeService.emailVerificationAndValidityCode(user);
+
     }
 
     /**

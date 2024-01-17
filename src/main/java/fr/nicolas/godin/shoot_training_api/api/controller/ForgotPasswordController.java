@@ -34,32 +34,10 @@ public class ForgotPasswordController {
 
     @PostMapping(value="save-new-password",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResponseMessage> saveNewPassword(@RequestBody NewPasswordRequestDto newPasswordRequestDto) {
-        try {
 
-            String email = newPasswordRequestDto.getEmail();
-            HttpStatus status = BAD_REQUEST;
-            CodeMessageResponse codeMessageResponse = CodeMessageResponse.CODE_IS_OUT_OF_TIME;
-            boolean isInValidityTime = this.forgotPasswordService.emailVerificationAndValidityCode(email);
+        this.forgotPasswordService.emailVerificationAndValidityCode(newPasswordRequestDto);
+        return ResponseEntity.status(OK).body(new ResponseMessage(CodeMessageResponse.NEW_PASSWORD_CHANGE));
 
-            if (isInValidityTime) {
 
-                boolean isPasswordChange = this.forgotPasswordService.changePassword(newPasswordRequestDto);
-
-                if (!isPasswordChange) {
-                    codeMessageResponse = CodeMessageResponse.BAD_ACTIVATION_CODE;
-                } else {
-                    codeMessageResponse = CodeMessageResponse.NEW_PASSWORD_CHANGE;
-                    status = OK;
-                }
-
-            }
-
-            return ResponseEntity.status(status).body(new ResponseMessage(codeMessageResponse));
-
-        }catch (NullPointerException e){
-
-            return ResponseEntity.status(BAD_REQUEST).body(new ResponseMessage(CodeMessageResponse.EMAIL_IS_INVALID));
-
-        }
     }
 }
