@@ -95,21 +95,33 @@ public class RegistrationService {
     /**
      * Renvoie un code a la demande de l'utlisateur si il a depasser le temps impati avant d'activer son compte
      * @param refreshCodeRequest RefreshCodeRequest
-     * @throws NullPointerException si le mail fournis n'existe pas en bdd
      */
-    public void refreshValidationCode(RefreshCodeRequest refreshCodeRequest) throws NullPointerException {
+    public void refreshValidationCode(RefreshCodeRequest refreshCodeRequest)  {
 
         User user = this.userRepository.findByEmail(refreshCodeRequest.email());
-        boolean codeIsInValidityTime = this.activationCodeService.emailVerificationAndValidityCode(user);
+        if (user==null){
 
-        if (!codeIsInValidityTime){
-
-            ActivationCode oldCode = this.activationCodeService.getGeneratedValidationCode(user);
-            this.activationCodeService.deleteActivatedCode(oldCode);
+            throw new CustomException("email invalid refresh");
 
         }
+        else {
 
-        ActivationCode code = this.activationCodeService.generateValidationCode(user,ActivationCodeType.ACTIVATION);
-        this.mailerService.sendValidationCode(code);
+            boolean codeIsInValidityTime = this.activationCodeService.emailVerificationAndValidityCode(user);
+
+            if (!codeIsInValidityTime){
+
+                ActivationCode oldCode = this.activationCodeService.getGeneratedValidationCode(user);
+                this.activationCodeService.deleteActivatedCode(oldCode);
+                ActivationCode code = this.activationCodeService.generateValidationCode(user,ActivationCodeType.ACTIVATION);
+                this.mailerService.sendValidationCode(code);
+            }else {
+
+                throw new CustomException("Code encore valide");
+
+            }
+
+
+        }
     }
+
 }

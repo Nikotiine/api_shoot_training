@@ -47,18 +47,8 @@ public class RegistrationController {
     @PostMapping(value ="refresh-code",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResponseMessage> refreshCode(@Valid @RequestBody RefreshCodeRequest request) {
 
-       try {
-
-           this.registrationService.refreshValidationCode(request);
-           return ResponseEntity.status(OK).body(new ResponseMessage(CodeMessageResponse.NEW_CODE_SENT));
-
-        } catch (NullPointerException e) {
-
-
-           return ResponseEntity.status(BAD_REQUEST).body(new ResponseMessage(CodeMessageResponse.EMAIL_IS_INVALID));
-
-        }
-
+        this.registrationService.refreshValidationCode(request);
+        return ResponseEntity.status(OK).body(new ResponseMessage(CodeMessageResponse.NEW_CODE_SENT));
 
     }
 }

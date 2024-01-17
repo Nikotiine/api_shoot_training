@@ -1,5 +1,6 @@
 package fr.nicolas.godin.shoot_training_api.api.service;
 
+import fr.nicolas.godin.shoot_training_api.configuration.CustomException;
 import fr.nicolas.godin.shoot_training_api.database.ActivationCodeType;
 import fr.nicolas.godin.shoot_training_api.database.entity.User;
 import fr.nicolas.godin.shoot_training_api.database.entity.ActivationCode;
@@ -44,6 +45,9 @@ public class ActivationCodeService {
 
         Date now = new Date();
         ActivationCode code = activationCodeRepository.findByuser(user);
+        if (code == null || user.isActive()){
+            throw new CustomException("Vous avez deja valide votre code");
+        }
         return now.before(code.getTimeOfValidity());
 
     }
