@@ -13,6 +13,8 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 
 @Service
 @AllArgsConstructor
@@ -55,54 +57,38 @@ public class RegistrationService {
 
     }
 
-    /**
-     * Verifie que le mail existe bien en bdd
-     * @param email mail
-     * @return Boolean
-     * @throws NullPointerException si le mail fournis n'existe pas en bdd
-     */
-    public Boolean emailVerification(String email) throws NullPointerException {
 
-        User user = this.userRepository.findByEmail(email);
-        return this.activationCodeService.emailVerificationAndValidityCode(user);
 
-    }
-
-    /**
-     * Verifie que le compte est deja actif
-     * @param email email
-     * @return Boolean
-     * @throws NullPointerException si le mail fournis n'existe pas en bdd
-     */
-    public Boolean accountIsAlreadyActivated(String email) throws NullPointerException {
-
-        User user = this.userRepository.findByEmail(email);
-        return user.isActive();
-
-    }
 
     /**
      * Valide le compte de l'utilisateur apres verification du code
      * @param code le code envoye par mail
-     * @return Boolean
      */
-    public Boolean validationCode(ActivationCodeDto code) {
-
-        boolean isActivate = false;
+    public void validationCode(ActivationCodeDto code) {
+        Date now = new Date();
         User user = this.userRepository.findByEmail(code.getEmail());
-        ActivationCode activationCode = this.activationCodeService.getGeneratedValidationCode(user);
+        if (user==null){
+            throw new CustomException("Email invalide validation code");
+        }else if (user.isActive()){
+            throw new CustomException("Compte deja actif validation code");
+        }else {
+            ActivationCode activationCode = this.activationCodeService.getGeneratedValidationCode(user);
+            if (!now.before(activationCode.getTimeOfValidity())){
+                throw new CustomException("invalid custom code");
+            }else {
+                if (code.getCode() == activationCode.getCode() && activationCode.getType() == ActivationCodeType.ACTIVATION) {
+                    // Active le compte
+                    user.setActive(true);
+                    // Valide le status actif du compte
+                    this.userRepository.save(user);
+                    // Supprime le code en base de données
+                    this.activationCodeService.deleteActivatedCode(activationCode);
 
-        if (code.getCode() == activationCode.getCode() && activationCode.getType() == ActivationCodeType.ACTIVATION) {
-            // Active le compte
-            user.setActive(true);
-            // Valide le status actif du compte
-            this.userRepository.save(user);
-            // Supprime le code en base de données
-            this.activationCodeService.deleteActivatedCode(activationCode);
-            isActivate = true;
 
+                }
+            }
         }
-        return isActivate;
+
 
     }
 

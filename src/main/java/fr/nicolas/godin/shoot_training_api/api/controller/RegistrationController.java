@@ -38,47 +38,10 @@ public class RegistrationController {
 
     @PostMapping(value ="validation-code",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResponseMessage> codeValidation(@Valid @RequestBody ActivationCodeDto activationCodeDto) {
-        try {
 
-            CodeMessageResponse codeMessageResponse = CodeMessageResponse.ACCOUNT_IS_ALREADY_ACTIVE;
-            HttpStatus status = BAD_REQUEST;
-            boolean accountIsActive = this.registrationService.accountIsAlreadyActivated(activationCodeDto.getEmail());
+        this.registrationService.validationCode(activationCodeDto);
+        return  ResponseEntity.status(OK).body(new ResponseMessage(CodeMessageResponse.ACCOUNT_ACTIVATED));
 
-            if (!accountIsActive) {
-
-                boolean isInValidityTime = this.registrationService.emailVerification(activationCodeDto.getEmail());
-
-                if (isInValidityTime) {
-
-                    boolean accountActivated = this.registrationService.validationCode(activationCodeDto);
-
-                    if (accountActivated) {
-
-                        status = HttpStatus.OK;
-                        codeMessageResponse = CodeMessageResponse.ACCOUNT_ACTIVATED;
-
-                    } else {
-
-                        codeMessageResponse = CodeMessageResponse.BAD_ACTIVATION_CODE;
-                    }
-
-
-                }else {
-
-                    codeMessageResponse = CodeMessageResponse.CODE_IS_OUT_OF_TIME;
-
-
-                }
-            }
-
-
-            return  ResponseEntity.status(status).body(new ResponseMessage(codeMessageResponse));
-
-        } catch (NullPointerException e) {
-
-            return ResponseEntity.status(BAD_REQUEST).body(new ResponseMessage(CodeMessageResponse.EMAIL_IS_INVALID));
-
-        }
     }
 
     @PostMapping(value ="refresh-code",produces = MediaType.APPLICATION_JSON_VALUE)

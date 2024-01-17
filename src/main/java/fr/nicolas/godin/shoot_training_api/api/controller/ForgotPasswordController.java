@@ -7,12 +7,10 @@ import fr.nicolas.godin.shoot_training_api.api.enums.CodeMessageResponse;
 import fr.nicolas.godin.shoot_training_api.api.service.ForgotPasswordService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.OK;
 
 @RestController
@@ -35,7 +33,7 @@ public class ForgotPasswordController {
     @PostMapping(value="save-new-password",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResponseMessage> saveNewPassword(@RequestBody NewPasswordRequestDto newPasswordRequestDto) {
 
-        this.forgotPasswordService.emailVerificationAndValidityCode(newPasswordRequestDto);
+        this.forgotPasswordService.save(newPasswordRequestDto);
         return ResponseEntity.status(OK).body(new ResponseMessage(CodeMessageResponse.NEW_PASSWORD_CHANGE));
 
 

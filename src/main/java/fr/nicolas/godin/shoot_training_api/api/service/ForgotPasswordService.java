@@ -50,7 +50,7 @@ public class ForgotPasswordService {
      * @param newPasswordRequestDto email de l'utilisateur
      */
 
-    public void emailVerificationAndValidityCode(NewPasswordRequestDto newPasswordRequestDto) {
+    public void save(NewPasswordRequestDto newPasswordRequestDto) {
         User user = this.userRepository.findByEmail(newPasswordRequestDto.getEmail());
         if (user == null){
             throw new CustomException("email invalide");
