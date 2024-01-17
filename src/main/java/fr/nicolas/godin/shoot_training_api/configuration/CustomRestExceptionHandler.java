@@ -28,7 +28,7 @@ public class CustomRestExceptionHandler{
     }
 
     @ExceptionHandler(CustomException.class)
-    public ResponseEntity<Map<String, String>> invalidCredential(CustomException e) {
+    public ResponseEntity<Map<String, String>> customException(CustomException e) {
         Map<String, String> errors = new HashMap<>();
         errors.put(KEY, e.getMessage());
         return new ResponseEntity<>(errors, HttpStatus.FORBIDDEN);

@@ -29,18 +29,9 @@ public class RegistrationController {
     @ResponseBody
     public ResponseEntity<ResponseMessage> register(@Valid @RequestBody UserRegistrationDto userRegistrationDto){
 
-        try {
-
-            User user = this.modelMapper.map(userRegistrationDto, User.class);
-            this.registrationService.register(user);
-            return ResponseEntity.status(CREATED).body(new ResponseMessage(CodeMessageResponse.REGISTER_SUCCESS));
-
-        } catch (DataIntegrityViolationException e) {
-
-            return ResponseEntity.status(BAD_REQUEST)
-                    .body(new ResponseMessage(CodeMessageResponse.EMAIL_IS_ALREADY_USE));
-
-        }
+        User user = this.modelMapper.map(userRegistrationDto, User.class);
+        this.registrationService.register(user);
+        return ResponseEntity.status(CREATED).body(new ResponseMessage(CodeMessageResponse.REGISTER_SUCCESS));
 
     }
 

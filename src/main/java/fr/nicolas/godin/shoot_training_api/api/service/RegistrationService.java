@@ -2,12 +2,14 @@ package fr.nicolas.godin.shoot_training_api.api.service;
 
 import fr.nicolas.godin.shoot_training_api.api.dto.RefreshCodeRequest;
 import fr.nicolas.godin.shoot_training_api.api.dto.ActivationCodeDto;
+import fr.nicolas.godin.shoot_training_api.configuration.CustomException;
 import fr.nicolas.godin.shoot_training_api.database.ActivationCodeType;
 import fr.nicolas.godin.shoot_training_api.database.UserRole;
 import fr.nicolas.godin.shoot_training_api.database.entity.User;
 import fr.nicolas.godin.shoot_training_api.database.entity.ActivationCode;
 import fr.nicolas.godin.shoot_training_api.database.repository.UserRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +29,7 @@ public class RegistrationService {
      */
     public void register(User newUser){
 
-        User user =  this.createNewuser(newUser);
+        User user =  this.createNewUser(newUser);
         ActivationCode code = this.activationCodeService.generateValidationCode(user, ActivationCodeType.ACTIVATION);
         this.mailerService.sendValidationCode(code);
 
@@ -36,15 +38,20 @@ public class RegistrationService {
     /**
      * Creer l utilisateur en bdd
      * @param newUser user
-     * @return user
+
      */
-    private User createNewuser(User newUser) {
+    private User createNewUser(User newUser) {
 
         String hash = this.passwordEncoder.encode(newUser.getPassword());
         newUser.setPassword(hash);
         newUser.setRole(UserRole.USER);
         newUser.setActive(false);
-        return this.userRepository.save(newUser);
+        try {
+           return this.userRepository.save(newUser);
+        }catch (DataIntegrityViolationException e){
+            throw new CustomException("Cet email est deja utiliser");
+        }
+
 
     }
 
