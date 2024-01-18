@@ -35,11 +35,11 @@ public class Weapon extends BaseEntity implements Serializable {
 
     private String variation;
 
-    private long barrelLength;
+    private double barrelLength;
 
     private boolean isHeavyBarrel;
 
-    private long barrelStripes;
+    private double barrelStripes;
 
 
 }

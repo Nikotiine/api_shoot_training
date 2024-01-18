@@ -5,7 +5,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd"
         objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
-    <changeSet id="1705614755637-1" author="niko (generated)">
+    <changeSet id="1705615837644-1" author="niko (generated)">
         <createTable tableName="activation_code">
             <column autoIncrement="true" name="id" type="INT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_activationcode"/>
@@ -19,7 +19,7 @@
             <column name="type" type="SMALLINT"/>
         </createTable>
     </changeSet>
-    <changeSet id="1705614755637-2" author="niko (generated)">
+    <changeSet id="1705615837644-2" author="niko (generated)">
         <createTable tableName="caliber">
             <column autoIncrement="true" name="id" type="INT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_caliber"/>
@@ -30,7 +30,7 @@
             <column name="caliber" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet id="1705614755637-3" author="niko (generated)">
+    <changeSet id="1705615837644-3" author="niko (generated)">
         <createTable tableName="optics">
             <column autoIncrement="true" name="id" type="INT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_optics"/>
@@ -54,18 +54,18 @@
                 <constraints nullable="false"/>
             </column>
             <column name="min_parallax" type="INT"/>
-            <column name="max_elevation" type="BIGINT">
+            <column name="max_elevation" type="DOUBLE">
                 <constraints nullable="false"/>
             </column>
-            <column name="max_derivation" type="BIGINT">
+            <column name="max_derivation" type="DOUBLE">
                 <constraints nullable="false"/>
             </column>
-            <column name="value_of_one_click" type="BIGINT">
+            <column name="value_of_one_click" type="DOUBLE">
                 <constraints nullable="false"/>
             </column>
         </createTable>
     </changeSet>
-    <changeSet id="1705614755637-4" author="niko (generated)">
+    <changeSet id="1705615837644-4" author="niko (generated)">
         <createTable tableName="optics_body_diameter">
             <column autoIncrement="true" name="id" type="INT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_opticsbodydiameter"/>
@@ -73,12 +73,12 @@
             <column defaultValueBoolean="true" name="active" type="boolean"/>
             <column name="createdat" type="DATETIME"/>
             <column name="updated_at" type="DATETIME"/>
-            <column name="diameter" type="BIGINT">
+            <column name="diameter" type="DOUBLE">
                 <constraints nullable="false"/>
             </column>
         </createTable>
     </changeSet>
-    <changeSet id="1705614755637-5" author="niko (generated)">
+    <changeSet id="1705615837644-5" author="niko (generated)">
         <createTable tableName="optics_click_type">
             <column autoIncrement="true" name="id" type="INT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_opticsclicktype"/>
@@ -89,7 +89,7 @@
             <column name="type" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet id="1705614755637-6" author="niko (generated)">
+    <changeSet id="1705615837644-6" author="niko (generated)">
         <createTable tableName="optics_factory">
             <column autoIncrement="true" name="id" type="INT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_opticsfactory"/>
@@ -100,7 +100,7 @@
             <column name="name" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet id="1705614755637-7" author="niko (generated)">
+    <changeSet id="1705615837644-7" author="niko (generated)">
         <createTable tableName="optics_focal_plane">
             <column autoIncrement="true" name="id" type="INT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_opticsfocalplane"/>
@@ -111,7 +111,7 @@
             <column name="focal_plane" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet id="1705614755637-8" author="niko (generated)">
+    <changeSet id="1705615837644-8" author="niko (generated)">
         <createTable tableName="optics_outlet_diameter">
             <column autoIncrement="true" name="id" type="INT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_opticsoutletdiameter"/>
@@ -124,7 +124,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet id="1705614755637-9" author="niko (generated)">
+    <changeSet id="1705615837644-9" author="niko (generated)">
         <createTable tableName="user_weapon_setup">
             <column autoIncrement="true" name="id" type="INT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_userweaponsetup"/>
@@ -137,7 +137,7 @@
             <column name="user_id" type="INT"/>
         </createTable>
     </changeSet>
-    <changeSet id="1705614755637-10" author="niko (generated)">
+    <changeSet id="1705615837644-10" author="niko (generated)">
         <createTable tableName="users">
             <column autoIncrement="true" name="id" type="INT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_users"/>
@@ -152,7 +152,7 @@
             <column name="role" type="SMALLINT"/>
         </createTable>
     </changeSet>
-    <changeSet id="1705614755637-11" author="niko (generated)">
+    <changeSet id="1705615837644-11" author="niko (generated)">
         <createTable tableName="weapon">
             <column autoIncrement="true" name="id" type="INT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_weapon"/>
@@ -166,18 +166,18 @@
             <column name="caliber_id" type="INT"/>
             <column name="model" type="VARCHAR(255)"/>
             <column name="variation" type="VARCHAR(255)"/>
-            <column name="barrel_length" type="BIGINT">
+            <column name="barrel_length" type="DOUBLE">
                 <constraints nullable="false"/>
             </column>
             <column name="is_heavy_barrel" type="BOOLEAN">
                 <constraints nullable="false"/>
             </column>
-            <column name="barrel_stripes" type="BIGINT">
+            <column name="barrel_stripes" type="DOUBLE">
                 <constraints nullable="false"/>
             </column>
         </createTable>
     </changeSet>
-    <changeSet id="1705614755637-12" author="niko (generated)">
+    <changeSet id="1705615837644-12" author="niko (generated)">
         <createTable tableName="weapon_category">
             <column autoIncrement="true" name="id" type="INT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_weaponcategory"/>
@@ -190,7 +190,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet id="1705614755637-13" author="niko (generated)">
+    <changeSet id="1705615837644-13" author="niko (generated)">
         <createTable tableName="weapon_factory">
             <column autoIncrement="true" name="id" type="INT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_weaponfactory"/>
@@ -201,7 +201,7 @@
             <column name="name" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet id="1705614755637-14" author="niko (generated)">
+    <changeSet id="1705615837644-14" author="niko (generated)">
         <createTable tableName="weapon_type">
             <column autoIncrement="true" name="id" type="INT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_weapontype"/>
@@ -212,70 +212,70 @@
             <column name="type" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet id="1705614755637-15" author="niko (generated)">
+    <changeSet id="1705615837644-15" author="niko (generated)">
         <addUniqueConstraint columnNames="email" constraintName="uc_users_email" tableName="users"/>
     </changeSet>
-    <changeSet id="1705614755637-16" author="niko (generated)">
+    <changeSet id="1705615837644-16" author="niko (generated)">
         <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="activation_code"
                                  constraintName="FK_ACTIVATIONCODE_ON_USER" referencedColumnNames="id"
                                  referencedTableName="users"/>
     </changeSet>
-    <changeSet id="1705614755637-17" author="niko (generated)">
+    <changeSet id="1705615837644-17" author="niko (generated)">
         <addForeignKeyConstraint baseColumnNames="body_diameter_id" baseTableName="optics"
                                  constraintName="FK_OPTICS_ON_BODY_DIAMETER" referencedColumnNames="id"
                                  referencedTableName="optics_body_diameter"/>
     </changeSet>
-    <changeSet id="1705614755637-18" author="niko (generated)">
+    <changeSet id="1705615837644-18" author="niko (generated)">
         <addForeignKeyConstraint baseColumnNames="click_type_id" baseTableName="optics"
                                  constraintName="FK_OPTICS_ON_CLICK_TYPE" referencedColumnNames="id"
                                  referencedTableName="optics_click_type"/>
     </changeSet>
-    <changeSet id="1705614755637-19" author="niko (generated)">
+    <changeSet id="1705615837644-19" author="niko (generated)">
         <addForeignKeyConstraint baseColumnNames="factory_id" baseTableName="optics"
                                  constraintName="FK_OPTICS_ON_FACTORY" referencedColumnNames="id"
                                  referencedTableName="optics_factory"/>
     </changeSet>
-    <changeSet id="1705614755637-20" author="niko (generated)">
+    <changeSet id="1705615837644-20" author="niko (generated)">
         <addForeignKeyConstraint baseColumnNames="focal_plane_id" baseTableName="optics"
                                  constraintName="FK_OPTICS_ON_FOCAL_PLANE" referencedColumnNames="id"
                                  referencedTableName="optics_focal_plane"/>
     </changeSet>
-    <changeSet id="1705614755637-21" author="niko (generated)">
+    <changeSet id="1705615837644-21" author="niko (generated)">
         <addForeignKeyConstraint baseColumnNames="outlet_diameter_id" baseTableName="optics"
                                  constraintName="FK_OPTICS_ON_OUTLET_DIAMETER" referencedColumnNames="id"
                                  referencedTableName="optics_outlet_diameter"/>
     </changeSet>
-    <changeSet id="1705614755637-22" author="niko (generated)">
+    <changeSet id="1705615837644-22" author="niko (generated)">
         <addForeignKeyConstraint baseColumnNames="optics_id" baseTableName="user_weapon_setup"
                                  constraintName="FK_USERWEAPONSETUP_ON_OPTICS" referencedColumnNames="id"
                                  referencedTableName="optics"/>
     </changeSet>
-    <changeSet id="1705614755637-23" author="niko (generated)">
+    <changeSet id="1705615837644-23" author="niko (generated)">
         <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="user_weapon_setup"
                                  constraintName="FK_USERWEAPONSETUP_ON_USER" referencedColumnNames="id"
                                  referencedTableName="users"/>
     </changeSet>
-    <changeSet id="1705614755637-24" author="niko (generated)">
+    <changeSet id="1705615837644-24" author="niko (generated)">
         <addForeignKeyConstraint baseColumnNames="weapon_id" baseTableName="user_weapon_setup"
                                  constraintName="FK_USERWEAPONSETUP_ON_WEAPON" referencedColumnNames="id"
                                  referencedTableName="weapon"/>
     </changeSet>
-    <changeSet id="1705614755637-25" author="niko (generated)">
+    <changeSet id="1705615837644-25" author="niko (generated)">
         <addForeignKeyConstraint baseColumnNames="caliber_id" baseTableName="weapon"
                                  constraintName="FK_WEAPON_ON_CALIBER" referencedColumnNames="id"
                                  referencedTableName="caliber"/>
     </changeSet>
-    <changeSet id="1705614755637-26" author="niko (generated)">
+    <changeSet id="1705615837644-26" author="niko (generated)">
         <addForeignKeyConstraint baseColumnNames="category_id" baseTableName="weapon"
                                  constraintName="FK_WEAPON_ON_CATEGORY" referencedColumnNames="id"
                                  referencedTableName="weapon_category"/>
     </changeSet>
-    <changeSet id="1705614755637-27" author="niko (generated)">
+    <changeSet id="1705615837644-27" author="niko (generated)">
         <addForeignKeyConstraint baseColumnNames="factory_id" baseTableName="weapon"
                                  constraintName="FK_WEAPON_ON_FACTORY" referencedColumnNames="id"
                                  referencedTableName="weapon_factory"/>
     </changeSet>
-    <changeSet id="1705614755637-28" author="niko (generated)">
+    <changeSet id="1705615837644-28" author="niko (generated)">
         <addForeignKeyConstraint baseColumnNames="type_id" baseTableName="weapon" constraintName="FK_WEAPON_ON_TYPE"
                                  referencedColumnNames="id" referencedTableName="weapon_type"/>
     </changeSet>

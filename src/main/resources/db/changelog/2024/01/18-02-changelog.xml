@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
+    <property name="now" value="now()" dbms="postgresql"/>
+    <changeSet id="1705614755637-1" author="niko (generated)">
+        <insert tableName="caliber">
+            <column name="caliber">22LR</column>
+            <column name="createdat">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="optics_focal_plane">
+            <column name="focal_plane">FFP</column>
+            <column name="createdat">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="optics_focal_plane">
+            <column name="focal_plane">SFP</column>
+            <column name="createdat">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="optics_body_diameter">
+            <column name="diameter">24.5</column>
+            <column name="createdat">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="optics_body_diameter">
+            <column name="diameter">30</column>
+            <column name="createdat">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="optics_body_diameter">
+            <column name="diameter">34</column>
+            <column name="createdat">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="optics_click_type">
+            <column name="type">MRAD</column>
+            <column name="createdat">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="optics_click_type">
+            <column name="type">MOA</column>
+            <column name="createdat">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="optics_outlet_diameter">
+            <column name="diameter">40</column>
+            <column name="createdat">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="optics_outlet_diameter">
+            <column name="diameter">44</column>
+            <column name="createdat">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="optics_outlet_diameter">
+            <column name="diameter">50</column>
+            <column name="createdat">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="optics_outlet_diameter">
+            <column name="diameter">56</column>
+            <column name="createdat">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="weapon_category">
+            <column name="category">A</column>
+            <column name="createdat">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="weapon_category">
+            <column name="category">B</column>
+            <column name="createdat">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="weapon_category">
+            <column name="category">C</column>
+            <column name="createdat">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="weapon_category">
+            <column name="category">D</column>
+            <column name="createdat">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="weapon_type">
+            <column name="type">Arme de poing</column>
+            <column name="createdat">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="weapon_type">
+            <column name="type">Fusil à verrou</column>
+            <column name="createdat">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="weapon_type">
+            <column name="type">Fusil à pompe</column>
+            <column name="createdat">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="weapon_type">
+            <column name="type">Fusil semi-automatique</column>
+            <column name="createdat">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="weapon_type">
+            <column name="type">Carabine levier sous garde</column>
+            <column name="createdat">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="weapon_type">
+            <column name="type">Carabine air comprimé</column>
+            <column name="createdat">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="weapon_type">
+            <column name="type">Carabine CO2</column>
+            <column name="createdat">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="weapon_type">
+            <column name="type">Carabine PCP</column>
+            <column name="createdat">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

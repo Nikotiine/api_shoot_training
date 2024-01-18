@@ -20,5 +20,5 @@ public class OpticsBodyDiameter extends BaseEntity implements Serializable {
     @OneToMany(mappedBy = "bodyDiameter")
     private Set<Optics> optics;
 
-    private long diameter;
+    private double diameter;
 }
