@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1705617315407-1" author="niko (generated)">
+        <createTable tableName="weapon_sound_reducer">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_weaponsoundreducer"/>
+            </column>
+            <column defaultValueBoolean="true" name="active" type="boolean"/>
+            <column name="createdat" type="DATETIME"/>
+            <column name="updated_at" type="DATETIME"/>
+            <column name="caliber_id" type="INT"/>
+            <column name="model" type="VARCHAR(255)"/>
+            <column name="length" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="diameter" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="weight" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="1705617315407-2" author="niko (generated)">
+        <addColumn tableName="user_weapon_setup">
+            <column name="sound_reducer_id" type="INT"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="1705617315407-3" author="niko (generated)">
+        <addForeignKeyConstraint baseColumnNames="sound_reducer_id" baseTableName="user_weapon_setup"
+                                 constraintName="FK_USERWEAPONSETUP_ON_SOUND_REDUCER" referencedColumnNames="id"
+                                 referencedTableName="weapon_sound_reducer"/>
+    </changeSet>
+    <changeSet id="1705617315407-4" author="niko (generated)">
+        <addForeignKeyConstraint baseColumnNames="caliber_id" baseTableName="weapon_sound_reducer"
+                                 constraintName="FK_WEAPONSOUNDREDUCER_ON_CALIBER" referencedColumnNames="id"
+                                 referencedTableName="caliber"/>
+    </changeSet>
+
+</databaseChangeLog>

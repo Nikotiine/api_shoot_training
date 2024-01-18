@@ -20,5 +20,8 @@ public class Caliber extends BaseEntity implements Serializable {
     @OneToMany(mappedBy = "caliber")
     private Set<Weapon> weapons;
 
+    @OneToMany(mappedBy = "caliber")
+    private Set<WeaponSoundReducer> soundReducers;
+
     private String caliber;
 }
