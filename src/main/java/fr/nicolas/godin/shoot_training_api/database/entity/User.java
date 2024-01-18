@@ -3,6 +3,7 @@ package fr.nicolas.godin.shoot_training_api.database.entity;
 import fr.nicolas.godin.shoot_training_api.database.UserRole;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,6 +16,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -38,6 +40,9 @@ public class User extends BaseEntity implements Serializable, UserDetails {
 
     @Column
     private UserRole role;
+
+    @OneToMany(mappedBy = "user")
+    private Set<UserWeaponSetup> weaponSetups;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
