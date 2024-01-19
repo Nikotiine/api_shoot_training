@@ -18,14 +18,14 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @Tag(name = "Authentication",description = "Authentication Controller")
-@RequestMapping("/api/authentication")
+@RequestMapping(value="/api/authentication",produces = MediaType.APPLICATION_JSON_VALUE)
 @AllArgsConstructor
 public class AuthenticationController {
 
     private AuthenticationManager authenticationManager;
     private JwtService jwtService;
     private ModelMapper modelMapper;
-    @PostMapping(value = "login",produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "login")
     @ResponseBody
     public Token login(@Valid @RequestBody CredentialsDto credentials) {
 
@@ -38,7 +38,7 @@ public class AuthenticationController {
 
     }
 
-    @GetMapping(value ="me",produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value ="me")
     @ResponseBody
     public UserProfileDto me(){
 

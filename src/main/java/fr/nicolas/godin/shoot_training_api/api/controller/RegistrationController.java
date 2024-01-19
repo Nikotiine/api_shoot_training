@@ -18,13 +18,13 @@ import static org.springframework.http.HttpStatus.*;
 
 @RestController
 @Tag(name = "Registration",description = "Registration Controller")
-@RequestMapping("/api/registration")
+@RequestMapping(value="/api/registration",produces = MediaType.APPLICATION_JSON_VALUE)
 @AllArgsConstructor
 public class RegistrationController {
 
     private RegistrationService registrationService;
     private ModelMapper modelMapper;
-    @PostMapping(value="register",produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value="register")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public ResponseEntity<ResponseMessage> register(@Valid @RequestBody UserRegistrationDto userRegistrationDto){
@@ -36,7 +36,7 @@ public class RegistrationController {
     }
 
 
-    @PostMapping(value ="validation-code",produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value ="validation-code")
     public ResponseEntity<ResponseMessage> codeValidation(@Valid @RequestBody ActivationCodeDto activationCodeDto) {
 
         this.registrationService.validationCode(activationCodeDto);
@@ -44,7 +44,7 @@ public class RegistrationController {
 
     }
 
-    @PostMapping(value ="refresh-code",produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value ="refresh-code")
     public ResponseEntity<ResponseMessage> refreshCode(@Valid @RequestBody RefreshCodeRequest request) {
 
         this.registrationService.refreshValidationCode(request);

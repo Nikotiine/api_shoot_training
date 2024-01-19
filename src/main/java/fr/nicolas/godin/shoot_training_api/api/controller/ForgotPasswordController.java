@@ -15,12 +15,12 @@ import static org.springframework.http.HttpStatus.OK;
 
 @RestController
 @Tag(name = "ForgotPassword",description = "ForgotPassword Controller")
-@RequestMapping("/api/forgot-password")
+@RequestMapping(value="/api/forgot-password",produces = MediaType.APPLICATION_JSON_VALUE)
 @AllArgsConstructor
 public class ForgotPasswordController {
     private ForgotPasswordService forgotPasswordService;
 
-    @PostMapping(value="request-new-password",produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value="request-new-password")
     public ResponseEntity<ResponseMessage> requestNewPassword(@RequestBody RefreshCodeRequest request) {
 
 
@@ -30,7 +30,7 @@ public class ForgotPasswordController {
 
     }
 
-    @PostMapping(value="save-new-password",produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value="save-new-password")
     public ResponseEntity<ResponseMessage> saveNewPassword(@RequestBody NewPasswordRequestDto newPasswordRequestDto) {
 
         this.forgotPasswordService.save(newPasswordRequestDto);
