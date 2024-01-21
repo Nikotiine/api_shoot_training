@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Service
@@ -25,18 +26,18 @@ public class WeaponService {
     private final WeaponCategoryRepository weaponCategoryRepository;
     private final CaliberRepository  caliberRepository;
     private final WeaponTypeRepository weaponTypeRepository;
-
     private ModelMapper modelMapper;
 
 
 
 
-    public Weapon save(Weapon weapon) {
+    public Weapon save(NewWeaponDto weaponDto) {
         try {
 
-           return this.weaponRepository.save(weapon);
+            Weapon weapon = this.modelMapper.map(weaponDto, Weapon.class);
+            return this.weaponRepository.save(weapon);
 
-        } catch (DataIntegrityViolationException e){
+        } catch (DataIntegrityViolationException e) {
 
             throw new CustomException(CustomExceptionMessage.WEAPON_MODEL_IS_EXIST.getMessage());
 
@@ -46,32 +47,27 @@ public class WeaponService {
     public WeaponDataCollection getDataCollection() {
 
         List<WeaponFactory>  weaponFactories = (List<WeaponFactory>) this.weaponFactoryRepository.findAll();
-        List<WeaponFactoryDto>  weaponFactoryDtoList =
-                weaponFactories
-                        .stream()
-                        .map(weaponFactory -> this.modelMapper.map(weaponFactory, WeaponFactoryDto.class))
-                        .toList();
+        List<WeaponFactoryDto>  weaponFactoryDtoList = this.mapList(weaponFactories, WeaponFactoryDto.class);
 
         List<Caliber> calibers = (List<Caliber>) this.caliberRepository.findAll();
-        List<CaliberDto> caliberDtoList =
-                calibers
-                        .stream()
-                        .map(caliber -> this.modelMapper.map(caliber, CaliberDto.class))
-                        .toList();
+        List<CaliberDto> caliberDtoList = this.mapList(calibers, CaliberDto.class);
+
         List<WeaponCategory> weaponCategories = (List<WeaponCategory>) this.weaponCategoryRepository.findAll();
-        List<WeaponCategoryDto> weaponCategoryDtoList =
-                weaponCategories
-                        .stream()
-                        .map(weaponCategory -> this.modelMapper.map(weaponCategory, WeaponCategoryDto.class))
-                        .toList();
+        List<WeaponCategoryDto> weaponCategoryDtoList = this.mapList(weaponCategories, WeaponCategoryDto.class);
+
         List<WeaponType> weaponTypes = (List<WeaponType>) this.weaponTypeRepository.findAll();
-        List<WeaponTypeDto> weaponTypeDtoList =
-                weaponTypes
-                        .stream()
-                        .map(weaponType -> this.modelMapper.map(weaponType, WeaponTypeDto.class))
-                        .toList();
+        List<WeaponTypeDto> weaponTypeDtoList = this.mapList(weaponTypes, WeaponTypeDto.class);
+
         return new WeaponDataCollection(weaponFactoryDtoList,weaponTypeDtoList,weaponCategoryDtoList,caliberDtoList);
     }
 
+    private  <T, D> List<D> mapList(List<T> entityList, Class<D> dtoClass) {
+        Function<T, D> mapFunction = entity -> modelMapper.map(entity, dtoClass);
+        return entityList.stream().map(mapFunction).toList();
+    }
 
+    public List<WeaponDto> getAll() {
+        List<Weapon> weapons = (List<Weapon>) this.weaponRepository.findAll();
+        return this.mapList(weapons,WeaponDto.class);
+    }
 }

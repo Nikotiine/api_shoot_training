@@ -104,7 +104,7 @@ public class JwtService {
 
         Date issuedAt =  new Date();
         // Temps d'expiration du token
-        int timeOfExpirationInMinute = 60;
+        int timeOfExpirationInMinute = 120;
         final int oneMinuteInMillisecond =  60 * 1000;
         int expiration = oneMinuteInMillisecond * timeOfExpirationInMinute;
 

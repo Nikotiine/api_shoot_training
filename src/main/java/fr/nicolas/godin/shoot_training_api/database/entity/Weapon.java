@@ -19,25 +19,28 @@ import java.util.Set;
 })
 public class Weapon extends BaseEntity implements Serializable {
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     private WeaponFactory factory;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     private WeaponType type;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     private WeaponCategory category;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Caliber caliber;
 
+    @Column(nullable = false)
     private String model;
 
     private String variation;
 
+    @Column(nullable = false)
     private double barrelLength;
 
-    private boolean isHeavyBarrel;
+    @Column(columnDefinition = "boolean default false")
+    private boolean isHeavyBarrel = false;
 
     private double barrelStripes;
 

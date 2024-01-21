@@ -18,12 +18,16 @@ import java.io.Serializable;
 @Setter
 @NoArgsConstructor
 public class NewWeaponDto implements Serializable {
+    @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)
     WeaponFactoryDto factory;
 
+    @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)
     WeaponTypeDto type;
 
+    @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)
     WeaponCategoryDto category;
 
+    @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)
     CaliberDto caliber;
 
     @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)
@@ -34,8 +38,9 @@ public class NewWeaponDto implements Serializable {
     String variation;
 
     @Positive
+    @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)
     double barrelLength;
-
+    @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)
     boolean isHeavyBarrel;
 
     double barrelStripes;

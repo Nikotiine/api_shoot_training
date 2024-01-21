@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <property name="now" value="now()" dbms="postgresql"/>
+    <changeSet id="1705755090390-1" author="niko (generated)">
+        <addUniqueConstraint columnNames="model, variation, factory_id" constraintName="uc_ed4873ad5830fc16bbcf42df3"
+                             tableName="weapon"/>
+        <insert tableName="weapon_factory">
+            <column name="name">CZ</column>
+            <column name="createdat">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="weapon_factory">
+            <column name="name">Tikka</column>
+            <column name="createdat">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="weapon_factory">
+            <column name="name">Sako</column>
+            <column name="createdat">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="weapon_factory">
+            <column name="name">Winchester</column>
+            <column name="createdat">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="weapon_factory">
+            <column name="name">Bergara</column>
+            <column name="createdat">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="weapon_factory">
+            <column name="name">Browning</column>
+            <column name="createdat">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="weapon_factory">
+            <column name="name">Chiappa</column>
+            <column name="createdat">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="weapon_factory">
+            <column name="name">Citadel</column>
+            <column name="createdat">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="weapon_factory">
+            <column name="name">ISSC</column>
+            <column name="createdat">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="weapon_factory">
+            <column name="name">Ruger</column>
+            <column name="createdat">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="weapon_factory">
+            <column name="name">Savage</column>
+            <column name="createdat">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="weapon_factory">
+            <column name="name">Pallas</column>
+            <column name="createdat">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="weapon_factory">
+            <column name="name">Uberti</column>
+            <column name="createdat">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="weapon_factory">
+            <column name="name">Rossi</column>
+            <column name="createdat">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="weapon_factory">
+            <column name="name">Derya</column>
+            <column name="createdat">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="weapon_factory">
+            <column name="name">Diana</column>
+            <column name="createdat">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="optics_factory">
+            <column name="name">Vortex optics</column>
+            <column name="createdat">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="optics_factory">
+            <column name="name">Vector optics</column>
+            <column name="createdat">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="optics_factory">
+            <column name="name">Hawke</column>
+            <column name="createdat">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="optics_factory">
+            <column name="name">Nikko Stirling</column>
+            <column name="createdat">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="optics_factory">
+            <column name="name">Schmidt &amp; Bender</column>
+            <column name="createdat">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="caliber">
+            <column name="caliber">22MAG</column>
+            <column name="createdat">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="caliber">
+            <column name="caliber">17HMR</column>
+            <column name="createdat">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="caliber">
+            <column name="caliber">.222</column>
+            <column name="createdat">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="caliber">
+            <column name="caliber">.308</column>
+            <column name="createdat">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="caliber">
+            <column name="caliber">.223</column>
+            <column name="createdat">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>
