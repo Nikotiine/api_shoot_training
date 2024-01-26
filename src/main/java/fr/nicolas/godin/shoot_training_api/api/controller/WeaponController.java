@@ -26,7 +26,7 @@ public class WeaponController {
 
     @PostMapping(value = "new")
     @ResponseBody
-    public Weapon newWeapon(@Valid @RequestBody NewWeaponDto weaponDto){
+    public WeaponDto newWeapon(@Valid @RequestBody NewWeaponDto weaponDto){
 
         return this.weaponService.save(weaponDto);
 

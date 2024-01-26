@@ -31,11 +31,12 @@ public class WeaponService {
 
 
 
-    public Weapon save(NewWeaponDto weaponDto) {
+    public WeaponDto save(NewWeaponDto weaponDto) {
         try {
 
             Weapon weapon = this.modelMapper.map(weaponDto, Weapon.class);
-            return this.weaponRepository.save(weapon);
+            Weapon saved = this.weaponRepository.save(weapon);
+            return this.modelMapper.map(saved,WeaponDto.class);
 
         } catch (DataIntegrityViolationException e) {
 
@@ -61,13 +62,14 @@ public class WeaponService {
         return new WeaponDataCollection(weaponFactoryDtoList,weaponTypeDtoList,weaponCategoryDtoList,caliberDtoList);
     }
 
-    private  <T, D> List<D> mapList(List<T> entityList, Class<D> dtoClass) {
-        Function<T, D> mapFunction = entity -> modelMapper.map(entity, dtoClass);
-        return entityList.stream().map(mapFunction).toList();
-    }
 
     public List<WeaponDto> getAll() {
         List<Weapon> weapons = (List<Weapon>) this.weaponRepository.findAll();
         return this.mapList(weapons,WeaponDto.class);
+    }
+
+    private  <T, D> List<D> mapList(List<T> entityList, Class<D> dtoClass) {
+        Function<T, D> mapFunction = entity -> modelMapper.map(entity, dtoClass);
+        return entityList.stream().map(mapFunction).toList();
     }
 }
