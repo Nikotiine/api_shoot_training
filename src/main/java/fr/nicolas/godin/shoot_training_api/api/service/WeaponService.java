@@ -2,6 +2,7 @@ package fr.nicolas.godin.shoot_training_api.api.service;
 
 import fr.nicolas.godin.shoot_training_api.api.dto.*;
 import fr.nicolas.godin.shoot_training_api.api.enums.CustomExceptionMessage;
+import fr.nicolas.godin.shoot_training_api.api.tools.ModelMapperTool;
 import fr.nicolas.godin.shoot_training_api.configuration.CustomException;
 import fr.nicolas.godin.shoot_training_api.database.entity.*;
 import fr.nicolas.godin.shoot_training_api.database.repository.*;
@@ -48,16 +49,16 @@ public class WeaponService {
     public WeaponDataCollection getDataCollection() {
 
         List<WeaponFactory>  weaponFactories = (List<WeaponFactory>) this.weaponFactoryRepository.findAll();
-        List<WeaponFactoryDto>  weaponFactoryDtoList = this.mapList(weaponFactories, WeaponFactoryDto.class);
+        List<WeaponFactoryDto>  weaponFactoryDtoList = ModelMapperTool.mapList(weaponFactories, WeaponFactoryDto.class);
 
         List<Caliber> calibers = (List<Caliber>) this.caliberRepository.findAll();
-        List<CaliberDto> caliberDtoList = this.mapList(calibers, CaliberDto.class);
+        List<CaliberDto> caliberDtoList = ModelMapperTool.mapList(calibers, CaliberDto.class);
 
         List<WeaponCategory> weaponCategories = (List<WeaponCategory>) this.weaponCategoryRepository.findAll();
-        List<WeaponCategoryDto> weaponCategoryDtoList = this.mapList(weaponCategories, WeaponCategoryDto.class);
+        List<WeaponCategoryDto> weaponCategoryDtoList = ModelMapperTool.mapList(weaponCategories, WeaponCategoryDto.class);
 
         List<WeaponType> weaponTypes = (List<WeaponType>) this.weaponTypeRepository.findAll();
-        List<WeaponTypeDto> weaponTypeDtoList = this.mapList(weaponTypes, WeaponTypeDto.class);
+        List<WeaponTypeDto> weaponTypeDtoList = ModelMapperTool.mapList(weaponTypes, WeaponTypeDto.class);
 
         return new WeaponDataCollection(weaponFactoryDtoList,weaponTypeDtoList,weaponCategoryDtoList,caliberDtoList);
     }
@@ -65,11 +66,8 @@ public class WeaponService {
 
     public List<WeaponDto> getAll() {
         List<Weapon> weapons = (List<Weapon>) this.weaponRepository.findAll();
-        return this.mapList(weapons,WeaponDto.class);
+        return ModelMapperTool.mapList(weapons,WeaponDto.class);
     }
 
-    private  <T, D> List<D> mapList(List<T> entityList, Class<D> dtoClass) {
-        Function<T, D> mapFunction = entity -> modelMapper.map(entity, dtoClass);
-        return entityList.stream().map(mapFunction).toList();
-    }
+
 }

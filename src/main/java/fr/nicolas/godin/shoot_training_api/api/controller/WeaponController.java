@@ -1,18 +1,14 @@
 package fr.nicolas.godin.shoot_training_api.api.controller;
 
 import fr.nicolas.godin.shoot_training_api.api.dto.NewWeaponDto;
-import fr.nicolas.godin.shoot_training_api.api.dto.ResponseMessage;
 import fr.nicolas.godin.shoot_training_api.api.dto.WeaponDataCollection;
 import fr.nicolas.godin.shoot_training_api.api.dto.WeaponDto;
 import fr.nicolas.godin.shoot_training_api.api.service.WeaponService;
-import fr.nicolas.godin.shoot_training_api.database.entity.Weapon;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
