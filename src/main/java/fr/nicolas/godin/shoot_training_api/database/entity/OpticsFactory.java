@@ -1,5 +1,6 @@
 package fr.nicolas.godin.shoot_training_api.database.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
@@ -20,5 +21,6 @@ public class OpticsFactory extends BaseEntity implements Serializable {
     @OneToMany(mappedBy = "factory")
     private Set<Optics> optics;
 
+    @Column(unique = true)
     private String name;
 }

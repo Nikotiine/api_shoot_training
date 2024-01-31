@@ -1,15 +1,13 @@
 package fr.nicolas.godin.shoot_training_api.api.controller;
 
+import fr.nicolas.godin.shoot_training_api.api.dto.NewOpticsDto;
 import fr.nicolas.godin.shoot_training_api.api.dto.OpticsDataCollection;
 import fr.nicolas.godin.shoot_training_api.api.dto.OpticsDto;
 import fr.nicolas.godin.shoot_training_api.api.service.OpticsService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,7 +27,13 @@ public class OpticsController {
 
     @GetMapping(value = "data-collection")
     @ResponseBody
-    public OpticsDataCollection getDataCollection() {
+    public OpticsDataCollection getOpticsDataCollection() {
         return this.opticsService.getDataCollection();
     }
-}
+
+    @PostMapping("new")
+    @ResponseBody
+    public OpticsDto newOptics(@RequestBody NewOpticsDto newOptics){
+        return this.opticsService.save(newOptics);
+    }
+ }

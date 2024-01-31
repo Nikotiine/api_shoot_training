@@ -30,7 +30,7 @@ public class WeaponController {
 
     @GetMapping(value = "data-collection")
     @ResponseBody
-    public WeaponDataCollection getDataCollection(){
+    public WeaponDataCollection getWeaponDataCollection(){
 
         return this.weaponService.getDataCollection();
     }

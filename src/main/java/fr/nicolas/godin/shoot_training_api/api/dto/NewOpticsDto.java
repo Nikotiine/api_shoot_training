@@ -7,7 +7,6 @@ import jakarta.validation.constraints.Positive;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.Value;
 
 import java.io.Serializable;
 
@@ -32,7 +31,7 @@ public class NewOpticsDto implements Serializable {
     OpticsFocalPlaneDto focalPlane;
 
     @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)
-    OpticsClickTypeDto clickType;
+    OpticsUnitDto opticsUnit;
 
     @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)
     @NotEmpty(message = DtoDecoratorConfiguration.NOT_EMPTY_MESSAGE)

@@ -1,5 +1,6 @@
 package fr.nicolas.godin.shoot_training_api.database.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
@@ -15,9 +16,10 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class OpticsClickType extends BaseEntity implements Serializable {
+public class OpticsUnit extends BaseEntity implements Serializable {
     @OneToMany(mappedBy = "clickType")
     private Set<Optics> optics;
 
+    @Column(unique = true)
     private String type;
 }

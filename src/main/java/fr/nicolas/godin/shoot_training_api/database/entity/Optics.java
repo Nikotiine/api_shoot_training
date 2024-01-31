@@ -1,8 +1,6 @@
 package fr.nicolas.godin.shoot_training_api.database.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,6 +13,9 @@ import java.io.Serializable;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(uniqueConstraints={
+        @UniqueConstraint(columnNames = {"name","focal_plane_id","factory_id"})
+})
 public class Optics extends BaseEntity implements Serializable {
 
 
@@ -31,7 +32,7 @@ public class Optics extends BaseEntity implements Serializable {
     private OpticsFocalPlane focalPlane;
 
     @ManyToOne
-    private OpticsClickType clickType;
+    private OpticsUnit opticsUnit;
 
     private String name;
 

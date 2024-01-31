@@ -24,4 +24,7 @@ public class WeaponSoundReducer extends BaseEntity implements Serializable {
     private double diameter;
 
     private double weight;
+
+    @ManyToOne
+    private WeaponSoundReducerFactory factory;
 }
