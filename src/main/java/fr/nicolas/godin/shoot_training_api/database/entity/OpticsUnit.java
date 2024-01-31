@@ -17,7 +17,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OpticsUnit extends BaseEntity implements Serializable {
-    @OneToMany(mappedBy = "clickType")
+    @OneToMany(mappedBy = "opticsUnit")
     private Set<Optics> optics;
 
     @Column(unique = true)
