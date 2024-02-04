@@ -7,7 +7,7 @@ import java.util.List;
 public record OpticsDataCollection(
         @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)List<OpticsFactoryDto> opticsFactoryList,
         @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)List<OpticsBodyDiameterDto> opticsBodyDiameterList,
-        @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)List<OpticsUnitDto> opticsopticsUnitList,
+        @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)List<OpticsUnitDto> opticsUnitList,
         @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)List<OpticsFocalPlaneDto> opticsFocalPlaneList,
         @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)List<OpticsOutletDiameterDto> opticsOutletDiameterList) {
 }

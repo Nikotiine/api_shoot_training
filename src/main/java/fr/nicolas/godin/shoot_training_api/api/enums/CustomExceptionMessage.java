@@ -11,7 +11,8 @@ public enum CustomExceptionMessage {
     CODE_IS_ACTIVE(HttpStatus.FORBIDDEN,"Votre code est encore actif"),
     CODE_IS_ALREADY_SEND(HttpStatus.FORBIDDEN,"Votre code a deja etait envoye, merci de verifier vos email et vos spams"),
     BAD_PASSWORD(HttpStatus.FORBIDDEN,"Mot de passe invalide"),
-    WEAPON_MODEL_IS_EXIST(HttpStatus.BAD_REQUEST,"Ce model existe deja");
+    WEAPON_MODEL_IS_EXIST(HttpStatus.BAD_REQUEST,"Ce model existe deja"),
+    WEAPON_SETUP_IS_EXIST(HttpStatus.BAD_REQUEST,"Ce setup existe deja");
 
     private final HttpStatus status;
     private final String message;

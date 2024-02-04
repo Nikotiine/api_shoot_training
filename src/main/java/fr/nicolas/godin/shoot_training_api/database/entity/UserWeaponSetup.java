@@ -29,4 +29,6 @@ public class UserWeaponSetup extends BaseEntity implements Serializable {
 
     @ManyToOne
     private WeaponSoundReducer soundReducer;
+
+    private int slopeRail = 0;
 }

@@ -75,4 +75,5 @@ public class NewOpticsDto implements Serializable {
     @NotBlank(message = DtoDecoratorConfiguration.NOT_BLACK_MESSAGE)
     @Positive
     double valueOfOneClick;
+
 }

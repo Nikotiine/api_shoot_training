@@ -12,4 +12,5 @@ public class DtoDecoratorConfiguration {
     static final String EMAIL_REGEX= "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
     static final int MIN_LENGTH_CODE=100000;
     static final int MAX_LENGTH_CODE=999999;
+    static final String POSITIVE_OR_ZERO_MESSAGE = "Doit etre O ou positif";
 }
