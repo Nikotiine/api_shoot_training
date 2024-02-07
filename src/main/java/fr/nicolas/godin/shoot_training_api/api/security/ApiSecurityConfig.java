@@ -69,7 +69,8 @@ public class ApiSecurityConfig {
                         .requestMatchers(HttpMethod.POST,"api/authentication/login").permitAll()
                         .requestMatchers(HttpMethod.POST,"api/forgot-password/request-new-password").permitAll()
                         .requestMatchers(HttpMethod.POST,"api/forgot-password/save-new-password").permitAll()
-                        .requestMatchers(HttpMethod.GET,"api/optics/data-collection").permitAll()
+                        .requestMatchers(HttpMethod.GET,"api/ammunition/**").permitAll()
+                        .requestMatchers(HttpMethod.GET,"api/caliber/all").permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(
