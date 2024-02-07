@@ -23,7 +23,7 @@ public class BaseEntity implements Serializable {
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column
-    private Date createdAT;
+    private Date createdAt;
 
     @UpdateTimestamp
     @Temporal(TemporalType.TIMESTAMP)

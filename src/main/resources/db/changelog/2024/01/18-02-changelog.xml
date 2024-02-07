@@ -7,254 +7,355 @@
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
     <property name="now" value="now()" dbms="postgresql"/>
     <changeSet id="1705614755637-1" author="niko (generated)">
-        <insert tableName="caliber">
-            <column name="caliber">22LR</column>
-            <column name="createdat">${now()}</column>
-            <column name="updated_at">${now()}</column>
-        </insert>
+
         <insert tableName="optics_focal_plane">
             <column name="focal_plane">FFP</column>
-            <column name="createdat">${now()}</column>
+            <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
         <insert tableName="optics_focal_plane">
             <column name="focal_plane">SFP</column>
-            <column name="createdat">${now()}</column>
+            <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
         <insert tableName="optics_body_diameter">
             <column name="diameter">24.5</column>
-            <column name="createdat">${now()}</column>
+            <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
         <insert tableName="optics_body_diameter">
             <column name="diameter">30</column>
-            <column name="createdat">${now()}</column>
+            <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
         <insert tableName="optics_body_diameter">
             <column name="diameter">34</column>
-            <column name="createdat">${now()}</column>
+            <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
         <insert tableName="optics_unit">
             <column name="type">MRAD</column>
-            <column name="createdat">${now()}</column>
+            <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
         <insert tableName="optics_unit">
             <column name="type">MOA</column>
-            <column name="createdat">${now()}</column>
+            <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
         <insert tableName="optics_outlet_diameter">
             <column name="diameter">40</column>
-            <column name="createdat">${now()}</column>
+            <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
         <insert tableName="optics_outlet_diameter">
             <column name="diameter">44</column>
-            <column name="createdat">${now()}</column>
+            <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
         <insert tableName="optics_outlet_diameter">
             <column name="diameter">50</column>
-            <column name="createdat">${now()}</column>
+            <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
         <insert tableName="optics_outlet_diameter">
             <column name="diameter">56</column>
-            <column name="createdat">${now()}</column>
+            <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
         <insert tableName="weapon_category">
             <column name="category">A</column>
-            <column name="createdat">${now()}</column>
+            <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
         <insert tableName="weapon_category">
             <column name="category">B</column>
-            <column name="createdat">${now()}</column>
+            <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
         <insert tableName="weapon_category">
             <column name="category">C</column>
-            <column name="createdat">${now()}</column>
+            <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
         <insert tableName="weapon_category">
             <column name="category">D</column>
-            <column name="createdat">${now()}</column>
+            <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
         <insert tableName="weapon_type">
             <column name="type">Arme de poing</column>
-            <column name="createdat">${now()}</column>
+            <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
         <insert tableName="weapon_type">
             <column name="type">Fusil à verrou</column>
-            <column name="createdat">${now()}</column>
+            <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
         <insert tableName="weapon_type">
             <column name="type">Fusil à pompe</column>
-            <column name="createdat">${now()}</column>
+            <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
         <insert tableName="weapon_type">
             <column name="type">Fusil semi-automatique</column>
-            <column name="createdat">${now()}</column>
+            <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
         <insert tableName="weapon_type">
             <column name="type">Carabine levier sous garde</column>
-            <column name="createdat">${now()}</column>
+            <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
         <insert tableName="weapon_type">
             <column name="type">Carabine air comprimé</column>
-            <column name="createdat">${now()}</column>
+            <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
         <insert tableName="weapon_type">
             <column name="type">Carabine CO2</column>
-            <column name="createdat">${now()}</column>
+            <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
         <insert tableName="weapon_type">
             <column name="type">Carabine PCP</column>
-            <column name="createdat">${now()}</column>
+            <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
         <insert tableName="weapon_factory">
             <column name="name">CZ</column>
-            <column name="createdat">${now()}</column>
+            <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
         <insert tableName="weapon_factory">
             <column name="name">Tikka</column>
-            <column name="createdat">${now()}</column>
+            <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
         <insert tableName="weapon_factory">
             <column name="name">Sako</column>
-            <column name="createdat">${now()}</column>
+            <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
         <insert tableName="weapon_factory">
             <column name="name">Winchester</column>
-            <column name="createdat">${now()}</column>
+            <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
         <insert tableName="weapon_factory">
             <column name="name">Bergara</column>
-            <column name="createdat">${now()}</column>
+            <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
         <insert tableName="weapon_factory">
             <column name="name">Browning</column>
-            <column name="createdat">${now()}</column>
+            <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
         <insert tableName="weapon_factory">
             <column name="name">Chiappa</column>
-            <column name="createdat">${now()}</column>
+            <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
         <insert tableName="weapon_factory">
             <column name="name">Citadel</column>
-            <column name="createdat">${now()}</column>
+            <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
         <insert tableName="weapon_factory">
             <column name="name">ISSC</column>
-            <column name="createdat">${now()}</column>
+            <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
         <insert tableName="weapon_factory">
             <column name="name">Ruger</column>
-            <column name="createdat">${now()}</column>
+            <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
         <insert tableName="weapon_factory">
             <column name="name">Savage</column>
-            <column name="createdat">${now()}</column>
+            <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
         <insert tableName="weapon_factory">
             <column name="name">Pallas</column>
-            <column name="createdat">${now()}</column>
+            <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
         <insert tableName="weapon_factory">
             <column name="name">Uberti</column>
-            <column name="createdat">${now()}</column>
+            <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
         <insert tableName="weapon_factory">
             <column name="name">Rossi</column>
-            <column name="createdat">${now()}</column>
+            <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
         <insert tableName="weapon_factory">
             <column name="name">Derya</column>
-            <column name="createdat">${now()}</column>
+            <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
         <insert tableName="weapon_factory">
             <column name="name">Diana</column>
-            <column name="createdat">${now()}</column>
+            <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
         <insert tableName="optics_factory">
             <column name="name">Vortex optics</column>
-            <column name="createdat">${now()}</column>
+            <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
         <insert tableName="optics_factory">
             <column name="name">Vector optics</column>
-            <column name="createdat">${now()}</column>
+            <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
         <insert tableName="optics_factory">
             <column name="name">Hawke</column>
-            <column name="createdat">${now()}</column>
+            <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
         <insert tableName="optics_factory">
             <column name="name">Nikko Stirling</column>
-            <column name="createdat">${now()}</column>
+            <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
         <insert tableName="optics_factory">
             <column name="name">Schmidt &amp; Bender</column>
-            <column name="createdat">${now()}</column>
+            <column name="created_at">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="caliber">
+            <column name="caliber">22LR</column>
+            <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
         <insert tableName="caliber">
             <column name="caliber">22MAG</column>
-            <column name="createdat">${now()}</column>
+            <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
         <insert tableName="caliber">
             <column name="caliber">17HMR</column>
-            <column name="createdat">${now()}</column>
+            <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
         <insert tableName="caliber">
             <column name="caliber">.222</column>
-            <column name="createdat">${now()}</column>
+            <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
         <insert tableName="caliber">
             <column name="caliber">.308</column>
-            <column name="createdat">${now()}</column>
+            <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
         <insert tableName="caliber">
             <column name="caliber">.223</column>
-            <column name="createdat">${now()}</column>
+            <column name="created_at">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="ammunition_weight">
+            <column name="weight">28</column>
+            <column name="created_at">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="ammunition_weight">
+            <column name="weight">36</column>
+            <column name="created_at">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="ammunition_weight">
+            <column name="weight">38</column>
+            <column name="created_at">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="ammunition_weight">
+            <column name="weight">40</column>
+            <column name="created_at">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="ammunition_weight">
+            <column name="weight">42</column>
+            <column name="created_at">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="ammunition_weight">
+            <column name="weight">43</column>
+            <column name="created_at">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="ammunition_weight">
+            <column name="weight">45</column>
+            <column name="created_at">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="ammunition_weight_calibers">
+            <column name="ammunition_weight_id">1</column>
+            <column name="calibers_id">1</column>
+
+        </insert>
+        <insert tableName="ammunition_weight_calibers">
+            <column name="ammunition_weight_id">2</column>
+            <column name="calibers_id">1</column>
+
+        </insert>
+        <insert tableName="ammunition_weight_calibers">
+            <column name="ammunition_weight_id">3</column>
+            <column name="calibers_id">1</column>
+
+        </insert>
+        <insert tableName="ammunition_weight_calibers">
+            <column name="ammunition_weight_id">4</column>
+            <column name="calibers_id">1</column>
+
+        </insert>
+        <insert tableName="ammunition_weight_calibers">
+            <column name="ammunition_weight_id">5</column>
+            <column name="calibers_id">1</column>
+
+        </insert>
+        <insert tableName="ammunition_weight_calibers">
+            <column name="ammunition_weight_id">6</column>
+            <column name="calibers_id">1</column>
+
+        </insert>
+        <insert tableName="ammunition_weight_calibers">
+            <column name="ammunition_weight_id">7</column>
+            <column name="calibers_id">1</column>
+
+        </insert>
+        <insert tableName="optics">
+            <column name="name">Taurus</column>
+            <column name="focal_plane_id">1</column>
+            <column name="body_diameter_id">2</column>
+            <column name="factory_id">1</column>
+            <column name="max_elevation">60</column>
+            <column name="max_derivation">60</column>
+            <column name="max_zoom">18</column>
+            <column name="min_parallax">25</column>
+            <column name="min_zoom">3</column>
+            <column name="parallax">true</column>
+            <column name="optics_unit_id">1</column>
+            <column name="outlet_diameter_id">3</column>
+            <column name="value_of_one_click">1</column>
+            <column name="created_at">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="weapon">
+            <column name="factory_id">1</column>
+            <column name="barrel_length">52.5</column>
+            <column name="barrel_stripes">1</column>
+            <column name="is_heavy_barrel">true</column>
+            <column name="caliber_id">1</column>
+            <column name="category_id">3</column>
+            <column name="model">457</column>
+            <column name="type_id">1</column>
+            <column name="variation">varmint synthetique</column>
+            <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
     </changeSet>

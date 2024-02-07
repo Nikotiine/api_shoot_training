@@ -42,6 +42,7 @@ public class Optics extends BaseEntity implements Serializable {
 
     private boolean parallax;
 
+    @Column(nullable = true)
     private int minParallax;
 
     private double maxElevation;
