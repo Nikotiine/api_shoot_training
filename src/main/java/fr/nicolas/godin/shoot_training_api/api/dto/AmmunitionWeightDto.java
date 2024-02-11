@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.Value;
+import org.springframework.security.core.parameters.P;
 
 import java.io.Serializable;
 
@@ -22,5 +23,11 @@ public class AmmunitionWeightDto implements Serializable {
 
     @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)
     @Positive
-    double weight;
+    double grains;
+
+    @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)
+    @Positive
+    double grams;
+
+
 }

@@ -6,6 +6,8 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
     <property name="now" value="now()" dbms="postgresql"/>
+
+
     <changeSet id="1705614755637-1" author="niko (generated)">
 
         <insert tableName="optics_focal_plane">
@@ -84,17 +86,7 @@
             <column name="updated_at">${now()}</column>
         </insert>
         <insert tableName="weapon_type">
-            <column name="type">Arme de poing</column>
-            <column name="created_at">${now()}</column>
-            <column name="updated_at">${now()}</column>
-        </insert>
-        <insert tableName="weapon_type">
             <column name="type">Fusil à verrou</column>
-            <column name="created_at">${now()}</column>
-            <column name="updated_at">${now()}</column>
-        </insert>
-        <insert tableName="weapon_type">
-            <column name="type">Fusil à pompe</column>
             <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
@@ -120,6 +112,11 @@
         </insert>
         <insert tableName="weapon_type">
             <column name="type">Carabine PCP</column>
+            <column name="created_at">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="weapon_type">
+            <column name="type">Arme de poing</column>
             <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
@@ -244,52 +241,54 @@
             <column name="updated_at">${now()}</column>
         </insert>
         <insert tableName="caliber">
-            <column name="caliber">.222</column>
+            <column name="caliber">4.5</column>
             <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
         <insert tableName="caliber">
-            <column name="caliber">.308</column>
-            <column name="created_at">${now()}</column>
-            <column name="updated_at">${now()}</column>
-        </insert>
-        <insert tableName="caliber">
-            <column name="caliber">.223</column>
+            <column name="caliber">5.5</column>
             <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
         <insert tableName="ammunition_weight">
-            <column name="weight">28</column>
+            <column name="grains">28</column>
+            <column name="grams">1.81437</column>
             <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
         <insert tableName="ammunition_weight">
-            <column name="weight">36</column>
+            <column name="grains">36</column>
+            <column name="grams">2.33276</column>
             <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
         <insert tableName="ammunition_weight">
-            <column name="weight">38</column>
+            <column name="grains">38</column>
+            <column name="grams">2.46236</column>
             <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
         <insert tableName="ammunition_weight">
-            <column name="weight">40</column>
+            <column name="grains">40</column>
+            <column name="grams">2.59196</column>
             <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
         <insert tableName="ammunition_weight">
-            <column name="weight">42</column>
+            <column name="grains">42</column>
+            <column name="grams">2.72155</column>
             <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
         <insert tableName="ammunition_weight">
-            <column name="weight">43</column>
+            <column name="grains">43</column>
+            <column name="grams">2.78635</column>
             <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
         <insert tableName="ammunition_weight">
-            <column name="weight">45</column>
+            <column name="grains">45</column>
+            <column name="grams">2.91595</column>
             <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
