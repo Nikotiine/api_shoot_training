@@ -36,7 +36,6 @@ public class JwtFilter extends OncePerRequestFilter {
         boolean isTokenExpired = true;
         //Si le header est vide ne laisse pas continuer la methode
         if (authorization != null && authorization.startsWith("Bearer ")){
-
             token = authorization.substring(7);
             isTokenExpired = this.jwtService.verifyTokenValidity(token);
             user = this.jwtService.getUserWithTokenPayload(token);

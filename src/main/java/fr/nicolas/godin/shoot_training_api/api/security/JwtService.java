@@ -1,11 +1,14 @@
 package fr.nicolas.godin.shoot_training_api.api.security;
 
 import fr.nicolas.godin.shoot_training_api.api.dto.Token;
+import fr.nicolas.godin.shoot_training_api.api.enums.CustomExceptionMessage;
 import fr.nicolas.godin.shoot_training_api.api.service.AuthenticationService;
+import fr.nicolas.godin.shoot_training_api.configuration.CustomException;
 import fr.nicolas.godin.shoot_training_api.database.entity.User;
 import io.github.cdimascio.dotenv.Dotenv;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.security.Keys;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -69,8 +72,10 @@ public class JwtService {
      */
     private <T> T getClaim(String token, Function<Claims,T> function) {
 
-        Claims claims = getAllClaims(token);
-        return function.apply(claims);
+            Claims claims = getAllClaims(token);
+            return function.apply(claims);
+
+
 
     }
 
@@ -81,11 +86,13 @@ public class JwtService {
      */
     private Claims getAllClaims(String token) {
 
-        return Jwts.parser()
-                .verifyWith(getKey())
-                .build()
-                .parseSignedClaims(token)
-                .getPayload();
+    return Jwts.parser()
+            .verifyWith(getKey())
+            .build()
+            .parseSignedClaims(token)
+            .getPayload();
+
+
 
     }
 

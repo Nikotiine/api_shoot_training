@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.Date;
+
 /**
  * DTO for {@link fr.nicolas.godin.shoot_training_api.database.entity.Weapon}
  */
@@ -14,6 +16,9 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class WeaponDto extends NewWeaponDto implements Serializable {
     @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)
-    private int id;
+    int id;
+
+    boolean isActive;
+    Date createdAT;
 
 }

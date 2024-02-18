@@ -1,5 +1,6 @@
 package fr.nicolas.godin.shoot_training_api.api.service;
 
+import fr.nicolas.godin.shoot_training_api.api.dao.AdminDao;
 import fr.nicolas.godin.shoot_training_api.api.dto.*;
 import fr.nicolas.godin.shoot_training_api.api.enums.CustomExceptionMessage;
 import fr.nicolas.godin.shoot_training_api.api.tools.ModelMapperTool;
@@ -11,11 +12,12 @@ import org.modelmapper.ModelMapper;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class OpticsService {
+public class OpticsService implements AdminDao<OpticsDto> {
 
     private OpticsRepository opticsRepository;
     private OpticsFactoryRepository opticsFactoryRepository;
@@ -61,5 +63,17 @@ public class OpticsService {
             throw new CustomException(CustomExceptionMessage.WEAPON_MODEL_IS_EXIST.getMessage());
         }
 
+    }
+
+
+    @Override
+    public long countTotalEntry() {
+        return this.opticsRepository.count();
+    }
+
+    @Override
+    public OpticsDto findLastEntry() {
+        Optics optics = this.opticsRepository.findFirstByOrderByIdDesc();
+        return ModelMapperTool.mapDto(optics, OpticsDto.class);
     }
 }

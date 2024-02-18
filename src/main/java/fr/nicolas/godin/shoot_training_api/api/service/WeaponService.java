@@ -1,5 +1,6 @@
 package fr.nicolas.godin.shoot_training_api.api.service;
 
+import fr.nicolas.godin.shoot_training_api.api.dao.AdminDao;
 import fr.nicolas.godin.shoot_training_api.api.dto.*;
 import fr.nicolas.godin.shoot_training_api.api.enums.CustomExceptionMessage;
 import fr.nicolas.godin.shoot_training_api.api.tools.ModelMapperTool;
@@ -13,6 +14,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -20,14 +22,14 @@ import java.util.stream.Collectors;
 @Service
 @AllArgsConstructor
 
-public class WeaponService {
+public class WeaponService implements AdminDao<WeaponDto> {
 
     private final WeaponRepository weaponRepository;
     private final WeaponFactoryRepository weaponFactoryRepository;
     private final WeaponCategoryRepository weaponCategoryRepository;
     private final CaliberRepository  caliberRepository;
     private final WeaponTypeRepository weaponTypeRepository;
-    private ModelMapper modelMapper;
+
 
 
 
@@ -35,9 +37,9 @@ public class WeaponService {
     public WeaponDto save(NewWeaponDto weaponDto) {
         try {
 
-            Weapon weapon = this.modelMapper.map(weaponDto, Weapon.class);
+            Weapon weapon = ModelMapperTool.mapDto(weaponDto, Weapon.class);
             Weapon saved = this.weaponRepository.save(weapon);
-            return this.modelMapper.map(saved,WeaponDto.class);
+            return ModelMapperTool.mapDto(saved,WeaponDto.class);
 
         } catch (DataIntegrityViolationException e) {
 
@@ -70,4 +72,14 @@ public class WeaponService {
     }
 
 
+    @Override
+    public long countTotalEntry() {
+        return this.weaponRepository.count();
+    }
+
+    @Override
+    public WeaponDto findLastEntry() {
+        Weapon weapon = this.weaponRepository.findFirstByOrderByIdDesc();
+        return ModelMapperTool.mapDto(weapon, WeaponDto.class);
+    }
 }

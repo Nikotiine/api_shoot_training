@@ -1,6 +1,7 @@
 package fr.nicolas.godin.shoot_training_api.configuration;
 import fr.nicolas.godin.shoot_training_api.api.enums.CustomExceptionMessage;
 import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.MalformedJwtException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -42,5 +43,13 @@ public class CustomRestExceptionHandler{
         Map<String, String> errors = new HashMap<>();
         errors.put(KEY, "Token expiré");
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(MalformedJwtException.class)
+    public ResponseEntity<Map<String,String>> invalidJwt(MalformedJwtException e) {
+
+        Map<String, String> errors = new HashMap<>();
+        errors.put(KEY, "Erreur de token");
+        return new ResponseEntity<>(errors, HttpStatus.FORBIDDEN);
     }
 }
