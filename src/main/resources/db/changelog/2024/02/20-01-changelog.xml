@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
+    <property name="now" value="now()" dbms="postgresql"/>
+    <changeSet id="1705614755637-1" author="niko (generated)">
+        <insert tableName="ammunition_factory">
+            <column name="name">Aguila</column>
+            <column name="created_at">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="ammunition_factory">
+            <column name="name">CCI</column>
+            <column name="created_at">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="ammunition_factory">
+            <column name="name">Federal</column>
+            <column name="created_at">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="ammunition_factory">
+            <column name="name">GECO</column>
+            <column name="created_at">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="ammunition_factory">
+            <column name="name">Hornady</column>
+            <column name="created_at">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="ammunition_factory">
+            <column name="name">Lapua</column>
+            <column name="created_at">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="ammunition_factory">
+            <column name="name">Magtech</column>
+            <column name="created_at">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="ammunition_factory">
+            <column name="name">Norma</column>
+            <column name="created_at">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="ammunition_factory">
+            <column name="name">Remington</column>
+            <column name="created_at">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="ammunition_factory">
+            <column name="name">RWS</column>
+            <column name="created_at">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="ammunition_factory">
+            <column name="name">Sellier Bellot</column>
+            <column name="created_at">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="ammunition_factory">
+            <column name="name">SK</column>
+            <column name="created_at">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="ammunition_factory">
+            <column name="name">Winchester</column>
+            <column name="created_at">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+        <insert tableName="ammunition_factory">
+            <column name="name">Eley</column>
+            <column name="created_at">${now()}</column>
+            <column name="updated_at">${now()}</column>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

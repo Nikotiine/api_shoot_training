@@ -28,5 +28,8 @@ OPEN_API_WEBSITE_URL=https://nicolas-godin.fr/
 JWT_SECRET_KEY= clef secrete pour signature du token HS512
 ```
 * Demarrer le projet.
-* Pour les utilisateur de Intellij telecharger le plugin JPA BUDDY
-* Le swagger d'open api est sur l'url : (http://localhost:8080/swagger-ui/index.html#/)# api_shoot_training
+* Pour les utilisateurs de Intellij telecharger le plugin JPA BUDDY
+* Le swagger d'open api est sur l'url : (http://localhost:8080/swagger-ui/index.html#/)
+
+
+# api_shoot_training

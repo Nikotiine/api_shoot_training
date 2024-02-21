@@ -30,4 +30,10 @@ public class AmmunitionController {
     public AmmunitionDto newAmmunition(@Valid NewAmmunitionDto newAmmunitionDto) {
         return this.ammunitionService.save(newAmmunitionDto);
     }
+
+    @GetMapping("all")
+    public List<AmmunitionDto> getAllAmmunition() {
+
+        return this.ammunitionService.getAll();
+    }
 }
