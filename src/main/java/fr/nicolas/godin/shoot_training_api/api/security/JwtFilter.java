@@ -1,9 +1,13 @@
 package fr.nicolas.godin.shoot_training_api.api.security;
 
+import fr.nicolas.godin.shoot_training_api.api.enums.CustomExceptionMessage;
+import fr.nicolas.godin.shoot_training_api.configuration.CustomException;
+import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.security.authentication.CredentialsExpiredException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -30,24 +34,27 @@ public class JwtFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
-        final String authorization = request.getHeader("Authorization");
-        String token = null;
-        UserDetails user = null;
-        boolean isTokenExpired = true;
-        //Si le header est vide ne laisse pas continuer la methode
-        if (authorization != null && authorization.startsWith("Bearer ")){
-            token = authorization.substring(7);
-            isTokenExpired = this.jwtService.verifyTokenValidity(token);
-            user = this.jwtService.getUserWithTokenPayload(token);
 
-        }
-        //Si le token est exprirer ne continue pas le filtre
-        if (!isTokenExpired && user != null && SecurityContextHolder.getContext().getAuthentication() == null){
+            final String authorization = request.getHeader("Authorization");
+            String token = null;
+            UserDetails user = null;
+            boolean isTokenExpired = true;
+            //Si le header est vide ne laisse pas continuer la methode
+            if (authorization != null && authorization.startsWith("Bearer ")){
+                token = authorization.substring(7);
+                isTokenExpired = this.jwtService.verifyTokenValidity(token);
+                user = this.jwtService.getUserWithTokenPayload(token);
 
-            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(user,null,user.getAuthorities());
-            SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+            }
+            //Si le token est exprirer ne continue pas le filtre
+            if (!isTokenExpired && user != null && SecurityContextHolder.getContext().getAuthentication() == null){
 
-        }
+                UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(user,null,user.getAuthorities());
+                SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+
+            }
+
+
         filterChain.doFilter(request,response);
 
     }

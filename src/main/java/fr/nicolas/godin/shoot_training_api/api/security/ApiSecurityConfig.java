@@ -1,5 +1,8 @@
 package fr.nicolas.godin.shoot_training_api.api.security;
 
+import fr.nicolas.godin.shoot_training_api.api.enums.CustomExceptionMessage;
+import fr.nicolas.godin.shoot_training_api.configuration.CustomException;
+import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -60,27 +63,29 @@ public class ApiSecurityConfig {
     // Filtre les route de l'api pour les fermer et obliger a etre authentifier sauf sur les route defini dans le requestMatcher
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-        return httpSecurity
-                .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(
-                authorize -> authorize
-                        .requestMatchers("/swagger-ui/**").permitAll()
-                        .requestMatchers("api/registration/**").permitAll()
-                        .requestMatchers(HttpMethod.POST,"api/authentication/login").permitAll()
-                        .requestMatchers(HttpMethod.POST,"api/forgot-password/request-new-password").permitAll()
-                        .requestMatchers(HttpMethod.POST,"api/forgot-password/save-new-password").permitAll()
-                        .requestMatchers(HttpMethod.GET,"api/ammunition/**").permitAll()
-                        .requestMatchers(HttpMethod.GET,"api/caliber/all").permitAll()
-                        .anyRequest().authenticated()
-                )
-                .sessionManagement(
-                        httpSecuritySessionManagementConfigurer ->
-                            httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                )
-                .addFilterBefore(
-                        jwtFilter, UsernamePasswordAuthenticationFilter.class
-                )
-                .build();
+           return httpSecurity
+                   .csrf(AbstractHttpConfigurer::disable)
+                   .authorizeHttpRequests(
+                           authorize -> authorize
+                                   .requestMatchers("/swagger-ui/**").permitAll()
+                                   .requestMatchers("api/registration/**").permitAll()
+                                   .requestMatchers(HttpMethod.POST,"api/authentication/login").permitAll()
+                                   .requestMatchers(HttpMethod.POST,"api/forgot-password/request-new-password").permitAll()
+                                   .requestMatchers(HttpMethod.POST,"api/forgot-password/save-new-password").permitAll()
+                                   .requestMatchers(HttpMethod.GET,"api/ammunition/**").permitAll()
+                                   .requestMatchers(HttpMethod.GET,"api/caliber/all").permitAll()
+                                   .anyRequest().authenticated()
+                   )
+                   .sessionManagement(
+                           httpSecuritySessionManagementConfigurer ->
+                                   httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                   )
+                   .addFilterBefore(
+                           jwtFilter, UsernamePasswordAuthenticationFilter.class
+                   )
+                   .build();
+
+
     }
 
     /**

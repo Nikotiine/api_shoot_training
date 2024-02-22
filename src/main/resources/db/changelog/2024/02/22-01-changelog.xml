@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
+    <property name="now" value="now()" dbms="postgresql"/>
+    <changeSet id="1705614755638-1" author="niko (generated)">
+        <insert tableName="ammunition">
+            <column name="factory_id">3</column>
+            <column name="created_at">${now()}</column>
+            <column name="updated_at">${now()}</column>
+            <column name="name">Champion</column>
+            <column name="initial_speed">380</column>
+            <column name="caliber_id">1</column>
+            <column name="weight_id">4</column>
+            <column name="ballistic_coefficient">0</column>
+        </insert>
+        <insert tableName="ammunition">
+            <column name="factory_id">10</column>
+            <column name="created_at">${now()}</column>
+            <column name="updated_at">${now()}</column>
+            <column name="name">Target Riffle</column>
+            <column name="initial_speed">330</column>
+            <column name="caliber_id">1</column>
+            <column name="weight_id">4</column>
+            <column name="ballistic_coefficient">0</column>
+        </insert>
+        <insert tableName="ammunition">
+            <column name="factory_id">10</column>
+            <column name="created_at">${now()}</column>
+            <column name="updated_at">${now()}</column>
+            <column name="name">Subsonic</column>
+            <column name="initial_speed">310</column>
+            <column name="caliber_id">1</column>
+            <column name="weight_id">4</column>
+            <column name="ballistic_coefficient">0</column>
+        </insert>
+        <insert tableName="ammunition">
+            <column name="factory_id">7</column>
+            <column name="created_at">${now()}</column>
+            <column name="updated_at">${now()}</column>
+            <column name="name">Standard</column>
+            <column name="initial_speed">330</column>
+            <column name="caliber_id">1</column>
+            <column name="weight_id">4</column>
+            <column name="ballistic_coefficient">0</column>
+        </insert>
+        <insert tableName="ammunition">
+            <column name="factory_id">2</column>
+            <column name="created_at">${now()}</column>
+            <column name="updated_at">${now()}</column>
+            <column name="name">Standard</column>
+            <column name="initial_speed">330</column>
+            <column name="caliber_id">1</column>
+            <column name="weight_id">4</column>
+            <column name="ballistic_coefficient">0</column>
+        </insert>
+        <insert tableName="ammunition">
+            <column name="factory_id">2</column>
+            <column name="created_at">${now()}</column>
+            <column name="updated_at">${now()}</column>
+            <column name="name">Subsonic</column>
+            <column name="initial_speed">330</column>
+            <column name="caliber_id">1</column>
+            <column name="weight_id">4</column>
+            <column name="ballistic_coefficient">0</column>
+        </insert>
+        <insert tableName="ammunition">
+            <column name="factory_id">5</column>
+            <column name="created_at">${now()}</column>
+            <column name="updated_at">${now()}</column>
+            <column name="name">Varmint express</column>
+            <column name="initial_speed">330</column>
+            <column name="caliber_id">1</column>
+            <column name="weight_id">4</column>
+            <column name="ballistic_coefficient">0</column>
+        </insert>
+        <insert tableName="ammunition">
+            <column name="factory_id">8</column>
+            <column name="created_at">${now()}</column>
+            <column name="updated_at">${now()}</column>
+            <column name="name">Tac 22 subsonic</column>
+            <column name="initial_speed">310</column>
+            <column name="caliber_id">1</column>
+            <column name="weight_id">4</column>
+            <column name="ballistic_coefficient">0</column>
+        </insert>
+        <insert tableName="ammunition">
+            <column name="factory_id">8</column>
+            <column name="created_at">${now()}</column>
+            <column name="updated_at">${now()}</column>
+            <column name="name">Tac 22 standard</column>
+            <column name="initial_speed">330</column>
+            <column name="caliber_id">1</column>
+            <column name="weight_id">4</column>
+            <column name="ballistic_coefficient">0</column>
+        </insert>
+        <insert tableName="ammunition">
+            <column name="factory_id">11</column>
+            <column name="created_at">${now()}</column>
+            <column name="updated_at">${now()}</column>
+            <column name="name">Standard club</column>
+            <column name="initial_speed">340</column>
+            <column name="caliber_id">1</column>
+            <column name="weight_id">4</column>
+            <column name="ballistic_coefficient">0</column>
+        </insert>
+        <insert tableName="ammunition">
+            <column name="factory_id">12</column>
+            <column name="created_at">${now()}</column>
+            <column name="updated_at">${now()}</column>
+            <column name="name">Standard plus</column>
+            <column name="initial_speed">325</column>
+            <column name="caliber_id">1</column>
+            <column name="weight_id">4</column>
+            <column name="ballistic_coefficient">0</column>
+        </insert>
+        <insert tableName="ammunition">
+            <column name="factory_id">12</column>
+            <column name="created_at">${now()}</column>
+            <column name="updated_at">${now()}</column>
+            <column name="name">Pistol match</column>
+            <column name="initial_speed">325</column>
+            <column name="caliber_id">1</column>
+            <column name="weight_id">4</column>
+            <column name="ballistic_coefficient">0</column>
+        </insert>
+        <insert tableName="ammunition">
+            <column name="factory_id">13</column>
+            <column name="created_at">${now()}</column>
+            <column name="updated_at">${now()}</column>
+            <column name="name">Subsonic 42MAX</column>
+            <column name="initial_speed">325</column>
+            <column name="caliber_id">1</column>
+            <column name="weight_id">5</column>
+            <column name="ballistic_coefficient">0</column>
+        </insert>
+        <insert tableName="ammunition">
+            <column name="factory_id">13</column>
+            <column name="created_at">${now()}</column>
+            <column name="updated_at">${now()}</column>
+            <column name="name">Standard velocity</column>
+            <column name="initial_speed">305</column>
+            <column name="caliber_id">1</column>
+            <column name="weight_id">4</column>
+            <column name="ballistic_coefficient">0</column>
+        </insert>
+        <insert tableName="ammunition">
+            <column name="factory_id">14</column>
+            <column name="created_at">${now()}</column>
+            <column name="updated_at">${now()}</column>
+            <column name="name">Force</column>
+            <column name="initial_speed">365</column>
+            <column name="caliber_id">1</column>
+            <column name="weight_id">5</column>
+            <column name="ballistic_coefficient">0</column>
+        </insert>
+        <insert tableName="ammunition">
+            <column name="factory_id">14</column>
+            <column name="created_at">${now()}</column>
+            <column name="updated_at">${now()}</column>
+            <column name="name">Sport</column>
+            <column name="initial_speed">345</column>
+            <column name="caliber_id">1</column>
+            <column name="weight_id">4</column>
+            <column name="ballistic_coefficient">0</column>
+        </insert>
+        <insert tableName="ammunition">
+            <column name="factory_id">14</column>
+            <column name="created_at">${now()}</column>
+            <column name="updated_at">${now()}</column>
+            <column name="name">Action</column>
+            <column name="initial_speed">345</column>
+            <column name="caliber_id">1</column>
+            <column name="weight_id">5</column>
+            <column name="ballistic_coefficient">0</column>
+        </insert>
+        <insert tableName="ammunition">
+            <column name="factory_id">1</column>
+            <column name="created_at">${now()}</column>
+            <column name="updated_at">${now()}</column>
+            <column name="name">Super-Extra</column>
+            <column name="initial_speed">335</column>
+            <column name="caliber_id">1</column>
+            <column name="weight_id">4</column>
+            <column name="ballistic_coefficient">0</column>
+        </insert>
+        <insert tableName="ammunition">
+            <column name="factory_id">1</column>
+            <column name="created_at">${now()}</column>
+            <column name="updated_at">${now()}</column>
+            <column name="name">Subsonic</column>
+            <column name="initial_speed">335</column>
+            <column name="caliber_id">1</column>
+            <column name="weight_id">4</column>
+            <column name="ballistic_coefficient">0</column>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

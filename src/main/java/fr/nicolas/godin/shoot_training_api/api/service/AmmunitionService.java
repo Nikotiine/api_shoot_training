@@ -44,7 +44,7 @@ public class AmmunitionService implements AdminDao<AmmunitionDto> {
     @Override
     public AmmunitionDto findLastEntry(){
         Ammunition ammunition = this.ammunitionRepository.findFirstByOrderByIdDesc();
-        return null;
+        return ModelMapperTool.mapDto(ammunition, AmmunitionDto.class);
     }
 
     @Override

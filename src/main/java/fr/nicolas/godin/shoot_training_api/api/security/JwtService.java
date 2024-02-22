@@ -7,6 +7,7 @@ import fr.nicolas.godin.shoot_training_api.configuration.CustomException;
 import fr.nicolas.godin.shoot_training_api.database.entity.User;
 import io.github.cdimascio.dotenv.Dotenv;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.security.Keys;
@@ -75,8 +76,6 @@ public class JwtService {
             Claims claims = getAllClaims(token);
             return function.apply(claims);
 
-
-
     }
 
     /**
@@ -86,12 +85,11 @@ public class JwtService {
      */
     private Claims getAllClaims(String token) {
 
-    return Jwts.parser()
-            .verifyWith(getKey())
-            .build()
-            .parseSignedClaims(token)
-            .getPayload();
-
+            return Jwts.parser()
+                    .verifyWith(getKey())
+                    .build()
+                    .parseSignedClaims(token)
+                    .getPayload();
 
 
     }

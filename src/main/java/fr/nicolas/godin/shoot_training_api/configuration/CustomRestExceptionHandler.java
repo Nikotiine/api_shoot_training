@@ -2,9 +2,11 @@ package fr.nicolas.godin.shoot_training_api.configuration;
 import fr.nicolas.godin.shoot_training_api.api.enums.CustomExceptionMessage;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
+import jakarta.servlet.ServletException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.CredentialsExpiredException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -38,15 +40,15 @@ public class CustomRestExceptionHandler{
         return new ResponseEntity<>(errors, status);
     }
 
-    @ExceptionHandler(ExpiredJwtException.class)
-    public ResponseEntity<Map<String,String>> expiredJWT(ExpiredJwtException e) {
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<Map<String,String>> expiredJWT(RuntimeException e) {
         Map<String, String> errors = new HashMap<>();
-        errors.put(KEY, "Token expiré");
+        errors.put(KEY, e.getMessage());
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(MalformedJwtException.class)
-    public ResponseEntity<Map<String,String>> invalidJwt(MalformedJwtException e) {
+    @ExceptionHandler(ServletException.class)
+    public ResponseEntity<Map<String,String>> invalidJwt(ServletException e) {
 
         Map<String, String> errors = new HashMap<>();
         errors.put(KEY, "Erreur de token");

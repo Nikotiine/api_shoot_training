@@ -76,7 +76,6 @@ public class UserService implements AdminDao<UserProfileDto> {
     @Override
     public UserProfileDto findLastEntry() {
         User user = this.userRepository.findFirstByOrderByIdDesc();
-        System.out.println(user);
         return ModelMapperTool.mapDto(user, UserProfileDto.class);
     }
 
