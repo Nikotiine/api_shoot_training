@@ -1,8 +1,6 @@
 package fr.nicolas.godin.shoot_training_api.api.controller;
 
-import fr.nicolas.godin.shoot_training_api.api.dto.AmmunitionDto;
-import fr.nicolas.godin.shoot_training_api.api.dto.AmmunitionWeightDto;
-import fr.nicolas.godin.shoot_training_api.api.dto.NewAmmunitionDto;
+import fr.nicolas.godin.shoot_training_api.api.dto.*;
 import fr.nicolas.godin.shoot_training_api.api.service.AmmunitionService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -21,19 +19,37 @@ public class AmmunitionController {
     private AmmunitionService ammunitionService;
 
     @GetMapping("weight-by-caliber")
+    @ResponseBody
     public List<AmmunitionWeightDto> getWeightByCaliber(@RequestParam(name = "id")int id){
 
         return this.ammunitionService.findAmmunitionWeightByCaliberId(id);
     }
 
-    @PostMapping("new")
-    public AmmunitionDto newAmmunition(@Valid NewAmmunitionDto newAmmunitionDto) {
+    @PostMapping("save/ammunition")
+    @ResponseBody
+    public AmmunitionDto newAmmunition(@Valid @RequestBody NewAmmunitionDto newAmmunitionDto) {
+
         return this.ammunitionService.save(newAmmunitionDto);
     }
 
+    @PostMapping("save/factory")
+    @ResponseBody
+    public AmmunitionFactoryDto newFactory(@Valid @RequestBody NewAmmunitionFactoryDto newAmmunitionFactory){
+
+        return this.ammunitionService.saveNewFactory(newAmmunitionFactory);
+    }
     @GetMapping("all")
+    @ResponseBody
     public List<AmmunitionDto> getAllAmmunition() {
 
         return this.ammunitionService.getAll();
     }
+
+    @GetMapping("data-collection")
+    @ResponseBody
+    public AmmunitionDataCollection getDataCollection() {
+
+        return this.ammunitionService.getDataCollection();
+    }
+
 }

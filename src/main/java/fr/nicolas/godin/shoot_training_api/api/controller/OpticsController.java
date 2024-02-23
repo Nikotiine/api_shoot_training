@@ -1,10 +1,9 @@
 package fr.nicolas.godin.shoot_training_api.api.controller;
 
-import fr.nicolas.godin.shoot_training_api.api.dto.NewOpticsDto;
-import fr.nicolas.godin.shoot_training_api.api.dto.OpticsDataCollection;
-import fr.nicolas.godin.shoot_training_api.api.dto.OpticsDto;
+import fr.nicolas.godin.shoot_training_api.api.dto.*;
 import fr.nicolas.godin.shoot_training_api.api.service.OpticsService;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -22,8 +21,9 @@ public class OpticsController {
     @GetMapping("all")
     @ResponseBody
     public List<OpticsDto> getAllOptics(){
-        return this.opticsService.getAll();
+        return this.opticsService.getAllActive();
     }
+
 
     @GetMapping(value = "data-collection")
     @ResponseBody
@@ -31,9 +31,15 @@ public class OpticsController {
         return this.opticsService.getDataCollection();
     }
 
-    @PostMapping("new")
+    @PostMapping("save/optics")
     @ResponseBody
-    public OpticsDto newOptics(@RequestBody NewOpticsDto newOptics){
+    public OpticsDto newOptics(@Valid @RequestBody NewOpticsDto newOptics){
         return this.opticsService.save(newOptics);
+    }
+
+    @PostMapping("save/factory")
+    @ResponseBody
+    public OpticsFactoryDto newOpticsFactory(@Valid @RequestBody NewOpticsFactoryDto newOpticsFactory){
+        return this.opticsService.saveNewFactory(newOpticsFactory);
     }
  }

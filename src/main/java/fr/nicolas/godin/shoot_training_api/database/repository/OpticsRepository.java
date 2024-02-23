@@ -8,4 +8,6 @@ import java.util.Date;
 public interface OpticsRepository extends CrudRepository<Optics,Integer> {
 
     Optics findFirstByOrderByIdDesc();
+
+    Iterable<Optics> findAllByActiveIsTrue();
 }

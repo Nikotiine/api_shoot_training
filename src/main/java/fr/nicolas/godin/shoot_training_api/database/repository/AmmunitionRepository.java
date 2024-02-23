@@ -7,4 +7,6 @@ import java.util.Date;
 
 public interface AmmunitionRepository extends CrudRepository<Ammunition, Integer> {
     Ammunition findFirstByOrderByIdDesc();
+
+    Iterable<Ammunition> findAllByActiveIsTrue();
 }

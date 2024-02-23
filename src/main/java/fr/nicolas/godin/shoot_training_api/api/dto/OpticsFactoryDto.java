@@ -16,13 +16,10 @@ import java.io.Serializable;
 @Getter
 @Setter
 @NoArgsConstructor
-public class OpticsFactoryDto implements Serializable {
+public class OpticsFactoryDto extends NewOpticsFactoryDto implements Serializable {
 
     @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)
     int id;
 
-    @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)
-    @NotEmpty(message = DtoDecoratorConfiguration.NOT_EMPTY_MESSAGE)
-    @NotBlank(message = DtoDecoratorConfiguration.NOT_BLACK_MESSAGE)
-    String name;
+
 }

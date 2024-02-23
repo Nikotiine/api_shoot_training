@@ -1,6 +1,7 @@
 package fr.nicolas.godin.shoot_training_api.api.service;
 
 import fr.nicolas.godin.shoot_training_api.api.dao.AdminDao;
+import fr.nicolas.godin.shoot_training_api.api.dao.UserDao;
 import fr.nicolas.godin.shoot_training_api.api.dto.*;
 import fr.nicolas.godin.shoot_training_api.api.enums.CustomExceptionMessage;
 import fr.nicolas.godin.shoot_training_api.api.tools.ModelMapperTool;
@@ -17,7 +18,7 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class OpticsService implements AdminDao<OpticsDto> {
+public class OpticsService implements AdminDao<OpticsDto>, UserDao<OpticsDto> {
 
     private OpticsRepository opticsRepository;
     private OpticsFactoryRepository opticsFactoryRepository;
@@ -27,6 +28,10 @@ public class OpticsService implements AdminDao<OpticsDto> {
     private OpticsOutletDiameterRepository opticsOutletDiameterRepository;
     private ModelMapper modelMapper;
 
+    /**
+     * Retroune la liste de toutes les optiquess
+     * @return List<OpticsDto>
+     */
     public List<OpticsDto> getAll() {
         List<Optics> opticsList = (List<Optics>) this.opticsRepository.findAll();
         return ModelMapperTool.mapList(opticsList, OpticsDto.class);
@@ -60,7 +65,7 @@ public class OpticsService implements AdminDao<OpticsDto> {
 
         } catch (DataIntegrityViolationException e){
 
-            throw new CustomException(CustomExceptionMessage.WEAPON_MODEL_IS_EXIST.getMessage());
+            throw new CustomException(CustomExceptionMessage.OPTIC_MODEL_IS_EXIST.getMessage());
         }
 
     }
@@ -75,5 +80,25 @@ public class OpticsService implements AdminDao<OpticsDto> {
     public OpticsDto findLastEntry() {
         Optics optics = this.opticsRepository.findFirstByOrderByIdDesc();
         return ModelMapperTool.mapDto(optics, OpticsDto.class);
+    }
+
+    public OpticsFactoryDto saveNewFactory(NewOpticsFactoryDto newOpticsFactory) {
+        try {
+
+            OpticsFactory factory = ModelMapperTool.mapDto(newOpticsFactory,OpticsFactory.class);
+            OpticsFactory saved = this.opticsFactoryRepository.save(factory);
+            return ModelMapperTool.mapDto(saved,OpticsFactoryDto.class);
+
+        } catch (DataIntegrityViolationException e){
+
+            throw new CustomException(CustomExceptionMessage.FACTORY_IS_EXIST.getMessage());
+        }
+
+    }
+
+    @Override
+    public List<OpticsDto> getAllActive() {
+        List<Optics> optics = (List<Optics>) this.opticsRepository.findAllByActiveIsTrue();
+        return ModelMapperTool.mapList(optics,OpticsDto.class);
     }
 }

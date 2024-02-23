@@ -1,8 +1,6 @@
 package fr.nicolas.godin.shoot_training_api.api.controller;
 
-import fr.nicolas.godin.shoot_training_api.api.dto.NewWeaponDto;
-import fr.nicolas.godin.shoot_training_api.api.dto.WeaponDataCollection;
-import fr.nicolas.godin.shoot_training_api.api.dto.WeaponDto;
+import fr.nicolas.godin.shoot_training_api.api.dto.*;
 import fr.nicolas.godin.shoot_training_api.api.service.WeaponService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -20,12 +18,18 @@ public class WeaponController {
     private WeaponService weaponService;
 
 
-    @PostMapping(value = "new")
+    @PostMapping(value = "save/weapon")
     @ResponseBody
     public WeaponDto newWeapon(@Valid @RequestBody NewWeaponDto weaponDto){
 
         return this.weaponService.save(weaponDto);
 
+    }
+
+    @PostMapping(value = "save/factory")
+    @ResponseBody
+    public WeaponFactoryDto newFactory(@Valid @RequestBody NewWeaponFactoryDto newWeaponFactory){
+        return this.weaponService.saveNewFactory(newWeaponFactory);
     }
 
     @GetMapping(value = "data-collection")
@@ -39,7 +43,7 @@ public class WeaponController {
     @ResponseBody
     public List<WeaponDto> getAllWeapon(){
 
-        return this.weaponService.getAll();
+        return this.weaponService.getAllActive();
     }
 
 }

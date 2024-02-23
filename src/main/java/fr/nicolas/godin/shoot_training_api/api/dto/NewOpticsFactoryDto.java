@@ -11,15 +11,14 @@ import lombok.Value;
 import java.io.Serializable;
 
 /**
- * DTO for {@link fr.nicolas.godin.shoot_training_api.database.entity.AmmunitionFactory}
+ * DTO for {@link fr.nicolas.godin.shoot_training_api.database.entity.OpticsFactory}
  */
 @Getter
 @Setter
 @NoArgsConstructor
-public class AmmunitionFactoryDto extends NewAmmunitionFactoryDto implements Serializable {
-
+public class NewOpticsFactoryDto implements Serializable {
     @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)
-    int id;
-
-
+    @NotEmpty(message = DtoDecoratorConfiguration.NOT_EMPTY_MESSAGE)
+    @NotBlank(message = DtoDecoratorConfiguration.NOT_BLACK_MESSAGE)
+    String name;
 }

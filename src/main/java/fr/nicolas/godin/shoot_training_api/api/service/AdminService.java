@@ -46,4 +46,16 @@ public class AdminService {
         this.userService.disableUser(user);
         return this.findAllUsers();
     }
+
+    public List<OpticsDto> findAllOptics() {
+        return this.opticsService.getAll();
+    }
+
+    public List<WeaponDto> findAllWeapons() {
+        return this.weaponService.getAll();
+    }
+
+    public List<AmmunitionDto> findAllAmmunition() {
+        return this.ammunitionService.getAll();
+    }
 }

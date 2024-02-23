@@ -38,4 +38,22 @@ public class AdminController {
     public  List<UserProfileDto> disableUser(@Valid @RequestBody UserProfileDto user) {
         return this.adminService.disableUser(user);
     }
+
+    @GetMapping("optics/all")
+    @ResponseBody
+    public List<OpticsDto> getAllOptics(){
+        return this.adminService.findAllOptics();
+    }
+
+    @GetMapping("weapons/all")
+    @ResponseBody
+    public List<WeaponDto> getAllWeapons(){
+        return this.adminService.findAllWeapons();
+    }
+
+    @GetMapping("ammunition/all")
+    @ResponseBody
+    public List<AmmunitionDto> getAllAmmunition() {
+        return this.adminService.findAllAmmunition();
+    }
 }

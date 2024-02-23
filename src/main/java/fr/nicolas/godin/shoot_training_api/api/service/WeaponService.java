@@ -1,6 +1,7 @@
 package fr.nicolas.godin.shoot_training_api.api.service;
 
 import fr.nicolas.godin.shoot_training_api.api.dao.AdminDao;
+import fr.nicolas.godin.shoot_training_api.api.dao.UserDao;
 import fr.nicolas.godin.shoot_training_api.api.dto.*;
 import fr.nicolas.godin.shoot_training_api.api.enums.CustomExceptionMessage;
 import fr.nicolas.godin.shoot_training_api.api.tools.ModelMapperTool;
@@ -22,7 +23,7 @@ import java.util.stream.Collectors;
 @Service
 @AllArgsConstructor
 
-public class WeaponService implements AdminDao<WeaponDto> {
+public class WeaponService implements AdminDao<WeaponDto>, UserDao<WeaponDto> {
 
     private final WeaponRepository weaponRepository;
     private final WeaponFactoryRepository weaponFactoryRepository;
@@ -66,6 +67,7 @@ public class WeaponService implements AdminDao<WeaponDto> {
     }
 
 
+    @Override
     public List<WeaponDto> getAll() {
         List<Weapon> weapons = (List<Weapon>) this.weaponRepository.findAll();
         return ModelMapperTool.mapList(weapons,WeaponDto.class);
@@ -79,7 +81,27 @@ public class WeaponService implements AdminDao<WeaponDto> {
 
     @Override
     public WeaponDto findLastEntry() {
+
         Weapon weapon = this.weaponRepository.findFirstByOrderByIdDesc();
         return ModelMapperTool.mapDto(weapon, WeaponDto.class);
+    }
+
+    public WeaponFactoryDto saveNewFactory(NewWeaponFactoryDto newWeaponFactory) {
+        try {
+
+            WeaponFactory factory = ModelMapperTool.mapDto(newWeaponFactory,WeaponFactory.class);
+            WeaponFactory saved = this.weaponFactoryRepository.save(factory);
+            return ModelMapperTool.mapDto(saved,WeaponFactoryDto.class);
+        } catch (DataIntegrityViolationException e){
+
+            throw new CustomException(CustomExceptionMessage.FACTORY_IS_EXIST.getMessage());
+        }
+
+    }
+
+    @Override
+    public List<WeaponDto> getAllActive() {
+        List<Weapon> weapons = (List<Weapon>) this.weaponRepository.findAllByActiveIsTrue();
+        return ModelMapperTool.mapList(weapons,WeaponDto.class);
     }
 }
