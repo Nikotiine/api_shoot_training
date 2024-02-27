@@ -13,7 +13,7 @@ public enum CustomExceptionMessage {
     BAD_PASSWORD(HttpStatus.FORBIDDEN,"Mot de passe invalide"),
     WEAPON_MODEL_IS_EXIST(HttpStatus.BAD_REQUEST,"Ce model d'arme existe deja"),
     OPTIC_MODEL_IS_EXIST(HttpStatus.BAD_REQUEST,"Cette lunette existe deja"),
-
+    NULL_POINTER_EXCEPTION(HttpStatus.BAD_REQUEST,"Definir un probleme"),
     WEAPON_SETUP_IS_EXIST(HttpStatus.BAD_REQUEST,"Ce setup existe deja"),
     FACTORY_IS_EXIST(HttpStatus.BAD_REQUEST,"Cette marque existe deja");
 

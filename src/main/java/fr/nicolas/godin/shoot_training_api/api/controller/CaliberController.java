@@ -20,6 +20,6 @@ public class CaliberController {
     private CaliberService caliberService;
     @GetMapping("all")
     public List<CaliberDto> getAllCalibers(){
-        return this.caliberService.findAllCalibers();
+        return this.caliberService.getAllActive();
     }
 }

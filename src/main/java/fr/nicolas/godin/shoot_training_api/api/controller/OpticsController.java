@@ -1,7 +1,7 @@
 package fr.nicolas.godin.shoot_training_api.api.controller;
 
 import fr.nicolas.godin.shoot_training_api.api.dto.*;
-import fr.nicolas.godin.shoot_training_api.api.service.OpticsService;
+import fr.nicolas.godin.shoot_training_api.api.service.optics.*;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -17,6 +17,11 @@ import java.util.List;
 public class OpticsController {
 
     private OpticsService opticsService;
+    private OpticsBodyDiameterService opticsBodyDiameterService;
+    private OpticsOutletDiameterService opticsOutletDiameterService;
+    private OpticsFactoryService opticsFactoryService;
+    private OpticsUnitService opticsUnitService;
+    private OpticsFocalPlaneService opticsFocalPlaneService;
 
     @GetMapping("all")
     @ResponseBody
@@ -28,18 +33,24 @@ public class OpticsController {
     @GetMapping(value = "data-collection")
     @ResponseBody
     public OpticsDataCollection getOpticsDataCollection() {
-        return this.opticsService.getDataCollection();
+        return new OpticsDataCollection(
+                this.opticsFactoryService.getAllActive(),
+                this.opticsBodyDiameterService.getAll(),
+                this.opticsUnitService.getAll(),
+                this.opticsFocalPlaneService.getAll(),
+                this.opticsOutletDiameterService.getAll()
+        );
     }
 
     @PostMapping("save/optics")
     @ResponseBody
     public OpticsDto newOptics(@Valid @RequestBody NewOpticsDto newOptics){
-        return this.opticsService.save(newOptics);
+        return this.opticsService.create(newOptics);
     }
 
     @PostMapping("save/factory")
     @ResponseBody
     public OpticsFactoryDto newOpticsFactory(@Valid @RequestBody NewOpticsFactoryDto newOpticsFactory){
-        return this.opticsService.saveNewFactory(newOpticsFactory);
+        return this.opticsFactoryService.create(newOpticsFactory);
     }
  }

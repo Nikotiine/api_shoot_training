@@ -1,7 +1,11 @@
 package fr.nicolas.godin.shoot_training_api.api.controller;
 
 import fr.nicolas.godin.shoot_training_api.api.dto.*;
-import fr.nicolas.godin.shoot_training_api.api.service.WeaponService;
+import fr.nicolas.godin.shoot_training_api.api.service.CaliberService;
+import fr.nicolas.godin.shoot_training_api.api.service.weapon.WeaponCategoryService;
+import fr.nicolas.godin.shoot_training_api.api.service.weapon.WeaponFactoryService;
+import fr.nicolas.godin.shoot_training_api.api.service.weapon.WeaponService;
+import fr.nicolas.godin.shoot_training_api.api.service.weapon.WeaponTypeService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -16,27 +20,36 @@ import java.util.List;
 public class WeaponController {
 
     private WeaponService weaponService;
+    private WeaponFactoryService weaponFactoryService;
+    private WeaponTypeService weaponTypeService;
+    private WeaponCategoryService weaponCategoryService;
+    private CaliberService caliberService;
 
 
     @PostMapping(value = "save/weapon")
     @ResponseBody
     public WeaponDto newWeapon(@Valid @RequestBody NewWeaponDto weaponDto){
 
-        return this.weaponService.save(weaponDto);
+        return this.weaponService.create(weaponDto);
 
     }
 
     @PostMapping(value = "save/factory")
     @ResponseBody
     public WeaponFactoryDto newFactory(@Valid @RequestBody NewWeaponFactoryDto newWeaponFactory){
-        return this.weaponService.saveNewFactory(newWeaponFactory);
+        return this.weaponFactoryService.create(newWeaponFactory);
     }
 
     @GetMapping(value = "data-collection")
     @ResponseBody
     public WeaponDataCollection getWeaponDataCollection(){
 
-        return this.weaponService.getDataCollection();
+        return new WeaponDataCollection(
+                this.weaponFactoryService.getAllActive(),
+                this.weaponTypeService.getAll(),
+                this.weaponCategoryService.getAll(),
+                this.caliberService.getAllActive()
+        );
     }
 
     @GetMapping(value = "all")

@@ -1,8 +1,8 @@
 package fr.nicolas.godin.shoot_training_api.api.service;
 
 import fr.nicolas.godin.shoot_training_api.api.dto.*;
-import fr.nicolas.godin.shoot_training_api.api.tools.ModelMapperTool;
-import fr.nicolas.godin.shoot_training_api.database.entity.User;
+import fr.nicolas.godin.shoot_training_api.api.service.optics.OpticsService;
+import fr.nicolas.godin.shoot_training_api.api.service.weapon.WeaponService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,16 +19,16 @@ public class AdminService {
 
     public AdminDashboardDataInformation findDataForDashboard() {
         long totalUser = this.userService.countTotalEntry();
-        UserProfileDto lastUser = this.userService.findLastEntry();
+        UserProfileDto lastUser = this.userService.getLastEntry();
 
         long totalWeapon = this.weaponService.countTotalEntry();
-        WeaponDto lastWeapon = this.weaponService.findLastEntry();
+        WeaponDto lastWeapon = this.weaponService.getLastEntry();
 
         long totalOptics = this.opticsService.countTotalEntry();
-        OpticsDto lastOptic = this.opticsService.findLastEntry();
+        OpticsDto lastOptic = this.opticsService.getLastEntry();
 
         long totalAmmo = this.ammunitionService.countTotalEntry();
-        AmmunitionDto lastAmmunition = this.ammunitionService.findLastEntry();
+        AmmunitionDto lastAmmunition = this.ammunitionService.getLastEntry();
         return new AdminDashboardDataInformation(totalUser,lastUser,totalWeapon,lastWeapon,totalOptics,lastOptic,totalAmmo,lastAmmunition);
     }
 

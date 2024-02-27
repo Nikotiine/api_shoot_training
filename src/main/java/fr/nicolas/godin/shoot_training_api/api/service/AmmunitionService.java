@@ -1,44 +1,30 @@
 package fr.nicolas.godin.shoot_training_api.api.service;
 
-import fr.nicolas.godin.shoot_training_api.api.dao.AdminDao;
-import fr.nicolas.godin.shoot_training_api.api.dao.UserDao;
+import fr.nicolas.godin.shoot_training_api.api.dao.AdminInterface;
+import fr.nicolas.godin.shoot_training_api.api.dao.CommonInterface;
 import fr.nicolas.godin.shoot_training_api.api.dto.*;
 import fr.nicolas.godin.shoot_training_api.api.tools.ModelMapperTool;
 import fr.nicolas.godin.shoot_training_api.database.entity.Ammunition;
-import fr.nicolas.godin.shoot_training_api.database.entity.AmmunitionFactory;
-import fr.nicolas.godin.shoot_training_api.database.entity.AmmunitionWeight;
-import fr.nicolas.godin.shoot_training_api.database.repository.AmmunitionFactoryRepository;
 import fr.nicolas.godin.shoot_training_api.database.repository.AmmunitionRepository;
-import fr.nicolas.godin.shoot_training_api.database.repository.AmmunitionWeightRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class AmmunitionService implements AdminDao<AmmunitionDto>, UserDao<AmmunitionDto> {
-    private AmmunitionWeightRepository ammunitionWeightRepository;
+public class AmmunitionService implements AdminInterface<AmmunitionDto,NewAmmunitionDto> {
+
     private AmmunitionRepository ammunitionRepository;
-    private AmmunitionFactoryRepository ammunitionFactoryRepository;
-    private CaliberService caliberService;
 
-    /**
-     * Retoune la liste des poids de munition associé au calibre passer en parametre
-     * @param id du calibre
-     * @return List<AmmunitionWeightDto>
-     */
-    public List<AmmunitionWeightDto> findAmmunitionWeightByCaliberId(int id) {
 
-        List<AmmunitionWeight> ammunitionWeightList = (List<AmmunitionWeight>) this.ammunitionWeightRepository.findAmmunitionWeightByCalibersId(id);
-        return ModelMapperTool.mapList(ammunitionWeightList, AmmunitionWeightDto.class);
-
-    }
 
 
     /**
      * Retourne la liste de toutes les munition disponible
+     * ADMIN DAO
      * @return List<AmmunitionDto>
      */
+    @Override
     public List<AmmunitionDto> getAll() {
 
         List<Ammunition> ammunitionList = (List<Ammunition>) this.ammunitionRepository.findAll();
@@ -47,10 +33,12 @@ public class AmmunitionService implements AdminDao<AmmunitionDto>, UserDao<Ammun
 
     /**
      * Sauvegarde une nouvelle munition
+     *
      * @param newAmmunition NewAmmunitionDto
      * @return la muntion sauvegarde AmmunitionDto
      */
-    public AmmunitionDto save(NewAmmunitionDto newAmmunition) {
+    @Override
+    public AmmunitionDto create(NewAmmunitionDto newAmmunition) {
 
         Ammunition ammunition = ModelMapperTool.mapDto(newAmmunition, Ammunition.class);
         Ammunition saved = this.ammunitionRepository.save(ammunition);
@@ -58,24 +46,20 @@ public class AmmunitionService implements AdminDao<AmmunitionDto>, UserDao<Ammun
 
     }
 
-
-
-    /**
-     * Retourne la liste necessaire pour l'enregistrement d'une nouvelle munition
-     * @return AmmunitionDataCollection
-     */
-    public AmmunitionDataCollection getDataCollection() {
-
-        List<AmmunitionFactory> ammunitionFactoryList = (List<AmmunitionFactory>) this.ammunitionFactoryRepository.findAll();
-        List<AmmunitionFactoryDto> ammunitionFactoryDtoList = ModelMapperTool.mapList(ammunitionFactoryList, AmmunitionFactoryDto.class);
-        List<CaliberDto> calibers = this.caliberService.findAllCalibers();
-
-        return new AmmunitionDataCollection(calibers, ammunitionFactoryDtoList);
-
+    @Override
+    public AmmunitionDto update(AmmunitionDto updateObjectDto) {
+        return null;
     }
 
     @Override
-    public AmmunitionDto findLastEntry() {
+    public List<AmmunitionDto> delete(AmmunitionDto objectDto) {
+        return null;
+    }
+
+
+
+    @Override
+    public AmmunitionDto getLastEntry() {
 
         Ammunition ammunition = this.ammunitionRepository.findFirstByOrderByIdDesc();
         return ModelMapperTool.mapDto(ammunition, AmmunitionDto.class);
@@ -87,18 +71,12 @@ public class AmmunitionService implements AdminDao<AmmunitionDto>, UserDao<Ammun
         return this.ammunitionRepository.count();
     }
 
-    public AmmunitionFactoryDto saveNewFactory(NewAmmunitionFactoryDto newAmmunitionFactory) {
-
-        AmmunitionFactory factory = ModelMapperTool.mapDto(newAmmunitionFactory,AmmunitionFactory.class);
-        AmmunitionFactory saved = this.ammunitionFactoryRepository.save(factory);
-        return ModelMapperTool.mapDto(saved, AmmunitionFactoryDto.class);
-    }
 
     @Override
     public List<AmmunitionDto> getAllActive() {
 
         List<Ammunition> ammunitionList = (List<Ammunition>) this.ammunitionRepository.findAllByActiveIsTrue();
-        return ModelMapperTool.mapList(ammunitionList,AmmunitionDto.class);
+        return ModelMapperTool.mapList(ammunitionList, AmmunitionDto.class);
 
     }
 }

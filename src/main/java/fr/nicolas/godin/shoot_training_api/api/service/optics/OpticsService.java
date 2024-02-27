@@ -1,7 +1,7 @@
-package fr.nicolas.godin.shoot_training_api.api.service;
+package fr.nicolas.godin.shoot_training_api.api.service.optics;
 
-import fr.nicolas.godin.shoot_training_api.api.dao.AdminDao;
-import fr.nicolas.godin.shoot_training_api.api.dao.UserDao;
+import fr.nicolas.godin.shoot_training_api.api.dao.AdminInterface;
+import fr.nicolas.godin.shoot_training_api.api.dao.CommonInterface;
 import fr.nicolas.godin.shoot_training_api.api.dto.*;
 import fr.nicolas.godin.shoot_training_api.api.enums.CustomExceptionMessage;
 import fr.nicolas.godin.shoot_training_api.api.tools.ModelMapperTool;
@@ -13,20 +13,14 @@ import org.modelmapper.ModelMapper;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class OpticsService implements AdminDao<OpticsDto>, UserDao<OpticsDto> {
+public class OpticsService implements AdminInterface<OpticsDto,NewOpticsDto> {
 
     private OpticsRepository opticsRepository;
-    private OpticsFactoryRepository opticsFactoryRepository;
-    private OpticsBodyDiameterRepository opticsBodyDiameterRepository;
-    private OpticsUnitRepository opticsUnitRepository;
-    private OpticsFocalPlaneRepository opticsFocalPlaneRepository;
-    private OpticsOutletDiameterRepository opticsOutletDiameterRepository;
-    private ModelMapper modelMapper;
+
 
     /**
      * Retroune la liste de toutes les optiquess
@@ -37,7 +31,7 @@ public class OpticsService implements AdminDao<OpticsDto>, UserDao<OpticsDto> {
         return ModelMapperTool.mapList(opticsList, OpticsDto.class);
     }
 
-    public OpticsDataCollection getDataCollection() {
+   /* public OpticsDataCollection getDataCollection() {
         List<OpticsFactory> opticsFactoryList = (List<OpticsFactory>) this.opticsFactoryRepository.findAll();
         List<OpticsFactoryDto> opticsFactoryDtoList = ModelMapperTool.mapList(opticsFactoryList, OpticsFactoryDto.class);
 
@@ -54,20 +48,30 @@ public class OpticsService implements AdminDao<OpticsDto>, UserDao<OpticsDto> {
         List<OpticsOutletDiameterDto> opticsOutletDiameterDtoList = ModelMapperTool.mapList(opticsOutletDiameterList, OpticsOutletDiameterDto.class);
 
         return new OpticsDataCollection(opticsFactoryDtoList,opticsBodyDiameterDtoList, opticsUnitDtoList,opticsFocalPlaneDtoList,opticsOutletDiameterDtoList);
-    }
+    }*/
 
-    public OpticsDto save(NewOpticsDto newOptics) {
+    public OpticsDto create(NewOpticsDto newOptics) {
         try {
 
-            Optics optics = this.modelMapper.map(newOptics, Optics.class);
+            Optics optics = ModelMapperTool.mapDto(newOptics, Optics.class);
             Optics saved = this.opticsRepository.save(optics);
-            return this.modelMapper.map(saved, OpticsDto.class);
+            return ModelMapperTool.mapDto(saved, OpticsDto.class);
 
         } catch (DataIntegrityViolationException e){
 
             throw new CustomException(CustomExceptionMessage.OPTIC_MODEL_IS_EXIST.getMessage());
         }
 
+    }
+
+    @Override
+    public OpticsDto update(OpticsDto updateObjectDto) {
+        return null;
+    }
+
+    @Override
+    public List<OpticsDto> delete(OpticsDto deleteObjectDto) {
+        return null;
     }
 
 
@@ -77,24 +81,11 @@ public class OpticsService implements AdminDao<OpticsDto>, UserDao<OpticsDto> {
     }
 
     @Override
-    public OpticsDto findLastEntry() {
+    public OpticsDto getLastEntry() {
         Optics optics = this.opticsRepository.findFirstByOrderByIdDesc();
         return ModelMapperTool.mapDto(optics, OpticsDto.class);
     }
 
-    public OpticsFactoryDto saveNewFactory(NewOpticsFactoryDto newOpticsFactory) {
-        try {
-
-            OpticsFactory factory = ModelMapperTool.mapDto(newOpticsFactory,OpticsFactory.class);
-            OpticsFactory saved = this.opticsFactoryRepository.save(factory);
-            return ModelMapperTool.mapDto(saved,OpticsFactoryDto.class);
-
-        } catch (DataIntegrityViolationException e){
-
-            throw new CustomException(CustomExceptionMessage.FACTORY_IS_EXIST.getMessage());
-        }
-
-    }
 
     @Override
     public List<OpticsDto> getAllActive() {

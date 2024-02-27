@@ -1,7 +1,10 @@
 package fr.nicolas.godin.shoot_training_api.api.controller;
 
 import fr.nicolas.godin.shoot_training_api.api.dto.*;
+import fr.nicolas.godin.shoot_training_api.api.service.AmmunitionFactoryService;
 import fr.nicolas.godin.shoot_training_api.api.service.AmmunitionService;
+import fr.nicolas.godin.shoot_training_api.api.service.AmmunitionWeightService;
+import fr.nicolas.godin.shoot_training_api.api.service.CaliberService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -17,26 +20,29 @@ import java.util.List;
 public class AmmunitionController {
 
     private AmmunitionService ammunitionService;
+    private AmmunitionFactoryService ammunitionFactoryService;
+    private AmmunitionWeightService ammunitionWeightService;
+    private CaliberService caliberService;
 
     @GetMapping("weight-by-caliber")
     @ResponseBody
     public List<AmmunitionWeightDto> getWeightByCaliber(@RequestParam(name = "id")int id){
 
-        return this.ammunitionService.findAmmunitionWeightByCaliberId(id);
+        return this.ammunitionWeightService.findAmmunitionWeightByCaliberId(id);
     }
 
     @PostMapping("save/ammunition")
     @ResponseBody
     public AmmunitionDto newAmmunition(@Valid @RequestBody NewAmmunitionDto newAmmunitionDto) {
 
-        return this.ammunitionService.save(newAmmunitionDto);
+        return this.ammunitionService.create(newAmmunitionDto);
     }
 
     @PostMapping("save/factory")
     @ResponseBody
     public AmmunitionFactoryDto newFactory(@Valid @RequestBody NewAmmunitionFactoryDto newAmmunitionFactory){
 
-        return this.ammunitionService.saveNewFactory(newAmmunitionFactory);
+        return this.ammunitionFactoryService.create(newAmmunitionFactory);
     }
     @GetMapping("all")
     @ResponseBody
@@ -49,7 +55,10 @@ public class AmmunitionController {
     @ResponseBody
     public AmmunitionDataCollection getDataCollection() {
 
-        return this.ammunitionService.getDataCollection();
+        return new AmmunitionDataCollection(
+                this.caliberService.getAllActive(),
+                this.ammunitionFactoryService.getAllActive()
+        );
     }
 
 }

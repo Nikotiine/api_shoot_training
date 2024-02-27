@@ -1,6 +1,6 @@
 package fr.nicolas.godin.shoot_training_api.api.service;
 
-import fr.nicolas.godin.shoot_training_api.api.dao.AdminDao;
+import fr.nicolas.godin.shoot_training_api.api.dao.AdminInterface;
 import fr.nicolas.godin.shoot_training_api.api.dto.UserEditDto;
 import fr.nicolas.godin.shoot_training_api.api.dto.UserProfileDto;
 import fr.nicolas.godin.shoot_training_api.api.enums.CustomExceptionMessage;
@@ -9,16 +9,14 @@ import fr.nicolas.godin.shoot_training_api.configuration.CustomException;
 import fr.nicolas.godin.shoot_training_api.database.entity.User;
 import fr.nicolas.godin.shoot_training_api.database.repository.UserRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class UserService implements AdminDao<UserProfileDto> {
+public class UserService {
     private UserRepository userRepository;
     private final BCryptPasswordEncoder passwordEncoder;
 
@@ -67,14 +65,14 @@ public class UserService implements AdminDao<UserProfileDto> {
         this.userRepository.save(disabledUser);
     }
 
-    @Override
+
     public long countTotalEntry() {
         return this.userRepository.count();
     }
 
 
-    @Override
-    public UserProfileDto findLastEntry() {
+
+    public UserProfileDto getLastEntry() {
         User user = this.userRepository.findFirstByOrderByIdDesc();
         return ModelMapperTool.mapDto(user, UserProfileDto.class);
     }

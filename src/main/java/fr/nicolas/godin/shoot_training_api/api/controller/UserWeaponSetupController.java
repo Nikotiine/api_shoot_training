@@ -22,13 +22,13 @@ public class UserWeaponSetupController {
     @PostMapping("new")
     public UserWeaponSetupDto newSetup(@Valid @RequestBody NewUserWeaponSetupDto newUserWeaponSetupDto) {
 
-       return this.userSetupService.save(newUserWeaponSetupDto);
+       return this.userSetupService.create(newUserWeaponSetupDto);
 
     }
 
     @GetMapping("all")
     public List<UserWeaponSetupDto> getAllUserWeaponSetup(@RequestParam(name = "id") int userId){
-        return this.userSetupService.findAll(userId);
+        return this.userSetupService.getAllActive(userId);
     }
 
 }

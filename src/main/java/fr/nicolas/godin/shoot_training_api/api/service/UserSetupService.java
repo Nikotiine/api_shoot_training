@@ -1,5 +1,6 @@
 package fr.nicolas.godin.shoot_training_api.api.service;
 
+import fr.nicolas.godin.shoot_training_api.api.dao.CommonInterface;
 import fr.nicolas.godin.shoot_training_api.api.dto.NewUserWeaponSetupDto;
 import fr.nicolas.godin.shoot_training_api.api.dto.UserWeaponSetupDto;
 import fr.nicolas.godin.shoot_training_api.api.enums.CustomExceptionMessage;
@@ -20,7 +21,7 @@ public class UserSetupService {
 
     private ModelMapper modelMapper;
     private UserWeaponSetupRepository weaponSetupRepository;
-    public UserWeaponSetupDto save(NewUserWeaponSetupDto newUserWeaponSetupDto) {
+    public UserWeaponSetupDto create(NewUserWeaponSetupDto newUserWeaponSetupDto) {
         UserWeaponSetup userWeaponSetup = this.modelMapper.map(newUserWeaponSetupDto,UserWeaponSetup.class);
 
         try {
@@ -33,7 +34,7 @@ public class UserSetupService {
         }
     }
 
-    public List<UserWeaponSetupDto> findAll(int userId) {
+    public List<UserWeaponSetupDto> getAllActive(int userId) {
         List<UserWeaponSetup> userWeaponSetupList = (List<UserWeaponSetup>) this.weaponSetupRepository.findAllByUserId(userId);
         return ModelMapperTool.mapList(userWeaponSetupList, UserWeaponSetupDto.class);
     }
