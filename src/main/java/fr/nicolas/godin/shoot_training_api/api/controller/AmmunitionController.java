@@ -40,15 +40,21 @@ public class AmmunitionController {
 
     @PostMapping("save/factory")
     @ResponseBody
-    public AmmunitionFactoryDto newFactory(@Valid @RequestBody NewAmmunitionFactoryDto newAmmunitionFactory){
+    public AmmunitionFactoryDto newAmmunitionFactory(@Valid @RequestBody NewAmmunitionFactoryDto newAmmunitionFactory){
 
         return this.ammunitionFactoryService.create(newAmmunitionFactory);
     }
-    @GetMapping("all")
+    @GetMapping("all/ammunition")
     @ResponseBody
     public List<AmmunitionDto> getAllAmmunition() {
 
         return this.ammunitionService.getAll();
+    }
+
+    @GetMapping("all/factory")
+    @ResponseBody
+    public List<AmmunitionFactoryDto> getAllFactories() {
+        return this.ammunitionFactoryService.getAll();
     }
 
     @GetMapping("data-collection")

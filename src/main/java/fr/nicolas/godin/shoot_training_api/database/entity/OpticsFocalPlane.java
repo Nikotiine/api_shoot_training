@@ -22,5 +22,5 @@ public class OpticsFocalPlane extends BaseEntity implements Serializable {
     private Set<Optics> optics;
 
     @Column(unique = true)
-    private String focalPlane;
+    private String label;
 }

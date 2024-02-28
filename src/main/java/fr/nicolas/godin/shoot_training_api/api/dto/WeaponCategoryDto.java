@@ -25,5 +25,5 @@ public class WeaponCategoryDto implements Serializable {
     @NotEmpty(message = DtoDecoratorConfiguration.NOT_EMPTY_MESSAGE)
     @NotBlank(message = DtoDecoratorConfiguration.NOT_BLACK_MESSAGE)
     @Length(min = 1,max = 1)
-    char category;
+    char label;
 }

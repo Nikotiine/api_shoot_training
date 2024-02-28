@@ -22,7 +22,7 @@ public class UserProfileDto implements Serializable {
     String lastName;
     String email;
     UserRole role;
-    Date createdAT;
+    Date createdAt;
     boolean isActive;
 
 }

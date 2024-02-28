@@ -22,5 +22,5 @@ public class WeaponType extends BaseEntity implements Serializable {
     private Set<Weapon> weapons;
 
     @Column(unique = true)
-    private String type;
+    private String label;
 }

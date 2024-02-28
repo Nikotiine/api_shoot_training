@@ -20,6 +20,6 @@ public class AmmunitionDto extends NewAmmunitionDto implements Serializable {
      int id;
 
     boolean isActive;
-    Date createdAT;
+    Date createdAt;
 
 }

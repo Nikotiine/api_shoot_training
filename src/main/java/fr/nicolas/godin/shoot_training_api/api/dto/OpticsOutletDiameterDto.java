@@ -26,5 +26,5 @@ public class OpticsOutletDiameterDto implements Serializable {
     @NotEmpty(message = DtoDecoratorConfiguration.NOT_EMPTY_MESSAGE)
     @NotBlank(message = DtoDecoratorConfiguration.NOT_BLACK_MESSAGE)
     @Positive
-    int diameter;
+    int label;
 }

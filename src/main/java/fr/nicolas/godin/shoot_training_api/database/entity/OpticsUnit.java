@@ -21,5 +21,5 @@ public class OpticsUnit extends BaseEntity implements Serializable {
     private Set<Optics> optics;
 
     @Column(unique = true)
-    private String type;
+    private String label;
 }

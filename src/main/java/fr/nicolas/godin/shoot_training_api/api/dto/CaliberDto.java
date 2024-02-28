@@ -9,6 +9,7 @@ import lombok.Setter;
 import lombok.Value;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * DTO for {@link fr.nicolas.godin.shoot_training_api.database.entity.Caliber}
@@ -23,6 +24,9 @@ public class CaliberDto implements Serializable {
     @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)
     @NotEmpty(message = DtoDecoratorConfiguration.NOT_EMPTY_MESSAGE)
     @NotBlank(message = DtoDecoratorConfiguration.NOT_BLACK_MESSAGE)
-    String caliber;
+    String label;
+
+    @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)
+    Date createdAt;
 
 }

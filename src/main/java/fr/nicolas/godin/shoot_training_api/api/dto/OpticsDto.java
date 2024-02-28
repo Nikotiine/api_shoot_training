@@ -17,5 +17,5 @@ public class OpticsDto extends NewOpticsDto{
 
     boolean isActive;
 
-    Date createdAT;
+    Date createdAt;
 }

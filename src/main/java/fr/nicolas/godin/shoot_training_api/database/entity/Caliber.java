@@ -26,7 +26,7 @@ public class Caliber extends BaseEntity implements Serializable {
     private Set<WeaponSoundReducer> soundReducers;
 
     @Column(unique = true)
-    private String caliber;
+    private String label;
 
     @ManyToMany
     private Set<AmmunitionWeight> ammunitionWeights;

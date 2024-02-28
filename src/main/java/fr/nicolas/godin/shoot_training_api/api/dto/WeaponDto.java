@@ -19,6 +19,6 @@ public class WeaponDto extends NewWeaponDto implements Serializable {
     int id;
 
     boolean isActive;
-    Date createdAT;
+    Date createdAt;
 
 }

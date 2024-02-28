@@ -24,5 +24,5 @@ public class OpticsUnitDto implements Serializable {
     @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)
     @NotEmpty(message = DtoDecoratorConfiguration.NOT_EMPTY_MESSAGE)
     @NotBlank(message = DtoDecoratorConfiguration.NOT_BLACK_MESSAGE)
-    String type;
+    String label;
 }

@@ -23,7 +23,7 @@ public class CaliberService implements AdminInterface<CaliberDto,Caliber> {
      */
     @Override
     public long countTotalEntry() {
-        return 0;
+        return this.caliberRepository.count();
     }
 
     /**
@@ -33,7 +33,8 @@ public class CaliberService implements AdminInterface<CaliberDto,Caliber> {
      */
     @Override
     public CaliberDto getLastEntry() {
-        return null;
+        Caliber caliber = this.caliberRepository.findFirstByOrderByIdDesc();
+        return ModelMapperTool.mapDto(caliber,CaliberDto.class);
     }
 
     /**

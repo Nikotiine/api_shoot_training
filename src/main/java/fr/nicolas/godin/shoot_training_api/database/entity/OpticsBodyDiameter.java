@@ -22,5 +22,5 @@ public class OpticsBodyDiameter extends BaseEntity implements Serializable {
     private Set<Optics> optics;
 
     @Column(unique = true)
-    private double diameter;
+    private double label;
 }

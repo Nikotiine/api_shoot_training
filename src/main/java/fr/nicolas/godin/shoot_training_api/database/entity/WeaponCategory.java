@@ -18,7 +18,7 @@ import java.util.Set;
 @NoArgsConstructor
 public class WeaponCategory extends BaseEntity implements Serializable {
     @Column(unique = true)
-    private char category;
+    private char label;
 
     @OneToMany(mappedBy = "category")
     private Set<Weapon> weapons;

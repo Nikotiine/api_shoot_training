@@ -1,9 +1,6 @@
 package fr.nicolas.godin.shoot_training_api.database.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.PrePersist;
-import jakarta.persistence.PreUpdate;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,6 +16,7 @@ import java.util.Set;
 @NoArgsConstructor
 public class AmmunitionWeight extends BaseEntity implements Serializable {
 
+    @Column(unique = true)
     private double grains;
 
     private double grams;

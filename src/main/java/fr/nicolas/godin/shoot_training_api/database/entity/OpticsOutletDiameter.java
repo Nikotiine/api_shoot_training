@@ -21,5 +21,5 @@ public class OpticsOutletDiameter extends BaseEntity implements Serializable {
     private Set<Optics> optics;
 
     @Column(unique = true)
-    private int diameter;
+    private int label;
 }
