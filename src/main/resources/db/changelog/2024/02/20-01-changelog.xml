@@ -6,73 +6,87 @@
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
     <property name="now" value="now()" dbms="postgresql"/>
     <changeSet id="1705614755637-1" author="niko (generated)">
-        <insert tableName="ammunition_factory">
+        <insert tableName="factory">
             <column name="name">Aguila</column>
+            <column name="type">1</column>
             <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
-        <insert tableName="ammunition_factory">
+        <insert tableName="factory">
             <column name="name">CCI</column>
+            <column name="type">1</column>
             <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
-        <insert tableName="ammunition_factory">
+        <insert tableName="factory">
             <column name="name">Federal</column>
+            <column name="type">1</column>
             <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
-        <insert tableName="ammunition_factory">
+        <insert tableName="factory">
             <column name="name">GECO</column>
+            <column name="type">1</column>
             <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
-        <insert tableName="ammunition_factory">
+        <insert tableName="factory">
             <column name="name">Hornady</column>
+            <column name="type">1</column>
             <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
-        <insert tableName="ammunition_factory">
+        <insert tableName="factory">
             <column name="name">Lapua</column>
+            <column name="type">1</column>
             <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
-        <insert tableName="ammunition_factory">
+        <insert tableName="factory">
             <column name="name">Magtech</column>
+            <column name="type">1</column>
             <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
-        <insert tableName="ammunition_factory">
+        <insert tableName="factory">
             <column name="name">Norma</column>
+            <column name="type">1</column>
             <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
-        <insert tableName="ammunition_factory">
+        <insert tableName="factory">
             <column name="name">Remington</column>
+            <column name="type">1</column>
             <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
-        <insert tableName="ammunition_factory">
+        <insert tableName="factory">
             <column name="name">RWS</column>
+            <column name="type">1</column>
             <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
-        <insert tableName="ammunition_factory">
+        <insert tableName="factory">
             <column name="name">Sellier Bellot</column>
+            <column name="type">1</column>
             <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
-        <insert tableName="ammunition_factory">
+        <insert tableName="factory">
             <column name="name">SK</column>
+            <column name="type">1</column>
             <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
-        <insert tableName="ammunition_factory">
+        <insert tableName="factory">
             <column name="name">Winchester</column>
+            <column name="type">1</column>
             <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
-        <insert tableName="ammunition_factory">
+        <insert tableName="factory">
             <column name="name">Eley</column>
+            <column name="type">1</column>
             <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>

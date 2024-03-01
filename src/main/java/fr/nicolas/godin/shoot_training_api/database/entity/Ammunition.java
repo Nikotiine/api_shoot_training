@@ -24,7 +24,7 @@ public class Ammunition extends BaseEntity implements Serializable {
     private Caliber caliber;
 
     @ManyToOne(optional = false)
-    private AmmunitionFactory factory;
+    private Factory factory;
 
     @ManyToOne(optional = false)
     private AmmunitionWeight weight;

@@ -116,108 +116,129 @@
             <column name="updated_at">${now()}</column>
         </insert>
 
-        <insert tableName="weapon_factory">
+        <insert tableName="factory">
             <column name="name">CZ</column>
+            <column name="type">0</column>
             <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
-        <insert tableName="weapon_factory">
+        <insert tableName="factory">
             <column name="name">Tikka</column>
+            <column name="type">0</column>
             <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
-        <insert tableName="weapon_factory">
+        <insert tableName="factory">
             <column name="name">Sako</column>
+            <column name="type">0</column>
             <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
-        <insert tableName="weapon_factory">
+        <insert tableName="factory">
             <column name="name">Winchester</column>
+            <column name="type">0</column>
             <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
-        <insert tableName="weapon_factory">
+        <insert tableName="factory">
             <column name="name">Bergara</column>
+            <column name="type">0</column>
             <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
-        <insert tableName="weapon_factory">
+        <insert tableName="factory">
             <column name="name">Browning</column>
+            <column name="type">0</column>
             <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
-        <insert tableName="weapon_factory">
+        <insert tableName="factory">
             <column name="name">Chiappa</column>
+            <column name="type">0</column>
             <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
-        <insert tableName="weapon_factory">
+        <insert tableName="factory">
             <column name="name">Citadel</column>
+            <column name="type">0</column>
             <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
-        <insert tableName="weapon_factory">
+        <insert tableName="factory">
             <column name="name">ISSC</column>
+            <column name="type">0</column>
             <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
-        <insert tableName="weapon_factory">
+        <insert tableName="factory">
             <column name="name">Ruger</column>
+            <column name="type">0</column>
             <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
-        <insert tableName="weapon_factory">
+        <insert tableName="factory">
             <column name="name">Savage</column>
+            <column name="type">0</column>
             <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
-        <insert tableName="weapon_factory">
+        <insert tableName="factory">
             <column name="name">Pallas</column>
+            <column name="type">0</column>
             <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
-        <insert tableName="weapon_factory">
+        <insert tableName="factory">
             <column name="name">Uberti</column>
+            <column name="type">0</column>
             <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
-        <insert tableName="weapon_factory">
+        <insert tableName="factory">
             <column name="name">Rossi</column>
+            <column name="type">0</column>
             <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
-        <insert tableName="weapon_factory">
+        <insert tableName="factory">
             <column name="name">Derya</column>
+            <column name="type">0</column>
             <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
-        <insert tableName="weapon_factory">
+        <insert tableName="factory">
             <column name="name">Diana</column>
+            <column name="type">0</column>
             <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
-        <insert tableName="optics_factory">
+        <insert tableName="factory">
             <column name="name">Vortex optics</column>
+            <column name="type">2</column>
             <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
-        <insert tableName="optics_factory">
+        <insert tableName="factory">
             <column name="name">Vector optics</column>
+            <column name="type">2</column>
             <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
-        <insert tableName="optics_factory">
+        <insert tableName="factory">
             <column name="name">Hawke</column>
+            <column name="type">2</column>
             <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
-        <insert tableName="optics_factory">
+        <insert tableName="factory">
             <column name="name">Nikko Stirling</column>
+            <column name="type">2</column>
             <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>
-        <insert tableName="optics_factory">
+        <insert tableName="factory">
             <column name="name">Schmidt &amp; Bender</column>
+            <column name="type">2</column>
             <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
         </insert>

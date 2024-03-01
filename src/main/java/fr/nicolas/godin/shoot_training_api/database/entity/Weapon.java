@@ -20,7 +20,7 @@ import java.util.Set;
 public class Weapon extends BaseEntity implements Serializable {
 
     @ManyToOne(optional = false)
-    private WeaponFactory factory;
+    private Factory factory;
 
     @ManyToOne(optional = false)
     private WeaponType type;

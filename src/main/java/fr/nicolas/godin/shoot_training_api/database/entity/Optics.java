@@ -20,7 +20,7 @@ public class Optics extends BaseEntity implements Serializable {
 
 
     @ManyToOne
-    private OpticsFactory factory;
+    private Factory factory;
 
     @ManyToOne
     private OpticsBodyDiameter bodyDiameter;

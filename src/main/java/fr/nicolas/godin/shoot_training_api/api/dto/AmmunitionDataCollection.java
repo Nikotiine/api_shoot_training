@@ -6,5 +6,5 @@ import java.util.List;
 
 public record AmmunitionDataCollection(
         @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)List<CaliberDto> caliberList,
-        @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)List<AmmunitionFactoryDto> factoryList){
+        @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)List<FactoryDto> factoryList){
 }

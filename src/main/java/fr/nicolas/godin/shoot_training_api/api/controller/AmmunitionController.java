@@ -1,10 +1,8 @@
 package fr.nicolas.godin.shoot_training_api.api.controller;
 
 import fr.nicolas.godin.shoot_training_api.api.dto.*;
-import fr.nicolas.godin.shoot_training_api.api.service.AmmunitionFactoryService;
-import fr.nicolas.godin.shoot_training_api.api.service.AmmunitionService;
-import fr.nicolas.godin.shoot_training_api.api.service.AmmunitionWeightService;
-import fr.nicolas.godin.shoot_training_api.api.service.CaliberService;
+import fr.nicolas.godin.shoot_training_api.api.enums.FactoryType;
+import fr.nicolas.godin.shoot_training_api.api.service.*;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -20,7 +18,7 @@ import java.util.List;
 public class AmmunitionController {
 
     private AmmunitionService ammunitionService;
-    private AmmunitionFactoryService ammunitionFactoryService;
+    private FactoryService factoryService;
     private AmmunitionWeightService ammunitionWeightService;
     private CaliberService caliberService;
 
@@ -38,12 +36,7 @@ public class AmmunitionController {
         return this.ammunitionService.create(newAmmunitionDto);
     }
 
-    @PostMapping("save/factory")
-    @ResponseBody
-    public AmmunitionFactoryDto newAmmunitionFactory(@Valid @RequestBody NewAmmunitionFactoryDto newAmmunitionFactory){
 
-        return this.ammunitionFactoryService.create(newAmmunitionFactory);
-    }
     @GetMapping("all/ammunition")
     @ResponseBody
     public List<AmmunitionDto> getAllAmmunition() {
@@ -53,8 +46,8 @@ public class AmmunitionController {
 
     @GetMapping("all/factory")
     @ResponseBody
-    public List<AmmunitionFactoryDto> getAllFactories() {
-        return this.ammunitionFactoryService.getAll();
+    public List<FactoryDto> getAllFactories() {
+        return this.factoryService.getAllByType(FactoryType.AMMUNITION);
     }
 
     @GetMapping("data-collection")
@@ -63,7 +56,7 @@ public class AmmunitionController {
 
         return new AmmunitionDataCollection(
                 this.caliberService.getAllActive(),
-                this.ammunitionFactoryService.getAllActive()
+               this.factoryService.getAllByType(FactoryType.AMMUNITION)
         );
     }
 

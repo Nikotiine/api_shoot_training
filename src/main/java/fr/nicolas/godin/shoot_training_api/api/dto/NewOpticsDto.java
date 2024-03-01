@@ -19,7 +19,7 @@ import java.io.Serializable;
 public class NewOpticsDto implements Serializable {
 
     @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)
-    OpticsFactoryDto factory;
+    FactoryDto factory;
 
     @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)
     OpticsBodyDiameterDto bodyDiameter;

@@ -20,7 +20,7 @@ public class NewAmmunitionDto implements Serializable {
     CaliberDto caliber;
 
     @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)
-    AmmunitionFactoryDto factory;
+    FactoryDto factory;
 
     @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)
     AmmunitionWeightDto weight;

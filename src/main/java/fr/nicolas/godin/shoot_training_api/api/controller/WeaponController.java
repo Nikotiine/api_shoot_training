@@ -1,9 +1,10 @@
 package fr.nicolas.godin.shoot_training_api.api.controller;
 
 import fr.nicolas.godin.shoot_training_api.api.dto.*;
+import fr.nicolas.godin.shoot_training_api.api.enums.FactoryType;
 import fr.nicolas.godin.shoot_training_api.api.service.CaliberService;
+import fr.nicolas.godin.shoot_training_api.api.service.FactoryService;
 import fr.nicolas.godin.shoot_training_api.api.service.weapon.WeaponCategoryService;
-import fr.nicolas.godin.shoot_training_api.api.service.weapon.WeaponFactoryService;
 import fr.nicolas.godin.shoot_training_api.api.service.weapon.WeaponService;
 import fr.nicolas.godin.shoot_training_api.api.service.weapon.WeaponTypeService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -20,7 +21,7 @@ import java.util.List;
 public class WeaponController {
 
     private WeaponService weaponService;
-    private WeaponFactoryService weaponFactoryService;
+    private FactoryService factoryService;
     private WeaponTypeService weaponTypeService;
     private WeaponCategoryService weaponCategoryService;
     private CaliberService caliberService;
@@ -34,29 +35,32 @@ public class WeaponController {
 
     }
 
-    @PostMapping(value = "save/factory")
-    @ResponseBody
-    public WeaponFactoryDto newFactory(@Valid @RequestBody NewWeaponFactoryDto newWeaponFactory){
-        return this.weaponFactoryService.create(newWeaponFactory);
-    }
+
 
     @GetMapping(value = "data-collection")
     @ResponseBody
     public WeaponDataCollection getWeaponDataCollection(){
 
         return new WeaponDataCollection(
-                this.weaponFactoryService.getAllActive(),
+                this.factoryService.getAllByType(FactoryType.WEAPON),
                 this.weaponTypeService.getAll(),
                 this.weaponCategoryService.getAll(),
                 this.caliberService.getAllActive()
         );
     }
 
-    @GetMapping(value = "all")
+    @GetMapping(value = "all/weapon")
     @ResponseBody
     public List<WeaponDto> getAllWeapon(){
 
         return this.weaponService.getAllActive();
+    }
+
+    @GetMapping(value = "all/factory")
+    @ResponseBody
+    public List<FactoryDto> getAllWeaponFactory() {
+
+        return this.factoryService.getAllByType(FactoryType.WEAPON);
     }
 
 }

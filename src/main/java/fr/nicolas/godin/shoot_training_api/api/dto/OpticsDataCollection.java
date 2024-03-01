@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotNull;
 import java.util.List;
 
 public record OpticsDataCollection(
-        @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)List<OpticsFactoryDto> opticsFactoryList,
+        @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)List<FactoryDto> opticsFactoryList,
         @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)List<OpticsBodyDiameterDto> opticsBodyDiameterList,
         @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)List<OpticsUnitDto> opticsUnitList,
         @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)List<OpticsFocalPlaneDto> opticsFocalPlaneList,

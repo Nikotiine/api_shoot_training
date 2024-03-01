@@ -19,7 +19,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class NewWeaponDto implements Serializable {
     @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)
-    WeaponFactoryDto factory;
+    FactoryDto factory;
 
     @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)
     WeaponTypeDto type;

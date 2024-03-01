@@ -41,6 +41,6 @@ public class NewWeaponSoundReducerDto implements Serializable {
     @NotBlank(message = DtoDecoratorConfiguration.NOT_BLACK_MESSAGE)
     double weight;
 
-    WeaponSoundReducerFactoryDto factory;
+    FactoryDto factory;
 
 }
