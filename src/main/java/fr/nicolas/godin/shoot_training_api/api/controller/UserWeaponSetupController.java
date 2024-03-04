@@ -1,6 +1,6 @@
 package fr.nicolas.godin.shoot_training_api.api.controller;
 
-import fr.nicolas.godin.shoot_training_api.api.dto.NewUserWeaponSetupDto;
+import fr.nicolas.godin.shoot_training_api.api.dto.UserWeaponSetupCreateDto;
 import fr.nicolas.godin.shoot_training_api.api.dto.UserWeaponSetupDto;
 import fr.nicolas.godin.shoot_training_api.api.service.UserSetupService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -20,9 +20,9 @@ public class UserWeaponSetupController {
     private UserSetupService userSetupService;
 
     @PostMapping("new")
-    public UserWeaponSetupDto newSetup(@Valid @RequestBody NewUserWeaponSetupDto newUserWeaponSetupDto) {
+    public UserWeaponSetupDto newSetup(@Valid @RequestBody UserWeaponSetupCreateDto userWeaponSetupCreateDto) {
 
-       return this.userSetupService.create(newUserWeaponSetupDto);
+       return this.userSetupService.create(userWeaponSetupCreateDto);
 
     }
 

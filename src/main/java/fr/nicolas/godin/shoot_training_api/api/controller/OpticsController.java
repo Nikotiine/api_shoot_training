@@ -46,7 +46,7 @@ public class OpticsController {
 
     @PostMapping("save/optics")
     @ResponseBody
-    public OpticsDto newOptics(@Valid @RequestBody NewOpticsDto newOptics){
+    public OpticsDto newOptics(@Valid @RequestBody OpticsCreateDto newOptics){
         return this.opticsService.create(newOptics);
     }
 

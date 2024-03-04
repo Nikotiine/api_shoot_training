@@ -2,7 +2,7 @@ package fr.nicolas.godin.shoot_training_api.api.service;
 
 import fr.nicolas.godin.shoot_training_api.api.dao.AdminInterface;
 import fr.nicolas.godin.shoot_training_api.api.dto.FactoryDto;
-import fr.nicolas.godin.shoot_training_api.api.dto.NewFactoryDto;
+import fr.nicolas.godin.shoot_training_api.api.dto.FactoryCreateDto;
 import fr.nicolas.godin.shoot_training_api.api.enums.FactoryType;
 import fr.nicolas.godin.shoot_training_api.api.tools.ModelMapperTool;
 import fr.nicolas.godin.shoot_training_api.database.entity.Factory;
@@ -14,7 +14,7 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class FactoryService implements AdminInterface<FactoryDto, NewFactoryDto> {
+public class FactoryService implements AdminInterface<FactoryDto, FactoryCreateDto> {
 
     private FactoryRepository factoryRepository;
 
@@ -58,7 +58,7 @@ public class FactoryService implements AdminInterface<FactoryDto, NewFactoryDto>
     }
 
     @Override
-    public FactoryDto create(NewFactoryDto newObjectDto) {
+    public FactoryDto create(FactoryCreateDto newObjectDto) {
         Factory entity = ModelMapperTool.mapDto(newObjectDto,Factory.class);
         Factory saved = this.factoryRepository.save(entity);
         return ModelMapperTool.mapDto(saved, FactoryDto.class);

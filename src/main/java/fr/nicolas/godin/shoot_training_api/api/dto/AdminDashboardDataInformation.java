@@ -16,9 +16,8 @@ public record AdminDashboardDataInformation(
         @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)OpticsDto lastOpticEntry,
 
         @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)long totalAmmunition,
-        @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)AmmunitionDto lastAmmunitionEntry,
-        @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)long totalCaliber,
-        @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)CaliberDto lastCaliberEntry) {
+        @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)AmmunitionDto lastAmmunitionEntry)
+        {
 
 
 }

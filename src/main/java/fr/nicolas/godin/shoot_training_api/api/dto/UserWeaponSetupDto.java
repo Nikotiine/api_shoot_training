@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class UserWeaponSetupDto extends NewUserWeaponSetupDto{
+public class UserWeaponSetupDto extends UserWeaponSetupCreateDto {
 
     @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)
     int id;

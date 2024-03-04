@@ -9,6 +9,8 @@ import lombok.Value;
 import org.springframework.security.core.parameters.P;
 
 import java.io.Serializable;
+import java.util.Date;
+import java.util.Set;
 
 /**
  * DTO for {@link fr.nicolas.godin.shoot_training_api.database.entity.AmmunitionWeight}
@@ -16,18 +18,15 @@ import java.io.Serializable;
 @Getter
 @Setter
 @NoArgsConstructor
-public class AmmunitionWeightDto implements Serializable {
+public class AmmunitionWeightDto extends AmmunitionWeightCreateDto implements Serializable {
 
     @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)
     int id;
 
     @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)
-    @Positive
-    double grains;
+    Date createdAt;
 
     @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)
-    @Positive
-    double grams;
-
+    boolean active = true;
 
 }

@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class WeaponSoundReducerDto extends NewWeaponSoundReducerDto{
+public class WeaponSoundReducerDto extends WeaponSoundReducerCreateDto {
 
     @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)
     int id;

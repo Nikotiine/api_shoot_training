@@ -1,7 +1,7 @@
 package fr.nicolas.godin.shoot_training_api.api.controller;
 
 import fr.nicolas.godin.shoot_training_api.api.dto.FactoryDto;
-import fr.nicolas.godin.shoot_training_api.api.dto.NewFactoryDto;
+import fr.nicolas.godin.shoot_training_api.api.dto.FactoryCreateDto;
 import fr.nicolas.godin.shoot_training_api.api.enums.FactoryType;
 import fr.nicolas.godin.shoot_training_api.api.service.FactoryService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -26,7 +26,7 @@ public class FactoryController {
 
     @PostMapping(value = "save")
     @ResponseBody
-    public FactoryDto save(@Valid @RequestBody NewFactoryDto newFactoryDto){
-        return this.factoryService.create(newFactoryDto);
+    public FactoryDto save(@Valid @RequestBody FactoryCreateDto factoryCreateDto){
+        return this.factoryService.create(factoryCreateDto);
     }
 }

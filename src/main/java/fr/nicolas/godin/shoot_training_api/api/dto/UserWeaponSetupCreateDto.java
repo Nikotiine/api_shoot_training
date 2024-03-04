@@ -5,7 +5,6 @@ import jakarta.validation.constraints.PositiveOrZero;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.Value;
 
 import java.io.Serializable;
 
@@ -15,7 +14,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @NoArgsConstructor
-public class NewUserWeaponSetupDto implements Serializable {
+public class UserWeaponSetupCreateDto implements Serializable {
 
     @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)
     WeaponDto weapon;

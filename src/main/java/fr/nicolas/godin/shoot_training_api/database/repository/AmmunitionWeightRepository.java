@@ -5,8 +5,10 @@ import fr.nicolas.godin.shoot_training_api.database.entity.Caliber;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
 
-public interface AmmunitionWeightRepository extends CrudRepository<AmmunitionWeight, Integer> {
+import java.util.List;
 
-    Iterable<AmmunitionWeight> findAmmunitionWeightByCalibersId(int id);
+public interface AmmunitionWeightRepository extends JpaRepository<AmmunitionWeight, Integer> {
+
+    List<AmmunitionWeight> findAmmunitionWeightByCalibersId(int id);
 
 }

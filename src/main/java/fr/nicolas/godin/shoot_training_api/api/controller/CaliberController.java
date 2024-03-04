@@ -1,13 +1,13 @@
 package fr.nicolas.godin.shoot_training_api.api.controller;
 
+import fr.nicolas.godin.shoot_training_api.api.dto.CaliberCreateDto;
 import fr.nicolas.godin.shoot_training_api.api.dto.CaliberDto;
 import fr.nicolas.godin.shoot_training_api.api.service.CaliberService;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,7 +19,14 @@ public class CaliberController {
 
     private CaliberService caliberService;
     @GetMapping("all")
+    @ResponseBody
     public List<CaliberDto> getAllCalibers(){
         return this.caliberService.getAllActive();
+    }
+
+    @PostMapping("save")
+    @ResponseBody
+    public CaliberDto create(@Valid @RequestBody CaliberCreateDto caliberCreateDto) {
+        return this.caliberService.create(caliberCreateDto);
     }
 }

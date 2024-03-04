@@ -10,7 +10,7 @@ import java.util.Date;
 @Getter
 @Setter
 @NoArgsConstructor
-public class OpticsDto extends NewOpticsDto{
+public class OpticsDto extends OpticsCreateDto {
 
     @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)
     int id;

@@ -7,7 +7,6 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.Value;
 
 import java.io.Serializable;
 
@@ -17,7 +16,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @NoArgsConstructor
-public class NewFactoryDto implements Serializable {
+public class FactoryCreateDto implements Serializable {
     @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)
     @NotEmpty(message = DtoDecoratorConfiguration.NOT_EMPTY_MESSAGE)
     @NotBlank(message = DtoDecoratorConfiguration.NOT_BLACK_MESSAGE)

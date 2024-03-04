@@ -1,7 +1,6 @@
 package fr.nicolas.godin.shoot_training_api.api.service.weapon;
 
 import fr.nicolas.godin.shoot_training_api.api.dao.AdminInterface;
-import fr.nicolas.godin.shoot_training_api.api.dao.CommonInterface;
 import fr.nicolas.godin.shoot_training_api.api.dto.*;
 import fr.nicolas.godin.shoot_training_api.api.enums.CustomExceptionMessage;
 import fr.nicolas.godin.shoot_training_api.api.tools.ModelMapperTool;
@@ -17,12 +16,12 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 
-public class WeaponService implements AdminInterface<WeaponDto,NewWeaponDto> {
+public class WeaponService implements AdminInterface<WeaponDto, WeaponCreateDto> {
 
     private final WeaponRepository weaponRepository;
 
 
-    public WeaponDto create(NewWeaponDto weaponDto) {
+    public WeaponDto create(WeaponCreateDto weaponDto) {
         try {
 
             Weapon weapon = ModelMapperTool.mapDto(weaponDto, Weapon.class);

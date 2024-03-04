@@ -16,7 +16,6 @@ public class AdminService {
     private WeaponService weaponService;
     private OpticsService opticsService;
     private AmmunitionService ammunitionService;
-    private CaliberService caliberService;
 
     public AdminDashboardDataInformation findDataForDashboard() {
         long totalUser = this.userService.countTotalEntry();
@@ -31,9 +30,7 @@ public class AdminService {
         long totalAmmo = this.ammunitionService.countTotalEntry();
         AmmunitionDto lastAmmunition = this.ammunitionService.getLastEntry();
 
-        long totalCaliber = this.caliberService.countTotalEntry();
-        CaliberDto lastCaliber = this.caliberService.getLastEntry();
-        return new AdminDashboardDataInformation(totalUser,lastUser,totalWeapon,lastWeapon,totalOptics,lastOptic,totalAmmo,lastAmmunition,totalCaliber,lastCaliber);
+        return new AdminDashboardDataInformation(totalUser,lastUser,totalWeapon,lastWeapon,totalOptics,lastOptic,totalAmmo,lastAmmunition);
     }
 
     public List<UserProfileDto> findAllUsers() {

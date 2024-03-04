@@ -14,7 +14,7 @@ import java.util.Date;
 @Getter
 @Setter
 @NoArgsConstructor
-public class WeaponDto extends NewWeaponDto implements Serializable {
+public class WeaponDto extends WeaponCreateDto implements Serializable {
     @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)
     int id;
 

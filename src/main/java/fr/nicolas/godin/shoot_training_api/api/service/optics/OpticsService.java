@@ -1,7 +1,6 @@
 package fr.nicolas.godin.shoot_training_api.api.service.optics;
 
 import fr.nicolas.godin.shoot_training_api.api.dao.AdminInterface;
-import fr.nicolas.godin.shoot_training_api.api.dao.CommonInterface;
 import fr.nicolas.godin.shoot_training_api.api.dto.*;
 import fr.nicolas.godin.shoot_training_api.api.enums.CustomExceptionMessage;
 import fr.nicolas.godin.shoot_training_api.api.tools.ModelMapperTool;
@@ -9,7 +8,6 @@ import fr.nicolas.godin.shoot_training_api.configuration.CustomException;
 import fr.nicolas.godin.shoot_training_api.database.entity.*;
 import fr.nicolas.godin.shoot_training_api.database.repository.*;
 import lombok.AllArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +15,7 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class OpticsService implements AdminInterface<OpticsDto,NewOpticsDto> {
+public class OpticsService implements AdminInterface<OpticsDto, OpticsCreateDto> {
 
     private OpticsRepository opticsRepository;
 
@@ -50,7 +48,7 @@ public class OpticsService implements AdminInterface<OpticsDto,NewOpticsDto> {
         return new OpticsDataCollection(opticsFactoryDtoList,opticsBodyDiameterDtoList, opticsUnitDtoList,opticsFocalPlaneDtoList,opticsOutletDiameterDtoList);
     }*/
 
-    public OpticsDto create(NewOpticsDto newOptics) {
+    public OpticsDto create(OpticsCreateDto newOptics) {
         try {
 
             Optics optics = ModelMapperTool.mapDto(newOptics, Optics.class);

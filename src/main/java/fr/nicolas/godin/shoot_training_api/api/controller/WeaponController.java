@@ -29,7 +29,7 @@ public class WeaponController {
 
     @PostMapping(value = "save/weapon")
     @ResponseBody
-    public WeaponDto newWeapon(@Valid @RequestBody NewWeaponDto weaponDto){
+    public WeaponDto newWeapon(@Valid @RequestBody WeaponCreateDto weaponDto){
 
         return this.weaponService.create(weaponDto);
 
@@ -56,11 +56,5 @@ public class WeaponController {
         return this.weaponService.getAllActive();
     }
 
-    @GetMapping(value = "all/factory")
-    @ResponseBody
-    public List<FactoryDto> getAllWeaponFactory() {
-
-        return this.factoryService.getAllByType(FactoryType.WEAPON);
-    }
 
 }

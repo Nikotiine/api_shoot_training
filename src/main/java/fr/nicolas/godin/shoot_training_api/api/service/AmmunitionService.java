@@ -1,7 +1,6 @@
 package fr.nicolas.godin.shoot_training_api.api.service;
 
 import fr.nicolas.godin.shoot_training_api.api.dao.AdminInterface;
-import fr.nicolas.godin.shoot_training_api.api.dao.CommonInterface;
 import fr.nicolas.godin.shoot_training_api.api.dto.*;
 import fr.nicolas.godin.shoot_training_api.api.tools.ModelMapperTool;
 import fr.nicolas.godin.shoot_training_api.database.entity.Ammunition;
@@ -12,7 +11,7 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class AmmunitionService implements AdminInterface<AmmunitionDto,NewAmmunitionDto> {
+public class AmmunitionService implements AdminInterface<AmmunitionDto, AmmunitionCreateDto> {
 
     private AmmunitionRepository ammunitionRepository;
 
@@ -38,7 +37,7 @@ public class AmmunitionService implements AdminInterface<AmmunitionDto,NewAmmuni
      * @return la muntion sauvegarde AmmunitionDto
      */
     @Override
-    public AmmunitionDto create(NewAmmunitionDto newAmmunition) {
+    public AmmunitionDto create(AmmunitionCreateDto newAmmunition) {
 
         Ammunition ammunition = ModelMapperTool.mapDto(newAmmunition, Ammunition.class);
         Ammunition saved = this.ammunitionRepository.save(ammunition);

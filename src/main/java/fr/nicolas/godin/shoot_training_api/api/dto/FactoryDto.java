@@ -13,7 +13,7 @@ import java.util.Date;
 @Getter
 @Setter
 @NoArgsConstructor
-public class FactoryDto extends NewFactoryDto {
+public class FactoryDto extends FactoryCreateDto {
     @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)
     int id;
 
