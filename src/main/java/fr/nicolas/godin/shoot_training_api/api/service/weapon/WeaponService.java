@@ -36,31 +36,27 @@ public class WeaponService implements AdminInterface<WeaponDto, WeaponCreateDto>
     }
 
     @Override
-    public WeaponDto update(WeaponDto updateObjectDto) {
-        return null;
+    public WeaponDto update(WeaponDto weaponDto) {
+        try {
+
+        Weapon weapon = ModelMapperTool.mapDto(weaponDto,Weapon.class);
+        Weapon saved = this.weaponRepository.save(weapon);
+        return ModelMapperTool.mapDto(saved,WeaponDto.class);
+
+        } catch (DataIntegrityViolationException e) {
+
+            throw new CustomException(CustomExceptionMessage.WEAPON_MODEL_IS_EXIST.getMessage());
+
+        }
     }
 
     @Override
-    public List<WeaponDto> delete(WeaponDto deleteObjectDto) {
-        return null;
+    public List<WeaponDto> delete(WeaponDto weaponDto) {
+
+        Weapon weapon = ModelMapperTool.mapDto(weaponDto,Weapon.class);
+        this.weaponRepository.save(weapon);
+        return this.getAll();
     }
-
- /*   public WeaponDataCollection getDataCollection() {
-
-        List<WeaponFactory>  weaponFactories = (List<WeaponFactory>) this.weaponFactoryRepository.findAll();
-        List<WeaponFactoryDto>  weaponFactoryDtoList = ModelMapperTool.mapList(weaponFactories, WeaponFactoryDto.class);
-
-        List<Caliber> calibers = (List<Caliber>) this.caliberRepository.findAll();
-        List<CaliberDto> caliberDtoList = ModelMapperTool.mapList(calibers, CaliberDto.class);
-
-        List<WeaponCategory> weaponCategories = (List<WeaponCategory>) this.weaponCategoryRepository.findAll();
-        List<WeaponCategoryDto> weaponCategoryDtoList = ModelMapperTool.mapList(weaponCategories, WeaponCategoryDto.class);
-
-        List<WeaponType> weaponTypes = (List<WeaponType>) this.weaponTypeRepository.findAll();
-        List<WeaponTypeDto> weaponTypeDtoList = ModelMapperTool.mapList(weaponTypes, WeaponTypeDto.class);
-
-        return new WeaponDataCollection(weaponFactoryDtoList,weaponTypeDtoList,weaponCategoryDtoList,caliberDtoList);
-    }*/
 
 
     @Override

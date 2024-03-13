@@ -3,11 +3,14 @@ package fr.nicolas.godin.shoot_training_api.api.service;
 import fr.nicolas.godin.shoot_training_api.api.dao.AdminInterface;
 import fr.nicolas.godin.shoot_training_api.api.dto.AmmunitionWeightCreateDto;
 import fr.nicolas.godin.shoot_training_api.api.dto.AmmunitionWeightDto;
+import fr.nicolas.godin.shoot_training_api.api.enums.CustomExceptionMessage;
 import fr.nicolas.godin.shoot_training_api.api.tools.ModelMapperTool;
+import fr.nicolas.godin.shoot_training_api.configuration.CustomException;
 import fr.nicolas.godin.shoot_training_api.database.entity.AmmunitionWeight;
 import fr.nicolas.godin.shoot_training_api.database.repository.AmmunitionRepository;
 import fr.nicolas.godin.shoot_training_api.database.repository.AmmunitionWeightRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -69,10 +72,17 @@ public class AmmunitionWeightService implements AdminInterface<AmmunitionWeightD
 
     @Override
     public AmmunitionWeightDto create(AmmunitionWeightCreateDto ammunitionWeightCreate) {
-        AmmunitionWeight entity = ModelMapperTool.mapDto(ammunitionWeightCreate,AmmunitionWeight.class);
-        AmmunitionWeight saved = this.ammunitionWeightRepository.save(entity);
+        try {
 
-        return ModelMapperTool.mapDto(saved, AmmunitionWeightDto.class);
+            AmmunitionWeight entity = ModelMapperTool.mapDto(ammunitionWeightCreate,AmmunitionWeight.class);
+            AmmunitionWeight saved = this.ammunitionWeightRepository.save(entity);
+            return ModelMapperTool.mapDto(saved, AmmunitionWeightDto.class);
+
+        } catch (DataIntegrityViolationException e){
+
+            throw new CustomException(CustomExceptionMessage.WEIGHT_IS_EXIST.getMessage());
+        }
+
     }
 
     @Override

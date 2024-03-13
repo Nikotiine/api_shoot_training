@@ -16,6 +16,7 @@ public enum CustomExceptionMessage {
     NULL_POINTER_EXCEPTION(HttpStatus.BAD_REQUEST,"Definir un probleme"),
     WEAPON_SETUP_IS_EXIST(HttpStatus.BAD_REQUEST,"Ce setup existe deja"),
     CALIBER_IS_EXIST(HttpStatus.BAD_REQUEST,"Ce calibre existe deja"),
+    WEIGHT_IS_EXIST(HttpStatus.BAD_REQUEST,"Ce poids existe deja"),
     FACTORY_IS_EXIST(HttpStatus.BAD_REQUEST,"Cette marque existe deja");
 
 

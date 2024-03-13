@@ -12,7 +12,7 @@
     <include file="db/changelog/2024/01/18-02-changelog.xml"/>
     <include file="db/changelog/2024/02/20-01-changelog.xml"/>
     <include file="db/changelog/2024/02/22-01-changelog.xml"/>
-
+    <include file="db/changelog/2024/03/11-01-changelog.xml"/>
 
 
 </databaseChangeLog>

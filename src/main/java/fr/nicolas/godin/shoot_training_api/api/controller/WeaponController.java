@@ -27,7 +27,7 @@ public class WeaponController {
     private CaliberService caliberService;
 
 
-    @PostMapping(value = "save/weapon")
+    @PostMapping(value = "save")
     @ResponseBody
     public WeaponDto newWeapon(@Valid @RequestBody WeaponCreateDto weaponDto){
 
@@ -49,12 +49,31 @@ public class WeaponController {
         );
     }
 
-    @GetMapping(value = "all/weapon")
+    @GetMapping(value = "active")
     @ResponseBody
-    public List<WeaponDto> getAllWeapon(){
+    public List<WeaponDto> getActiveAllWeapon(){
 
         return this.weaponService.getAllActive();
     }
 
+    @GetMapping(value = "all")
+    @ResponseBody
+    public List<WeaponDto> getAllWeapon(){
 
+        return this.weaponService.getAll();
+    }
+
+    @DeleteMapping(value = "delete")
+    @ResponseBody
+    public List<WeaponDto> disable(@Valid @RequestBody WeaponDto weaponDto) {
+
+        return this.weaponService.delete(weaponDto);
+    }
+
+    @PutMapping(value = "edit")
+    @ResponseBody
+    public WeaponDto editWeapon(@Valid @RequestBody WeaponDto weaponDto) {
+
+        return this.weaponService.update(weaponDto);
+    }
 }

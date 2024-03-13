@@ -2,6 +2,7 @@ package fr.nicolas.godin.shoot_training_api.api.controller;
 
 import fr.nicolas.godin.shoot_training_api.api.dto.*;
 import fr.nicolas.godin.shoot_training_api.api.service.*;
+import fr.nicolas.godin.shoot_training_api.database.entity.AmmunitionWeight;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -40,6 +41,11 @@ public class AmmunitionController {
         return this.ammunitionService.create(ammunitionCreateDto);
     }
 
+    @PostMapping("save/weight")
+    @ResponseBody
+    public AmmunitionWeightDto newWeight(@Valid @RequestBody AmmunitionWeightCreateDto ammunitionWeightCreateDto){
+        return this.ammunitionWeightService.create(ammunitionWeightCreateDto);
+    }
 
     @GetMapping("all/ammunition")
     @ResponseBody
