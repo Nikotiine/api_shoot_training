@@ -27,7 +27,8 @@ public class OpticsController {
 
     @GetMapping("all")
     @ResponseBody
-    public List<OpticsDto> getAllOptics(){
+    public List<OpticsDto> getAllOptics() {
+
         return this.opticsService.getAllActive();
     }
 
@@ -35,6 +36,7 @@ public class OpticsController {
     @GetMapping(value = "data-collection")
     @ResponseBody
     public OpticsDataCollection getOpticsDataCollection() {
+
         return new OpticsDataCollection(
                 this.factoryService.getAllByType(FactoryType.OPTICS),
                 this.opticsBodyDiameterService.getAll(),
@@ -44,10 +46,24 @@ public class OpticsController {
         );
     }
 
-    @PostMapping("save/optics")
+    @PostMapping("save")
     @ResponseBody
-    public OpticsDto newOptics(@Valid @RequestBody OpticsCreateDto newOptics){
+    public OpticsDto newOptics(@Valid @RequestBody OpticsCreateDto newOptics) {
+
         return this.opticsService.create(newOptics);
     }
 
+    @DeleteMapping("delete")
+    @ResponseBody
+    public List<OpticsDto> disableOptics(@Valid @RequestBody OpticsDto opticsDto) {
+
+        return this.opticsService.delete(opticsDto);
+    }
+
+    @PutMapping("edit")
+    @ResponseBody
+    public OpticsDto editOptics(@Valid @RequestBody OpticsDto opticsDto) {
+
+        return this.opticsService.update(opticsDto);
+    }
  }

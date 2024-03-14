@@ -29,24 +29,6 @@ public class OpticsService implements AdminInterface<OpticsDto, OpticsCreateDto>
         return ModelMapperTool.mapList(opticsList, OpticsDto.class);
     }
 
-   /* public OpticsDataCollection getDataCollection() {
-        List<OpticsFactory> opticsFactoryList = (List<OpticsFactory>) this.opticsFactoryRepository.findAll();
-        List<OpticsFactoryDto> opticsFactoryDtoList = ModelMapperTool.mapList(opticsFactoryList, OpticsFactoryDto.class);
-
-        List<OpticsBodyDiameter> opticsBodyDiameterList = (List<OpticsBodyDiameter>) this.opticsBodyDiameterRepository.findAll();
-        List<OpticsBodyDiameterDto> opticsBodyDiameterDtoList = ModelMapperTool.mapList(opticsBodyDiameterList, OpticsBodyDiameterDto.class);
-
-        List<OpticsUnit> opticsopticsUnitsList = (List<OpticsUnit>) this.opticsUnitRepository.findAll();
-        List<OpticsUnitDto> opticsUnitDtoList = ModelMapperTool.mapList(opticsopticsUnitsList, OpticsUnitDto.class);
-
-        List<OpticsFocalPlane> opticsFocalPlaneList = (List<OpticsFocalPlane>) this.opticsFocalPlaneRepository.findAll();
-        List<OpticsFocalPlaneDto> opticsFocalPlaneDtoList = ModelMapperTool.mapList(opticsFocalPlaneList, OpticsFocalPlaneDto.class);
-
-        List<OpticsOutletDiameter> opticsOutletDiameterList = (List<OpticsOutletDiameter>) this.opticsOutletDiameterRepository.findAll();
-        List<OpticsOutletDiameterDto> opticsOutletDiameterDtoList = ModelMapperTool.mapList(opticsOutletDiameterList, OpticsOutletDiameterDto.class);
-
-        return new OpticsDataCollection(opticsFactoryDtoList,opticsBodyDiameterDtoList, opticsUnitDtoList,opticsFocalPlaneDtoList,opticsOutletDiameterDtoList);
-    }*/
 
     public OpticsDto create(OpticsCreateDto newOptics) {
         try {
@@ -63,13 +45,26 @@ public class OpticsService implements AdminInterface<OpticsDto, OpticsCreateDto>
     }
 
     @Override
-    public OpticsDto update(OpticsDto updateObjectDto) {
-        return null;
+    public OpticsDto update(OpticsDto opticsDto) {
+
+        try {
+            Optics optics = ModelMapperTool.mapDto(opticsDto,Optics.class);
+            Optics saved = this.opticsRepository.save(optics);
+            return ModelMapperTool.mapDto(saved,OpticsDto.class);
+        }
+        catch (DataIntegrityViolationException e){
+
+            throw new CustomException(CustomExceptionMessage.OPTIC_MODEL_IS_EXIST.getMessage());
+        }
+
     }
 
     @Override
-    public List<OpticsDto> delete(OpticsDto deleteObjectDto) {
-        return null;
+    public List<OpticsDto> delete(OpticsDto opticsDto) {
+
+        Optics optics = ModelMapperTool.mapDto(opticsDto,Optics.class);
+        this.opticsRepository.save(optics);
+        return this.getAll();
     }
 
 

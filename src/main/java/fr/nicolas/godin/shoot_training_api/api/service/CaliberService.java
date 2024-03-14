@@ -48,22 +48,27 @@ public class CaliberService implements AdminInterface<CaliberDto, CaliberCreateD
      */
     @Override
     public List<CaliberDto> getAll() {
-        List<Caliber> caliberList = (List<Caliber>) this.caliberRepository.findAll();
-        return ModelMapperTool.mapList(caliberList, CaliberDto.class);
+
+        return ModelMapperTool.mapList(this.caliberRepository.findAll(), CaliberDto.class);
     }
 
     @Override
     public List<CaliberDto> getAllActive() {
-        return this.getAll();
+
+        return ModelMapperTool.mapList(this.caliberRepository.findAllByActiveIsTrue(),CaliberDto.class);
+
     }
 
     @Override
     public CaliberDto create(CaliberCreateDto newObjectDto) {
+
         try {
+
             Caliber entity = ModelMapperTool.mapDto(newObjectDto,Caliber.class);
             Caliber saved = this.caliberRepository.save(entity);
             return ModelMapperTool.mapDto(saved,CaliberDto.class);
-        } catch (DataIntegrityViolationException e){
+
+        } catch (DataIntegrityViolationException e) {
 
             throw new CustomException(CustomExceptionMessage.CALIBER_IS_EXIST.getMessage());
         }
@@ -71,12 +76,26 @@ public class CaliberService implements AdminInterface<CaliberDto, CaliberCreateD
     }
 
     @Override
-    public CaliberDto update(CaliberDto updateObjectDto) {
-        return null;
+    public CaliberDto update(CaliberDto caliberDto) {
+
+        try {
+
+            Caliber caliber = ModelMapperTool.mapDto(caliberDto,Caliber.class);
+            Caliber saved = this.caliberRepository.save(caliber);
+            return ModelMapperTool.mapDto(saved,CaliberDto.class);
+
+        } catch (DataIntegrityViolationException e) {
+
+            throw new CustomException(CustomExceptionMessage.CALIBER_IS_EXIST.getMessage());
+        }
+
     }
 
     @Override
-    public List<CaliberDto> delete(CaliberDto deleteObjectDto) {
-        return null;
+    public List<CaliberDto> delete(CaliberDto caliberDto) {
+
+        Caliber caliber = ModelMapperTool.mapDto(caliberDto,Caliber.class);
+        this.caliberRepository.save(caliber);
+        return this.getAll();
     }
 }

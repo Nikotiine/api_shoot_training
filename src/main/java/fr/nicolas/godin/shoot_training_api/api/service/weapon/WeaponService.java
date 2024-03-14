@@ -61,8 +61,8 @@ public class WeaponService implements AdminInterface<WeaponDto, WeaponCreateDto>
 
     @Override
     public List<WeaponDto> getAll() {
-        List<Weapon> weapons = (List<Weapon>) this.weaponRepository.findAll();
-        return ModelMapperTool.mapList(weapons,WeaponDto.class);
+
+        return ModelMapperTool.mapList(this.weaponRepository.findAll(),WeaponDto.class);
     }
 
 
@@ -82,7 +82,7 @@ public class WeaponService implements AdminInterface<WeaponDto, WeaponCreateDto>
 
     @Override
     public List<WeaponDto> getAllActive() {
-        List<Weapon> weapons = (List<Weapon>) this.weaponRepository.findAllByActiveIsTrue();
-        return ModelMapperTool.mapList(weapons,WeaponDto.class);
+
+        return ModelMapperTool.mapList(this.weaponRepository.findAllByActiveIsTrue(),WeaponDto.class);
     }
 }

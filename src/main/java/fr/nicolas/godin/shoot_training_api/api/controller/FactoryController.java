@@ -21,12 +21,28 @@ public class FactoryController {
     @GetMapping("all-by-type")
     @ResponseBody
     public List<FactoryDto> getAllFactoryByType(@RequestParam(name = "type")FactoryType type) {
+
         return this.factoryService.getAllByType(type);
     }
 
     @PostMapping(value = "save")
     @ResponseBody
-    public FactoryDto save(@Valid @RequestBody FactoryCreateDto factoryCreateDto){
+    public FactoryDto saveFactory(@Valid @RequestBody FactoryCreateDto factoryCreateDto) {
+
         return this.factoryService.create(factoryCreateDto);
+    }
+
+    @PutMapping("edit")
+    @ResponseBody
+    public FactoryDto editFactory(@Valid @RequestBody FactoryDto factoryDto) {
+
+        return this.factoryService.update(factoryDto);
+    }
+
+    @DeleteMapping("delete")
+    @ResponseBody
+    public List<FactoryDto> disableFactory(@Valid @RequestBody FactoryDto factoryDto) {
+
+        return this.factoryService.delete(factoryDto);
     }
 }

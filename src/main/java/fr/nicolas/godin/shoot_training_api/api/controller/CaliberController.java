@@ -20,13 +20,29 @@ public class CaliberController {
     private CaliberService caliberService;
     @GetMapping("all")
     @ResponseBody
-    public List<CaliberDto> getAllCalibers(){
+    public List<CaliberDto> getAllCalibers() {
+
         return this.caliberService.getAllActive();
     }
 
     @PostMapping("save")
     @ResponseBody
-    public CaliberDto create(@Valid @RequestBody CaliberCreateDto caliberCreateDto) {
+    public CaliberDto saveCaliber(@Valid @RequestBody CaliberCreateDto caliberCreateDto) {
+
         return this.caliberService.create(caliberCreateDto);
+    }
+
+    @PutMapping("edit")
+    @ResponseBody
+    public CaliberDto editCaliber(@Valid @RequestBody CaliberDto caliberDto) {
+
+        return this.caliberService.update(caliberDto);
+    }
+
+    @DeleteMapping("delete")
+    @ResponseBody
+    public List<CaliberDto> disableCaliber(@Valid @RequestBody CaliberDto caliberDto) {
+
+        return this.caliberService.delete(caliberDto);
     }
 }

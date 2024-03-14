@@ -3,11 +3,14 @@ package fr.nicolas.godin.shoot_training_api.api.service;
 import fr.nicolas.godin.shoot_training_api.api.dao.AdminInterface;
 import fr.nicolas.godin.shoot_training_api.api.dto.FactoryDto;
 import fr.nicolas.godin.shoot_training_api.api.dto.FactoryCreateDto;
+import fr.nicolas.godin.shoot_training_api.api.enums.CustomExceptionMessage;
 import fr.nicolas.godin.shoot_training_api.api.enums.FactoryType;
 import fr.nicolas.godin.shoot_training_api.api.tools.ModelMapperTool;
+import fr.nicolas.godin.shoot_training_api.configuration.CustomException;
 import fr.nicolas.godin.shoot_training_api.database.entity.Factory;
 import fr.nicolas.godin.shoot_training_api.database.repository.FactoryRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -59,18 +62,38 @@ public class FactoryService implements AdminInterface<FactoryDto, FactoryCreateD
 
     @Override
     public FactoryDto create(FactoryCreateDto newObjectDto) {
-        Factory entity = ModelMapperTool.mapDto(newObjectDto,Factory.class);
-        Factory saved = this.factoryRepository.save(entity);
-        return ModelMapperTool.mapDto(saved, FactoryDto.class);
+        try {
+
+            Factory entity = ModelMapperTool.mapDto(newObjectDto,Factory.class);
+            Factory saved = this.factoryRepository.save(entity);
+            return ModelMapperTool.mapDto(saved, FactoryDto.class);
+
+        } catch (DataIntegrityViolationException e) {
+
+            throw new CustomException(CustomExceptionMessage.FACTORY_IS_EXIST.getMessage());
+        }
+
     }
 
     @Override
-    public FactoryDto update(FactoryDto updateObjectDto) {
-        return null;
+    public FactoryDto update(FactoryDto factoryDto) {
+        try {
+            Factory factory = ModelMapperTool.mapDto(factoryDto,Factory.class);
+            Factory saved = this.factoryRepository.save(factory);
+            return ModelMapperTool.mapDto(saved,FactoryDto.class);
+
+        } catch (DataIntegrityViolationException e) {
+
+            throw new CustomException(CustomExceptionMessage.FACTORY_IS_EXIST.getMessage());
+        }
+
     }
 
     @Override
-    public List<FactoryDto> delete(FactoryDto deleteObjectDto) {
-        return null;
+    public List<FactoryDto> delete(FactoryDto factoryDto) {
+
+        Factory factory = ModelMapperTool.mapDto(factoryDto,Factory.class);
+        this.factoryRepository.save(factory);
+        return this.getAllByType(factory.getType());
     }
 }
