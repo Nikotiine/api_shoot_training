@@ -51,9 +51,10 @@ public class WeaponService implements AdminInterface<WeaponDto, WeaponCreateDto>
     }
 
     @Override
-    public List<WeaponDto> delete(WeaponDto weaponDto) {
+    public List<WeaponDto> delete(int id) {
 
-        Weapon weapon = ModelMapperTool.mapDto(weaponDto,Weapon.class);
+        Weapon weapon = this.weaponRepository.findById(id);
+        weapon.setActive(false);
         this.weaponRepository.save(weapon);
         return this.getAll();
     }

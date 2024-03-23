@@ -9,6 +9,8 @@ import java.util.List;
 
 public interface WeaponRepository extends JpaRepository<Weapon,Integer> {
     Weapon findFirstByOrderByIdDesc();
+    Weapon findById(int id);
 
     List<Weapon> findAllByActiveIsTrue();
+
 }

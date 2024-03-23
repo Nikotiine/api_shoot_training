@@ -34,9 +34,9 @@ public class AdminController {
         return this.adminService.editUserRole(user);
     }
 
-    @PostMapping("user/disable-profile")
-    public  List<UserProfileDto> disableUser(@Valid @RequestBody UserProfileDto user) {
-        return this.adminService.disableUser(user);
+    @DeleteMapping("user/disable")
+    public  List<UserProfileDto> disableUser(@RequestParam(name = "id") int id) {
+        return this.adminService.disableUser(id);
     }
 
     @GetMapping("optics/all")

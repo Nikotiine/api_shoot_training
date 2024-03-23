@@ -51,7 +51,7 @@ public class AmmunitionService implements AdminInterface<AmmunitionDto, Ammuniti
     }
 
     @Override
-    public List<AmmunitionDto> delete(AmmunitionDto objectDto) {
+    public List<AmmunitionDto> delete(int id) {
         return null;
     }
 

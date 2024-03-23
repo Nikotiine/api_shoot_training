@@ -41,8 +41,8 @@ public class CaliberController {
 
     @DeleteMapping("delete")
     @ResponseBody
-    public List<CaliberDto> disableCaliber(@Valid @RequestBody CaliberDto caliberDto) {
+    public List<CaliberDto> disableCaliber(@RequestParam(name = "id") int id) {
 
-        return this.caliberService.delete(caliberDto);
+        return this.caliberService.delete(id);
     }
 }

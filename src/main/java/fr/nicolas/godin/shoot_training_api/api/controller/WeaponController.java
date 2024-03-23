@@ -65,9 +65,9 @@ public class WeaponController {
 
     @DeleteMapping(value = "delete")
     @ResponseBody
-    public List<WeaponDto> disableWeapon(@Valid @RequestBody WeaponDto weaponDto) {
+    public List<WeaponDto> disableWeapon(@RequestParam(name = "id") int id) {
 
-        return this.weaponService.delete(weaponDto);
+        return this.weaponService.delete(id);
     }
 
     @PutMapping(value = "edit")

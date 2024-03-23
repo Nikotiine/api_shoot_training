@@ -348,7 +348,7 @@
             <column name="name">Taurus</column>
             <column name="focal_plane_id">1</column>
             <column name="body_diameter_id">2</column>
-            <column name="factory_id">1</column>
+            <column name="factory_id">17</column>
             <column name="max_elevation">60</column>
             <column name="max_derivation">60</column>
             <column name="max_zoom">18</column>

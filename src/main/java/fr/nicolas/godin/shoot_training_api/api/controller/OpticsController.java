@@ -55,15 +55,15 @@ public class OpticsController {
 
     @DeleteMapping("delete")
     @ResponseBody
-    public List<OpticsDto> disableOptics(@Valid @RequestBody OpticsDto opticsDto) {
+    public List<OpticsDto> disableOptics(@RequestParam(name = "id") int id) {
 
-        return this.opticsService.delete(opticsDto);
+        return this.opticsService.delete(id);
     }
 
     @PutMapping("edit")
     @ResponseBody
     public OpticsDto editOptics(@Valid @RequestBody OpticsDto opticsDto) {
-
+System.out.println(opticsDto);
         return this.opticsService.update(opticsDto);
     }
  }

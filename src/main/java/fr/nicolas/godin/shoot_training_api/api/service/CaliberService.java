@@ -92,9 +92,10 @@ public class CaliberService implements AdminInterface<CaliberDto, CaliberCreateD
     }
 
     @Override
-    public List<CaliberDto> delete(CaliberDto caliberDto) {
+    public List<CaliberDto> delete(int id) {
 
-        Caliber caliber = ModelMapperTool.mapDto(caliberDto,Caliber.class);
+        Caliber caliber = this.caliberRepository.findById(id);
+        caliber.setActive(false);
         this.caliberRepository.save(caliber);
         return this.getAll();
     }

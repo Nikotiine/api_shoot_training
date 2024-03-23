@@ -9,5 +9,6 @@ import java.util.List;
 public interface CaliberRepository extends JpaRepository<Caliber,Integer> {
     Caliber findFirstByOrderByIdDesc();
 
+    Caliber findById(int id);
     List<Caliber> findAllByActiveIsTrue();
 }

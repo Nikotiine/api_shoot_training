@@ -9,5 +9,7 @@ import java.util.List;
 public interface FactoryRepository extends JpaRepository<Factory,Integer> {
 
     List<Factory> findAllByType(FactoryType type);
+
+    Factory findById(int id);
     List<Factory> findAllByActiveIsTrue();
 }

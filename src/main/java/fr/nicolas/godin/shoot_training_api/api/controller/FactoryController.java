@@ -41,8 +41,8 @@ public class FactoryController {
 
     @DeleteMapping("delete")
     @ResponseBody
-    public List<FactoryDto> disableFactory(@Valid @RequestBody FactoryDto factoryDto) {
+    public List<FactoryDto> disableFactory(@RequestParam(name = "id") int id) {
 
-        return this.factoryService.delete(factoryDto);
+        return this.factoryService.delete(id);
     }
 }

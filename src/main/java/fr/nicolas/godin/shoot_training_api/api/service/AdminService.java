@@ -43,8 +43,8 @@ public class AdminService {
         return this.findAllUsers();
     }
 
-    public List<UserProfileDto> disableUser(UserProfileDto user) {
-        this.userService.disableUser(user);
+    public List<UserProfileDto> disableUser(int id) {
+        this.userService.disableUser(id);
         return this.findAllUsers();
     }
 

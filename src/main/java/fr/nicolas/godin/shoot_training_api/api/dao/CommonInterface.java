@@ -10,7 +10,7 @@ public interface CommonInterface<T,D> {
 
     T update(T updateObjectDto);
 
-    List<T> delete(T deleteObjectDto);
+    List<T> delete(int id);
 
 
 }

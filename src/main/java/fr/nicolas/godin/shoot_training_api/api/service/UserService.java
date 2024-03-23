@@ -56,13 +56,15 @@ public class UserService {
      * @return UserProfileDto[]
      */
     public List<UserProfileDto> getAll() {
-        List<User> userList = (List<User>) this.userRepository.findAll();
-        return ModelMapperTool.mapList(userList, UserProfileDto.class);
+
+        return ModelMapperTool.mapList(this.userRepository.findAll(), UserProfileDto.class);
     }
 
-    public void disableUser(UserProfileDto user) {
-        User disabledUser = ModelMapperTool.mapDto(user, User.class);
-        this.userRepository.save(disabledUser);
+    public void disableUser(int id) {
+
+        User user = this.userRepository.findById(id);
+        user.setActive(false);
+        this.userRepository.save(user);
     }
 
 

@@ -90,9 +90,10 @@ public class FactoryService implements AdminInterface<FactoryDto, FactoryCreateD
     }
 
     @Override
-    public List<FactoryDto> delete(FactoryDto factoryDto) {
+    public List<FactoryDto> delete(int id) {
 
-        Factory factory = ModelMapperTool.mapDto(factoryDto,Factory.class);
+        Factory factory = this.factoryRepository.findById(id);
+        factory.setActive(false);
         this.factoryRepository.save(factory);
         return this.getAllByType(factory.getType());
     }

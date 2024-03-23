@@ -25,8 +25,8 @@ public class OpticsService implements AdminInterface<OpticsDto, OpticsCreateDto>
      * @return List<OpticsDto>
      */
     public List<OpticsDto> getAll() {
-        List<Optics> opticsList = (List<Optics>) this.opticsRepository.findAll();
-        return ModelMapperTool.mapList(opticsList, OpticsDto.class);
+
+        return ModelMapperTool.mapList(this.opticsRepository.findAll(), OpticsDto.class);
     }
 
 
@@ -60,9 +60,10 @@ public class OpticsService implements AdminInterface<OpticsDto, OpticsCreateDto>
     }
 
     @Override
-    public List<OpticsDto> delete(OpticsDto opticsDto) {
+    public List<OpticsDto> delete(int id) {
 
-        Optics optics = ModelMapperTool.mapDto(opticsDto,Optics.class);
+        Optics optics = this.opticsRepository.findById(id);
+        optics.setActive(false);
         this.opticsRepository.save(optics);
         return this.getAll();
     }
@@ -82,7 +83,7 @@ public class OpticsService implements AdminInterface<OpticsDto, OpticsCreateDto>
 
     @Override
     public List<OpticsDto> getAllActive() {
-        List<Optics> optics = (List<Optics>) this.opticsRepository.findAllByActiveIsTrue();
-        return ModelMapperTool.mapList(optics,OpticsDto.class);
+
+        return ModelMapperTool.mapList(this.opticsRepository.findAllByActiveIsTrue(),OpticsDto.class);
     }
 }

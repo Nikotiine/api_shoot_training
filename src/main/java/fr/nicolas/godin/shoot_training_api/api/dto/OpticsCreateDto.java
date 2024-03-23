@@ -39,40 +39,26 @@ public class OpticsCreateDto implements Serializable {
     String name;
 
     @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)
-    @NotEmpty(message = DtoDecoratorConfiguration.NOT_EMPTY_MESSAGE)
-    @NotBlank(message = DtoDecoratorConfiguration.NOT_BLACK_MESSAGE)
     @Positive
     int minZoom;
 
     @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)
-    @NotEmpty(message = DtoDecoratorConfiguration.NOT_EMPTY_MESSAGE)
-    @NotBlank(message = DtoDecoratorConfiguration.NOT_BLACK_MESSAGE)
     @Positive
     int maxZoom;
 
     boolean parallax;
 
-    @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)
-    @NotEmpty(message = DtoDecoratorConfiguration.NOT_EMPTY_MESSAGE)
-    @NotBlank(message = DtoDecoratorConfiguration.NOT_BLACK_MESSAGE)
-    @Positive
     int minParallax;
 
     @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)
-    @NotEmpty(message = DtoDecoratorConfiguration.NOT_EMPTY_MESSAGE)
-    @NotBlank(message = DtoDecoratorConfiguration.NOT_BLACK_MESSAGE)
     @Positive
     double maxElevation;
 
     @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)
-    @NotEmpty(message = DtoDecoratorConfiguration.NOT_EMPTY_MESSAGE)
-    @NotBlank(message = DtoDecoratorConfiguration.NOT_BLACK_MESSAGE)
     @Positive
     double maxDerivation;
 
     @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)
-    @NotEmpty(message = DtoDecoratorConfiguration.NOT_EMPTY_MESSAGE)
-    @NotBlank(message = DtoDecoratorConfiguration.NOT_BLACK_MESSAGE)
     @Positive
     double valueOfOneClick;
 

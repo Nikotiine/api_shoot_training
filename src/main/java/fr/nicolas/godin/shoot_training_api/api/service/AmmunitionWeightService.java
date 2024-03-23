@@ -91,7 +91,7 @@ public class AmmunitionWeightService implements AdminInterface<AmmunitionWeightD
     }
 
     @Override
-    public List<AmmunitionWeightDto> delete(AmmunitionWeightDto deleteObjectDto) {
+    public List<AmmunitionWeightDto> delete(int id) {
         return null;
     }
 }
