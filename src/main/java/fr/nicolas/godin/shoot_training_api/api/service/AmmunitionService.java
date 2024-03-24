@@ -2,10 +2,13 @@ package fr.nicolas.godin.shoot_training_api.api.service;
 
 import fr.nicolas.godin.shoot_training_api.api.dao.AdminInterface;
 import fr.nicolas.godin.shoot_training_api.api.dto.*;
+import fr.nicolas.godin.shoot_training_api.api.enums.CustomExceptionMessage;
 import fr.nicolas.godin.shoot_training_api.api.tools.ModelMapperTool;
+import fr.nicolas.godin.shoot_training_api.configuration.CustomException;
 import fr.nicolas.godin.shoot_training_api.database.entity.Ammunition;
 import fr.nicolas.godin.shoot_training_api.database.repository.AmmunitionRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -26,8 +29,8 @@ public class AmmunitionService implements AdminInterface<AmmunitionDto, Ammuniti
     @Override
     public List<AmmunitionDto> getAll() {
 
-        List<Ammunition> ammunitionList = (List<Ammunition>) this.ammunitionRepository.findAll();
-        return ModelMapperTool.mapList(ammunitionList, AmmunitionDto.class);
+
+        return ModelMapperTool.mapList(this.ammunitionRepository.findAll(), AmmunitionDto.class);
     }
 
     /**
@@ -38,21 +41,42 @@ public class AmmunitionService implements AdminInterface<AmmunitionDto, Ammuniti
      */
     @Override
     public AmmunitionDto create(AmmunitionCreateDto newAmmunition) {
+        try {
 
-        Ammunition ammunition = ModelMapperTool.mapDto(newAmmunition, Ammunition.class);
-        Ammunition saved = this.ammunitionRepository.save(ammunition);
-        return ModelMapperTool.mapDto(saved, AmmunitionDto.class);
+            Ammunition ammunition = ModelMapperTool.mapDto(newAmmunition, Ammunition.class);
+            Ammunition saved = this.ammunitionRepository.save(ammunition);
+            return ModelMapperTool.mapDto(saved, AmmunitionDto.class);
+
+        } catch  (DataIntegrityViolationException e) {
+
+            throw new CustomException(CustomExceptionMessage.AMMUNITION_NAME_AND_FACTORY_EXIST.getMessage());
+        }
+
 
     }
 
     @Override
-    public AmmunitionDto update(AmmunitionDto updateObjectDto) {
-        return null;
+    public AmmunitionDto update(AmmunitionDto ammunitionDto) {
+        try {
+
+            Ammunition ammunition = ModelMapperTool.mapDto(ammunitionDto,Ammunition.class);
+            Ammunition saved = this.ammunitionRepository.save(ammunition);
+            return ModelMapperTool.mapDto(saved,AmmunitionDto.class);
+
+        } catch (DataIntegrityViolationException e) {
+
+            throw new CustomException(CustomExceptionMessage.AMMUNITION_NAME_AND_FACTORY_EXIST.getMessage());
+        }
     }
 
     @Override
     public List<AmmunitionDto> delete(int id) {
-        return null;
+
+        Ammunition ammunition = this.ammunitionRepository.findById(id);
+        ammunition.setActive(false);
+        this.ammunitionRepository.save(ammunition);
+
+        return this.getAll();
     }
 
 
@@ -74,8 +98,7 @@ public class AmmunitionService implements AdminInterface<AmmunitionDto, Ammuniti
     @Override
     public List<AmmunitionDto> getAllActive() {
 
-        List<Ammunition> ammunitionList = (List<Ammunition>) this.ammunitionRepository.findAllByActiveIsTrue();
-        return ModelMapperTool.mapList(ammunitionList, AmmunitionDto.class);
+        return ModelMapperTool.mapList(this.ammunitionRepository.findAllByActiveIsTrue(), AmmunitionDto.class);
 
     }
 }

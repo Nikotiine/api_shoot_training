@@ -7,7 +7,7 @@
     <property name="now" value="now()" dbms="postgresql"/>
     <changeSet id="1705614755638-1" author="niko (generated)">
         <insert tableName="ammunition">
-            <column name="factory_id">3</column>
+            <column name="factory_id">24</column>
             <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
             <column name="name">Champion</column>
@@ -17,7 +17,7 @@
             <column name="ballistic_coefficient">0</column>
         </insert>
         <insert tableName="ammunition">
-            <column name="factory_id">10</column>
+            <column name="factory_id">31</column>
             <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
             <column name="name">Target Riffle</column>
@@ -27,7 +27,7 @@
             <column name="ballistic_coefficient">0</column>
         </insert>
         <insert tableName="ammunition">
-            <column name="factory_id">10</column>
+            <column name="factory_id">31</column>
             <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
             <column name="name">Subsonic</column>
@@ -37,7 +37,7 @@
             <column name="ballistic_coefficient">0</column>
         </insert>
         <insert tableName="ammunition">
-            <column name="factory_id">7</column>
+            <column name="factory_id">23</column>
             <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
             <column name="name">Standard</column>
@@ -47,7 +47,7 @@
             <column name="ballistic_coefficient">0</column>
         </insert>
         <insert tableName="ammunition">
-            <column name="factory_id">2</column>
+            <column name="factory_id">34</column>
             <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
             <column name="name">Standard</column>
@@ -57,7 +57,7 @@
             <column name="ballistic_coefficient">0</column>
         </insert>
         <insert tableName="ammunition">
-            <column name="factory_id">2</column>
+            <column name="factory_id">23</column>
             <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
             <column name="name">Subsonic</column>
@@ -67,7 +67,7 @@
             <column name="ballistic_coefficient">0</column>
         </insert>
         <insert tableName="ammunition">
-            <column name="factory_id">5</column>
+            <column name="factory_id">26</column>
             <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
             <column name="name">Varmint express</column>
@@ -77,7 +77,7 @@
             <column name="ballistic_coefficient">0</column>
         </insert>
         <insert tableName="ammunition">
-            <column name="factory_id">8</column>
+            <column name="factory_id">29</column>
             <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
             <column name="name">Tac 22 subsonic</column>
@@ -87,7 +87,7 @@
             <column name="ballistic_coefficient">0</column>
         </insert>
         <insert tableName="ammunition">
-            <column name="factory_id">8</column>
+            <column name="factory_id">29</column>
             <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
             <column name="name">Tac 22 standard</column>
@@ -97,7 +97,7 @@
             <column name="ballistic_coefficient">0</column>
         </insert>
         <insert tableName="ammunition">
-            <column name="factory_id">11</column>
+            <column name="factory_id">32</column>
             <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
             <column name="name">Standard club</column>
@@ -107,7 +107,7 @@
             <column name="ballistic_coefficient">0</column>
         </insert>
         <insert tableName="ammunition">
-            <column name="factory_id">12</column>
+            <column name="factory_id">33</column>
             <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
             <column name="name">Standard plus</column>
@@ -117,7 +117,7 @@
             <column name="ballistic_coefficient">0</column>
         </insert>
         <insert tableName="ammunition">
-            <column name="factory_id">12</column>
+            <column name="factory_id">33</column>
             <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
             <column name="name">Pistol match</column>
@@ -127,7 +127,7 @@
             <column name="ballistic_coefficient">0</column>
         </insert>
         <insert tableName="ammunition">
-            <column name="factory_id">13</column>
+            <column name="factory_id">34</column>
             <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
             <column name="name">Subsonic 42MAX</column>
@@ -137,7 +137,7 @@
             <column name="ballistic_coefficient">0</column>
         </insert>
         <insert tableName="ammunition">
-            <column name="factory_id">13</column>
+            <column name="factory_id">34</column>
             <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
             <column name="name">Standard velocity</column>
@@ -147,7 +147,7 @@
             <column name="ballistic_coefficient">0</column>
         </insert>
         <insert tableName="ammunition">
-            <column name="factory_id">14</column>
+            <column name="factory_id">35</column>
             <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
             <column name="name">Force</column>
@@ -157,7 +157,7 @@
             <column name="ballistic_coefficient">0</column>
         </insert>
         <insert tableName="ammunition">
-            <column name="factory_id">14</column>
+            <column name="factory_id">35</column>
             <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
             <column name="name">Sport</column>
@@ -167,7 +167,7 @@
             <column name="ballistic_coefficient">0</column>
         </insert>
         <insert tableName="ammunition">
-            <column name="factory_id">14</column>
+            <column name="factory_id">35</column>
             <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
             <column name="name">Action</column>
@@ -177,7 +177,7 @@
             <column name="ballistic_coefficient">0</column>
         </insert>
         <insert tableName="ammunition">
-            <column name="factory_id">1</column>
+            <column name="factory_id">22</column>
             <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
             <column name="name">Super-Extra</column>
@@ -187,7 +187,7 @@
             <column name="ballistic_coefficient">0</column>
         </insert>
         <insert tableName="ammunition">
-            <column name="factory_id">1</column>
+            <column name="factory_id">22</column>
             <column name="created_at">${now()}</column>
             <column name="updated_at">${now()}</column>
             <column name="name">Subsonic</column>

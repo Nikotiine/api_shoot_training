@@ -29,6 +29,12 @@ public class OpticsController {
     @ResponseBody
     public List<OpticsDto> getAllOptics() {
 
+        return this.opticsService.getAll();
+    }
+    @GetMapping("actoves")
+    @ResponseBody
+    public List<OpticsDto> getAllActiveOptics() {
+
         return this.opticsService.getAllActive();
     }
 
@@ -63,7 +69,7 @@ public class OpticsController {
     @PutMapping("edit")
     @ResponseBody
     public OpticsDto editOptics(@Valid @RequestBody OpticsDto opticsDto) {
-System.out.println(opticsDto);
+
         return this.opticsService.update(opticsDto);
     }
  }

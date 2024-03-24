@@ -55,5 +55,18 @@ public class AmmunitionController {
     }
 
 
+    @DeleteMapping("delete")
+    @ResponseBody
+    public List<AmmunitionDto> disableAmmunition(@RequestParam(name = "id") int id) {
+
+        return this.ammunitionService.delete(id);
+    }
+
+    @PutMapping("edit")
+    @ResponseBody
+    public AmmunitionDto editAmmunition(@Valid @RequestBody AmmunitionDto ammunitionDto) {
+
+        return this.ammunitionService.update(ammunitionDto);
+    }
 
 }
