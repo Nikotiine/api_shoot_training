@@ -1,6 +1,6 @@
 package fr.nicolas.godin.shoot_training_api.api.service.optics;
 
-import fr.nicolas.godin.shoot_training_api.api.dao.SimpleInterface;
+import fr.nicolas.godin.shoot_training_api.api.interfaces.SimpleInterface;
 import fr.nicolas.godin.shoot_training_api.api.dto.OpticsUnitDto;
 import fr.nicolas.godin.shoot_training_api.api.tools.ModelMapperTool;
 import fr.nicolas.godin.shoot_training_api.database.entity.OpticsUnit;

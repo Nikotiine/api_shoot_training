@@ -13,7 +13,7 @@ public enum CustomExceptionMessage {
     BAD_PASSWORD(HttpStatus.FORBIDDEN,"Mot de passe invalide"),
     WEAPON_MODEL_IS_EXIST(HttpStatus.BAD_REQUEST,"Ce model d'arme existe deja"),
     OPTIC_MODEL_IS_EXIST(HttpStatus.BAD_REQUEST,"Cette lunette existe deja"),
-    NULL_POINTER_EXCEPTION(HttpStatus.BAD_REQUEST,"Definir un probleme"),
+    NULL_POINTER_EXCEPTION(HttpStatus.BAD_REQUEST,"Erreur de parametre dans la requete (ID inconnu)"),
     WEAPON_SETUP_IS_EXIST(HttpStatus.BAD_REQUEST,"Ce setup existe deja"),
     CALIBER_IS_EXIST(HttpStatus.BAD_REQUEST,"Ce calibre existe deja"),
     WEIGHT_IS_EXIST(HttpStatus.BAD_REQUEST,"Ce poids existe deja"),

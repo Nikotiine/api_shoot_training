@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @Tag(name = "Ammunition",description = "Ammunition Controller")
@@ -55,18 +56,30 @@ public class AmmunitionController {
     }
 
 
-    @DeleteMapping("delete")
+    @DeleteMapping("delete/ammunition")
     @ResponseBody
     public List<AmmunitionDto> disableAmmunition(@RequestParam(name = "id") int id) {
 
         return this.ammunitionService.delete(id);
     }
 
-    @PutMapping("edit")
+    @PutMapping("edit/ammunition")
     @ResponseBody
     public AmmunitionDto editAmmunition(@Valid @RequestBody AmmunitionDto ammunitionDto) {
 
         return this.ammunitionService.update(ammunitionDto);
     }
+    @DeleteMapping("delete/weight")
+    @ResponseBody
+    public List<AmmunitionWeightDto> disableAmmunitionWeight(@RequestParam(name = "id") int id) {
 
+        return this.ammunitionWeightService.delete(id);
+    }
+
+    @PutMapping("edit/weight")
+    @ResponseBody
+    public AmmunitionWeightDto editWeight(@Valid @RequestBody AmmunitionWeightDto ammunitionWeightDto) {
+
+        return this.ammunitionWeightService.update(ammunitionWeightDto);
+    }
 }

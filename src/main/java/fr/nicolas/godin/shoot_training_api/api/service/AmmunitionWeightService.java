@@ -1,13 +1,12 @@
 package fr.nicolas.godin.shoot_training_api.api.service;
 
-import fr.nicolas.godin.shoot_training_api.api.dao.AdminInterface;
+import fr.nicolas.godin.shoot_training_api.api.interfaces.AdminInterface;
 import fr.nicolas.godin.shoot_training_api.api.dto.AmmunitionWeightCreateDto;
 import fr.nicolas.godin.shoot_training_api.api.dto.AmmunitionWeightDto;
 import fr.nicolas.godin.shoot_training_api.api.enums.CustomExceptionMessage;
 import fr.nicolas.godin.shoot_training_api.api.tools.ModelMapperTool;
 import fr.nicolas.godin.shoot_training_api.configuration.CustomException;
 import fr.nicolas.godin.shoot_training_api.database.entity.AmmunitionWeight;
-import fr.nicolas.godin.shoot_training_api.database.repository.AmmunitionRepository;
 import fr.nicolas.godin.shoot_training_api.database.repository.AmmunitionWeightRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -77,7 +76,6 @@ public class AmmunitionWeightService implements AdminInterface<AmmunitionWeightD
             AmmunitionWeight entity = ModelMapperTool.mapDto(ammunitionWeightCreate,AmmunitionWeight.class);
             AmmunitionWeight saved = this.ammunitionWeightRepository.save(entity);
             return ModelMapperTool.mapDto(saved, AmmunitionWeightDto.class);
-
         } catch (DataIntegrityViolationException e){
 
             throw new CustomException(CustomExceptionMessage.WEIGHT_IS_EXIST.getMessage());
@@ -86,12 +84,31 @@ public class AmmunitionWeightService implements AdminInterface<AmmunitionWeightD
     }
 
     @Override
-    public AmmunitionWeightDto update(AmmunitionWeightDto updateObjectDto) {
-        return null;
+    public AmmunitionWeightDto update(AmmunitionWeightDto ammunitionWeightDto) {
+
+        try {
+            AmmunitionWeight entity = ModelMapperTool.mapDto(ammunitionWeightDto,AmmunitionWeight.class);
+            AmmunitionWeight saved = this.ammunitionWeightRepository.save(entity);
+            return ModelMapperTool.mapDto(saved, AmmunitionWeightDto.class);
+        } catch (DataIntegrityViolationException e){
+
+            throw new CustomException(CustomExceptionMessage.WEIGHT_IS_EXIST.getMessage());
+        }
+
     }
 
     @Override
     public List<AmmunitionWeightDto> delete(int id) {
-        return null;
+
+        try {
+
+            AmmunitionWeight ammunitionWeight = this.ammunitionWeightRepository.findById(id);
+            ammunitionWeight.setActive(false);
+            return this.getAll();
+        } catch (NullPointerException e){
+
+            throw new CustomException(CustomExceptionMessage.NULL_POINTER_EXCEPTION.getMessage());
+        }
+
     }
 }

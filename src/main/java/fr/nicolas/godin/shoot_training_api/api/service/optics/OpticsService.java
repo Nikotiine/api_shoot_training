@@ -1,6 +1,6 @@
 package fr.nicolas.godin.shoot_training_api.api.service.optics;
 
-import fr.nicolas.godin.shoot_training_api.api.dao.AdminInterface;
+import fr.nicolas.godin.shoot_training_api.api.interfaces.AdminInterface;
 import fr.nicolas.godin.shoot_training_api.api.dto.*;
 import fr.nicolas.godin.shoot_training_api.api.enums.CustomExceptionMessage;
 import fr.nicolas.godin.shoot_training_api.api.tools.ModelMapperTool;

@@ -1,5 +1,7 @@
 package fr.nicolas.godin.shoot_training_api.api.dto;
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,7 +17,14 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 public class AmmunitionWeightCreateDto implements Serializable {
+    @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)
+    @Positive
     double grains;
+
+    @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)
+    @Positive
     double grams;
+
+    @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)
     Set<CaliberDto> calibers;
 }

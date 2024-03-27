@@ -11,4 +11,6 @@ public interface AmmunitionWeightRepository extends JpaRepository<AmmunitionWeig
 
     List<AmmunitionWeight> findAmmunitionWeightByCalibersId(int id);
 
+    AmmunitionWeight findById(int id);
+
 }

@@ -1,6 +1,6 @@
 package fr.nicolas.godin.shoot_training_api.api.service;
 
-import fr.nicolas.godin.shoot_training_api.api.dao.AdminInterface;
+import fr.nicolas.godin.shoot_training_api.api.interfaces.AdminInterface;
 import fr.nicolas.godin.shoot_training_api.api.dto.CaliberCreateDto;
 import fr.nicolas.godin.shoot_training_api.api.dto.CaliberDto;
 import fr.nicolas.godin.shoot_training_api.api.enums.CustomExceptionMessage;
