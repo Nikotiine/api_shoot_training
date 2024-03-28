@@ -19,36 +19,17 @@ import java.util.stream.Collectors;
 public class AmmunitionController {
 
     private AmmunitionService ammunitionService;
-    private AmmunitionWeightService ammunitionWeightService;
 
 
-    @GetMapping("weight-by-caliber")
-    @ResponseBody
-    public List<AmmunitionWeightDto> getWeightByCaliber(@RequestParam(name = "id")int id){
-
-        return this.ammunitionWeightService.findAmmunitionWeightByCaliberId(id);
-    }
-
-    @GetMapping("all/weight")
-    @ResponseBody
-    public List<AmmunitionWeightDto> getAllWeight(){
-        return this.ammunitionWeightService.getAll();
-    }
-
-    @PostMapping("save/ammunition")
+    @PostMapping("save")
     @ResponseBody
     public AmmunitionDto newAmmunition(@Valid @RequestBody AmmunitionCreateDto ammunitionCreateDto) {
 
         return this.ammunitionService.create(ammunitionCreateDto);
     }
 
-    @PostMapping("save/weight")
-    @ResponseBody
-    public AmmunitionWeightDto newWeight(@Valid @RequestBody AmmunitionWeightCreateDto ammunitionWeightCreateDto){
-        return this.ammunitionWeightService.create(ammunitionWeightCreateDto);
-    }
 
-    @GetMapping("all/ammunition")
+    @GetMapping("all")
     @ResponseBody
     public List<AmmunitionDto> getAllAmmunition() {
 
@@ -56,30 +37,18 @@ public class AmmunitionController {
     }
 
 
-    @DeleteMapping("delete/ammunition")
+    @DeleteMapping("delete")
     @ResponseBody
     public List<AmmunitionDto> disableAmmunition(@RequestParam(name = "id") int id) {
 
         return this.ammunitionService.delete(id);
     }
 
-    @PutMapping("edit/ammunition")
+    @PutMapping("edit")
     @ResponseBody
     public AmmunitionDto editAmmunition(@Valid @RequestBody AmmunitionDto ammunitionDto) {
 
         return this.ammunitionService.update(ammunitionDto);
     }
-    @DeleteMapping("delete/weight")
-    @ResponseBody
-    public List<AmmunitionWeightDto> disableAmmunitionWeight(@RequestParam(name = "id") int id) {
 
-        return this.ammunitionWeightService.delete(id);
-    }
-
-    @PutMapping("edit/weight")
-    @ResponseBody
-    public AmmunitionWeightDto editWeight(@Valid @RequestBody AmmunitionWeightDto ammunitionWeightDto) {
-
-        return this.ammunitionWeightService.update(ammunitionWeightDto);
-    }
 }

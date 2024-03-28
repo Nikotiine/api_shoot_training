@@ -28,8 +28,15 @@ public class AmmunitionWeightService implements AdminInterface<AmmunitionWeightD
      */
     public List<AmmunitionWeightDto> findAmmunitionWeightByCaliberId(int id) {
 
-        List<AmmunitionWeight> ammunitionWeightList = this.ammunitionWeightRepository.findAmmunitionWeightByCalibersId(id);
-        return ModelMapperTool.mapList(ammunitionWeightList, AmmunitionWeightDto.class);
+        try {
+
+            List<AmmunitionWeight> ammunitionWeightList = this.ammunitionWeightRepository.findAmmunitionWeightByCalibersId(id);
+            return ModelMapperTool.mapList(ammunitionWeightList, AmmunitionWeightDto.class);
+        } catch (NullPointerException e) {
+
+            throw new CustomException(CustomExceptionMessage.NULL_POINTER_EXCEPTION.getMessage());
+        }
+
 
     }
 
@@ -54,9 +61,9 @@ public class AmmunitionWeightService implements AdminInterface<AmmunitionWeightD
     }
 
     /**
-     * Retourne la liste complete de T actif ou non
+     * Retourne la liste complete de AmmunitionWeightDto actif ou non
      *
-     * @return List<T>
+     * @return List<AmmunitionWeightDto>
      */
     @Override
     public List<AmmunitionWeightDto> getAll() {

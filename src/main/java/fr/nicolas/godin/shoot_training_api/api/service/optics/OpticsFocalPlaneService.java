@@ -16,7 +16,7 @@ public class OpticsFocalPlaneService implements SimpleInterface<OpticsFocalPlane
     private OpticsFocalPlaneRepository opticsFocalPlaneRepository;
 
     public List<OpticsFocalPlaneDto> getAll(){
-        List<OpticsFocalPlane>  opticsFocalPlaneList = (List<OpticsFocalPlane>) this.opticsFocalPlaneRepository.findAll();
-        return ModelMapperTool.mapList(opticsFocalPlaneList, OpticsFocalPlaneDto.class);
+
+        return ModelMapperTool.mapList(this.opticsFocalPlaneRepository.findAll(), OpticsFocalPlaneDto.class);
     }
 }

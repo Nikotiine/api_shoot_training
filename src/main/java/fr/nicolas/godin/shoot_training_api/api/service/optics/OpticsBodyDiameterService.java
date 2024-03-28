@@ -17,7 +17,6 @@ public class OpticsBodyDiameterService implements SimpleInterface<OpticsBodyDiam
 
     public List<OpticsBodyDiameterDto> getAll() {
 
-        List<OpticsBodyDiameter> opticsBodyDiameter = (List<OpticsBodyDiameter>) this.opticsBodyDiameterRepository.findAll();
-        return ModelMapperTool.mapList(opticsBodyDiameter,OpticsBodyDiameterDto.class);
+        return ModelMapperTool.mapList(this.opticsBodyDiameterRepository.findAll(),OpticsBodyDiameterDto.class);
     }
 }
