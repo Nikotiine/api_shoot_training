@@ -14,7 +14,9 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"grams","grains"})})
+@Table(uniqueConstraints ={
+        @UniqueConstraint(columnNames = {"grams","grains"})
+})
 public class AmmunitionWeight extends BaseEntity implements Serializable {
 
 

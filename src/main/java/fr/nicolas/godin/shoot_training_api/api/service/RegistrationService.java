@@ -50,8 +50,10 @@ public class RegistrationService {
         newUser.setRole(UserRole.USER);
         newUser.setActive(false);
         try {
+
            return this.userRepository.save(newUser);
-        }catch (DataIntegrityViolationException e){
+        } catch (DataIntegrityViolationException e) {
+
             throw new CustomException(CustomExceptionMessage.EMAIL_IS_ALREADY_USE.getMessage());
         }
 
@@ -66,17 +68,23 @@ public class RegistrationService {
      * @param code le code envoye par mail
      */
     public void validationCode(ActivationCodeDto code) {
+
         Date now = new Date();
         User user = this.userRepository.findByEmail(code.getEmail());
         if (user==null){
+
             throw new CustomException(CustomExceptionMessage.EMAIL_IS_INVALID.getMessage());
         }else if (user.isActive()){
+
             throw new CustomException(CustomExceptionMessage.ACCOUNT_IS_ALREADY_ACTIVE.getMessage());
         }else {
+
             ActivationCode activationCode = this.activationCodeService.getGeneratedValidationCode(user);
-            if (!now.before(activationCode.getTimeOfValidity())){
+            if (!now.before(activationCode.getTimeOfValidity())) {
+
                 throw new CustomException(CustomExceptionMessage.BAD_ACTIVATION_CODE.getMessage());
-            }else {
+            } else {
+
                 if (code.getCode() == activationCode.getCode() && activationCode.getType() == ActivationCodeType.ACTIVATION) {
                     // Active le compte
                     user.setActive(true);
@@ -84,8 +92,6 @@ public class RegistrationService {
                     this.userRepository.save(user);
                     // Supprime le code en base de données
                     this.activationCodeService.deleteActivatedCode(activationCode);
-
-
                 }
             }
         }
@@ -100,28 +106,22 @@ public class RegistrationService {
     public void refreshValidationCode(RefreshCodeRequest refreshCodeRequest)  {
 
         User user = this.userRepository.findByEmail(refreshCodeRequest.email());
-        if (user==null){
+        if (user==null) {
 
             throw new CustomException(CustomExceptionMessage.EMAIL_IS_ALREADY_USE.getMessage());
-
-        }
-        else {
+        } else {
 
             boolean codeIsInValidityTime = this.activationCodeService.emailVerificationAndValidityCode(user);
-
             if (!codeIsInValidityTime){
 
                 ActivationCode oldCode = this.activationCodeService.getGeneratedValidationCode(user);
                 this.activationCodeService.deleteActivatedCode(oldCode);
                 ActivationCode code = this.activationCodeService.generateValidationCode(user,ActivationCodeType.ACTIVATION);
                 this.mailerService.sendValidationCode(code);
-            }else {
+            } else {
 
                 throw new CustomException(CustomExceptionMessage.CODE_IS_ACTIVE.getMessage());
-
             }
-
-
         }
     }
 

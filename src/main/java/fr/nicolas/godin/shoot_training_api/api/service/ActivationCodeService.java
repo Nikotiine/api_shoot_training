@@ -1,5 +1,6 @@
 package fr.nicolas.godin.shoot_training_api.api.service;
 
+import fr.nicolas.godin.shoot_training_api.api.enums.CustomExceptionMessage;
 import fr.nicolas.godin.shoot_training_api.configuration.CustomException;
 import fr.nicolas.godin.shoot_training_api.database.ActivationCodeType;
 import fr.nicolas.godin.shoot_training_api.database.entity.User;
@@ -46,7 +47,7 @@ public class ActivationCodeService {
         Date now = new Date();
         ActivationCode code = activationCodeRepository.findByuser(user);
         if (code == null || user.isActive()){
-            throw new CustomException("Vous avez deja valide votre code");
+            throw new CustomException(CustomExceptionMessage.CODE_IS_ALREADY_USE.getMessage());
         }
         return now.before(code.getTimeOfValidity());
 
@@ -69,6 +70,7 @@ public class ActivationCodeService {
      * @return le code de validation associer au compte utilisateur
      */
     public ActivationCode getGeneratedValidationCode(User user) {
+
         return this.activationCodeRepository.findByuser(user);
     }
 
@@ -79,6 +81,5 @@ public class ActivationCodeService {
     public void deleteActivatedCode(ActivationCode activationCode) {
 
         this.activationCodeRepository.delete(activationCode);
-
     }
 }

@@ -9,6 +9,7 @@ public enum CustomExceptionMessage {
     ACCOUNT_IS_ALREADY_ACTIVE(HttpStatus.FORBIDDEN,"Ce compte est déjà actif"),
     BAD_ACTIVATION_CODE(HttpStatus.BAD_REQUEST,"Code invalide, merci de retapper le code"),
     CODE_IS_ACTIVE(HttpStatus.FORBIDDEN,"Votre code est encore actif"),
+    CODE_IS_ALREADY_USE(HttpStatus.BAD_REQUEST,"Vous avez deja valide votre code"),
     CODE_IS_ALREADY_SEND(HttpStatus.FORBIDDEN,"Votre code a deja etait envoye, merci de verifier vos email et vos spams"),
     BAD_PASSWORD(HttpStatus.FORBIDDEN,"Mot de passe invalide"),
     WEAPON_MODEL_IS_EXIST(HttpStatus.BAD_REQUEST,"Ce model d'arme existe deja"),

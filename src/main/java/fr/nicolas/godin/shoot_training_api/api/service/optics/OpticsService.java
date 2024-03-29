@@ -62,20 +62,29 @@ public class OpticsService implements AdminInterface<OpticsDto, OpticsCreateDto>
     @Override
     public List<OpticsDto> delete(int id) {
 
-        Optics optics = this.opticsRepository.findById(id);
-        optics.setActive(false);
-        this.opticsRepository.save(optics);
-        return this.getAll();
+        try {
+
+            Optics optics = this.opticsRepository.findById(id);
+            optics.setActive(false);
+            this.opticsRepository.save(optics);
+            return this.getAll();
+        } catch (NullPointerException e) {
+
+            throw new CustomException(CustomExceptionMessage.NULL_POINTER_EXCEPTION.getMessage());
+        }
+
     }
 
 
     @Override
     public long countTotalEntry() {
+
         return this.opticsRepository.count();
     }
 
     @Override
     public OpticsDto getLastEntry() {
+
         Optics optics = this.opticsRepository.findFirstByOrderByIdDesc();
         return ModelMapperTool.mapDto(optics, OpticsDto.class);
     }

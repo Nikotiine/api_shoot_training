@@ -21,7 +21,7 @@ public class UserController {
 
     @PostMapping("edit")
     @ResponseBody
-    public UserProfileDto edit(@RequestBody UserEditDto userEditDto) {
+    public UserProfileDto editProfile(@RequestBody UserEditDto userEditDto) {
 
             User user = this.userService.update(userEditDto);
             return this.modelMapper.map(user, UserProfileDto.class);

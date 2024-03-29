@@ -19,14 +19,14 @@ public class UserWeaponSetupController {
 
     private UserSetupService userSetupService;
 
-    @PostMapping("new")
+    @PostMapping("save")
     public UserWeaponSetupDto newSetup(@Valid @RequestBody UserWeaponSetupCreateDto userWeaponSetupCreateDto) {
 
        return this.userSetupService.create(userWeaponSetupCreateDto);
 
     }
 
-    @GetMapping("all")
+    @GetMapping("by-user")
     public List<UserWeaponSetupDto> getAllUserWeaponSetup(@RequestParam(name = "id") int userId){
         return this.userSetupService.getAllActive(userId);
     }

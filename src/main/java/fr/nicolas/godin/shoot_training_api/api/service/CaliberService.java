@@ -94,9 +94,15 @@ public class CaliberService implements AdminInterface<CaliberDto, CaliberCreateD
     @Override
     public List<CaliberDto> delete(int id) {
 
-        Caliber caliber = this.caliberRepository.findById(id);
-        caliber.setActive(false);
-        this.caliberRepository.save(caliber);
-        return this.getAll();
+        try {
+            Caliber caliber = this.caliberRepository.findById(id);
+            caliber.setActive(false);
+            this.caliberRepository.save(caliber);
+            return this.getAll();
+        } catch (NullPointerException e) {
+
+            throw new CustomException(CustomExceptionMessage.NULL_POINTER_EXCEPTION.getMessage());
+        }
+
     }
 }

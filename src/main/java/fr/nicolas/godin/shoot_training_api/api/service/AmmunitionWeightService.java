@@ -94,6 +94,7 @@ public class AmmunitionWeightService implements AdminInterface<AmmunitionWeightD
     public AmmunitionWeightDto update(AmmunitionWeightDto ammunitionWeightDto) {
 
         try {
+
             AmmunitionWeight entity = ModelMapperTool.mapDto(ammunitionWeightDto,AmmunitionWeight.class);
             AmmunitionWeight saved = this.ammunitionWeightRepository.save(entity);
             return ModelMapperTool.mapDto(saved, AmmunitionWeightDto.class);
@@ -111,6 +112,7 @@ public class AmmunitionWeightService implements AdminInterface<AmmunitionWeightD
 
             AmmunitionWeight ammunitionWeight = this.ammunitionWeightRepository.findById(id);
             ammunitionWeight.setActive(false);
+            this.ammunitionWeightRepository.save(ammunitionWeight);
             return this.getAll();
         } catch (NullPointerException e){
 

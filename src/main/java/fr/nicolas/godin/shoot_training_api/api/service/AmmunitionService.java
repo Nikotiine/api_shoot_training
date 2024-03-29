@@ -72,11 +72,16 @@ public class AmmunitionService implements AdminInterface<AmmunitionDto, Ammuniti
     @Override
     public List<AmmunitionDto> delete(int id) {
 
-        Ammunition ammunition = this.ammunitionRepository.findById(id);
-        ammunition.setActive(false);
-        this.ammunitionRepository.save(ammunition);
+        try {
+            Ammunition ammunition = this.ammunitionRepository.findById(id);
+            ammunition.setActive(false);
+            this.ammunitionRepository.save(ammunition);
+            return this.getAll();
+        } catch (NullPointerException e) {
 
-        return this.getAll();
+            throw new CustomException(CustomExceptionMessage.NULL_POINTER_EXCEPTION.getMessage());
+        }
+
     }
 
 

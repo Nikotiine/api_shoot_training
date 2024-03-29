@@ -17,7 +17,7 @@ public class WeaponTypeService implements SimpleInterface<WeaponTypeDto> {
 
     @Override
     public List<WeaponTypeDto> getAll() {
-        List<WeaponType> weaponTypes = (List<WeaponType>) this.weaponTypeRepository.findAll();
-        return ModelMapperTool.mapList(weaponTypes, WeaponTypeDto.class);
+
+        return ModelMapperTool.mapList(this.weaponTypeRepository.findAll(), WeaponTypeDto.class);
     }
 }

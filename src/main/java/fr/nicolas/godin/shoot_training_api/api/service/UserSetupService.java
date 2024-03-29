@@ -18,15 +18,15 @@ import java.util.List;
 @AllArgsConstructor
 public class UserSetupService {
 
-    private ModelMapper modelMapper;
+
     private UserWeaponSetupRepository weaponSetupRepository;
     public UserWeaponSetupDto create(UserWeaponSetupCreateDto userWeaponSetupCreateDto) {
-        UserWeaponSetup userWeaponSetup = this.modelMapper.map(userWeaponSetupCreateDto,UserWeaponSetup.class);
 
         try {
-            UserWeaponSetup saved =  this.weaponSetupRepository.save(userWeaponSetup);
-            return this.modelMapper.map(saved, UserWeaponSetupDto.class);
 
+            UserWeaponSetup userWeaponSetup = ModelMapperTool.mapDto(userWeaponSetupCreateDto,UserWeaponSetup.class);
+            UserWeaponSetup saved =  this.weaponSetupRepository.save(userWeaponSetup);
+            return ModelMapperTool.mapDto(saved, UserWeaponSetupDto.class);
         } catch (DataIntegrityViolationException e) {
 
             throw new CustomException(CustomExceptionMessage.WEAPON_SETUP_IS_EXIST.getMessage());
@@ -34,7 +34,7 @@ public class UserSetupService {
     }
 
     public List<UserWeaponSetupDto> getAllActive(int userId) {
-        List<UserWeaponSetup> userWeaponSetupList = (List<UserWeaponSetup>) this.weaponSetupRepository.findAllByUserId(userId);
-        return ModelMapperTool.mapList(userWeaponSetupList, UserWeaponSetupDto.class);
+
+        return ModelMapperTool.mapList(this.weaponSetupRepository.findAllByUserId(userId), UserWeaponSetupDto.class);
     }
 }

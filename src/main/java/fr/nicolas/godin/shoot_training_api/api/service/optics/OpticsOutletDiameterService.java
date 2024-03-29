@@ -17,7 +17,7 @@ public class OpticsOutletDiameterService implements SimpleInterface<OpticsOutlet
     private OpticsOutletDiameterRepository opticsOutletDiameterRepository;
 
     public List<OpticsOutletDiameterDto> getAll(){
-        List<OpticsOutletDiameter> opticsOutletDiameterList = (List<OpticsOutletDiameter>) this.opticsOutletDiameterRepository.findAll();
-        return ModelMapperTool.mapList(opticsOutletDiameterList, OpticsOutletDiameterDto.class);
+
+        return ModelMapperTool.mapList(this.opticsOutletDiameterRepository.findAll(), OpticsOutletDiameterDto.class);
     }
 }

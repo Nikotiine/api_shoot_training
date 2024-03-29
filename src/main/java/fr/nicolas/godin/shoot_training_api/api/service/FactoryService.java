@@ -91,10 +91,15 @@ public class FactoryService implements AdminInterface<FactoryDto, FactoryCreateD
 
     @Override
     public List<FactoryDto> delete(int id) {
+        try {
 
-        Factory factory = this.factoryRepository.findById(id);
-        factory.setActive(false);
-        this.factoryRepository.save(factory);
-        return this.getAllByType(factory.getType());
+            Factory factory = this.factoryRepository.findById(id);
+            factory.setActive(false);
+            this.factoryRepository.save(factory);
+            return this.getAllByType(factory.getType());
+        } catch (NullPointerException e) {
+
+            throw new CustomException(CustomExceptionMessage.NULL_POINTER_EXCEPTION.getMessage());
+        }
     }
 }

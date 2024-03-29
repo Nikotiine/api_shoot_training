@@ -52,10 +52,13 @@ public class ForgotPasswordService {
      */
 
     public void save(NewPasswordRequestDto newPasswordRequestDto) {
+
         User user = this.userRepository.findByEmail(newPasswordRequestDto.getEmail());
-        if (user == null){
+        if (user == null) {
+
             throw new CustomException(CustomExceptionMessage.EMAIL_IS_INVALID.getMessage());
         }else {
+
             this.changePassword(user,newPasswordRequestDto);
         }
 
@@ -67,18 +70,24 @@ public class ForgotPasswordService {
      * @param request email de l'utilisateur
      */
     public void requestValidationCodeForNewPassword(RefreshCodeRequest request) {
+
         Date now = new Date();
         User user = this.userRepository.findByEmailAndActiveIsTrue(request.email());
-        if (user == null){
+        if (user == null) {
+
             throw new CustomException(CustomExceptionMessage.EMAIL_IS_INVALID.getMessage());
-        }else {
+        } else {
+
             ActivationCode code = this.activationCodeService.getGeneratedValidationCode(user);
-            if (code == null){
+            if (code == null) {
+
                 this.sendValidationCodeForNewPassword(user);
-            } else if (!now.before(code.getTimeOfValidity())){
+            } else if (!now.before(code.getTimeOfValidity())) {
+
                 this.activationCodeService.deleteActivatedCode(code);
                 this.sendValidationCodeForNewPassword(user);
-            }else {
+            } else {
+
                 throw new CustomException(CustomExceptionMessage.CODE_IS_ALREADY_SEND.getMessage());
             }
 
@@ -93,7 +102,6 @@ public class ForgotPasswordService {
 
         ActivationCode code =  this.activationCodeService.generateValidationCode(user, ActivationCodeType.RESET_PASSWORD);
         this.mailerService.sendNewPasswordCode(code);
-
     }
 
 }

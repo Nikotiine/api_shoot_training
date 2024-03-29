@@ -27,11 +27,9 @@ public class WeaponService implements AdminInterface<WeaponDto, WeaponCreateDto>
             Weapon weapon = ModelMapperTool.mapDto(weaponDto, Weapon.class);
             Weapon saved = this.weaponRepository.save(weapon);
             return ModelMapperTool.mapDto(saved,WeaponDto.class);
-
         } catch (DataIntegrityViolationException e) {
 
             throw new CustomException(CustomExceptionMessage.WEAPON_MODEL_IS_EXIST.getMessage());
-
         }
     }
 
@@ -39,24 +37,28 @@ public class WeaponService implements AdminInterface<WeaponDto, WeaponCreateDto>
     public WeaponDto update(WeaponDto weaponDto) {
         try {
 
-        Weapon weapon = ModelMapperTool.mapDto(weaponDto,Weapon.class);
-        Weapon saved = this.weaponRepository.save(weapon);
-        return ModelMapperTool.mapDto(saved,WeaponDto.class);
-
+            Weapon weapon = ModelMapperTool.mapDto(weaponDto, Weapon.class);
+            Weapon saved = this.weaponRepository.save(weapon);
+            return ModelMapperTool.mapDto(saved, WeaponDto.class);
         } catch (DataIntegrityViolationException e) {
 
             throw new CustomException(CustomExceptionMessage.WEAPON_MODEL_IS_EXIST.getMessage());
-
         }
     }
 
     @Override
     public List<WeaponDto> delete(int id) {
+        try {
 
-        Weapon weapon = this.weaponRepository.findById(id);
-        weapon.setActive(false);
-        this.weaponRepository.save(weapon);
-        return this.getAll();
+            Weapon weapon = this.weaponRepository.findById(id);
+            weapon.setActive(false);
+            this.weaponRepository.save(weapon);
+            return this.getAll();
+        } catch (NullPointerException e) {
+
+            throw new CustomException(CustomExceptionMessage.NULL_POINTER_EXCEPTION.getMessage());
+        }
+
     }
 
 
@@ -69,6 +71,7 @@ public class WeaponService implements AdminInterface<WeaponDto, WeaponCreateDto>
 
     @Override
     public long countTotalEntry() {
+
         return this.weaponRepository.count();
     }
 

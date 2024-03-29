@@ -16,7 +16,7 @@ public class OpticsUnitService implements SimpleInterface<OpticsUnitDto> {
     private OpticsUnitRepository opticsUnitRepository;
 
     public List<OpticsUnitDto> getAll(){
-        List<OpticsUnit> opticsUnitList = (List<OpticsUnit>) this.opticsUnitRepository.findAll();
-        return ModelMapperTool.mapList(opticsUnitList, OpticsUnitDto.class);
+
+        return ModelMapperTool.mapList(this.opticsUnitRepository.findAll(), OpticsUnitDto.class);
     }
 }
