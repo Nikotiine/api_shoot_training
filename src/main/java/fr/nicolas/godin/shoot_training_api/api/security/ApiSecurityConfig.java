@@ -1,8 +1,6 @@
 package fr.nicolas.godin.shoot_training_api.api.security;
 
-import fr.nicolas.godin.shoot_training_api.api.enums.CustomExceptionMessage;
-import fr.nicolas.godin.shoot_training_api.configuration.CustomException;
-import io.jsonwebtoken.ExpiredJwtException;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -10,6 +8,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
@@ -22,6 +22,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity
 public class ApiSecurityConfig {
     private final BCryptPasswordEncoder passwordEncoder;
     private final JwtFilter jwtFilter;

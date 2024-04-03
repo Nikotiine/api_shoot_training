@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,14 +32,14 @@ public class FactoryController {
 
         return this.factoryService.create(factoryCreateDto);
     }
-
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @PutMapping("edit")
     @ResponseBody
     public FactoryDto editFactory(@Valid @RequestBody FactoryDto factoryDto) {
 
         return this.factoryService.update(factoryDto);
     }
-
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @DeleteMapping("delete")
     @ResponseBody
     public List<FactoryDto> disableFactory(@RequestParam(name = "id") int id) {

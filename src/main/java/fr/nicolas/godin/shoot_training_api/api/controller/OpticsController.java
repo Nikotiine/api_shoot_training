@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,7 +32,7 @@ public class OpticsController {
 
         return this.opticsService.getAll();
     }
-    @GetMapping("actoves")
+    @GetMapping("actives")
     @ResponseBody
     public List<OpticsDto> getAllActiveOptics() {
 
@@ -58,14 +59,14 @@ public class OpticsController {
 
         return this.opticsService.create(newOptics);
     }
-
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @DeleteMapping("delete")
     @ResponseBody
     public List<OpticsDto> disableOptics(@RequestParam(name = "id") int id) {
 
         return this.opticsService.delete(id);
     }
-
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @PutMapping("edit")
     @ResponseBody
     public OpticsDto editOptics(@Valid @RequestBody OpticsDto opticsDto) {

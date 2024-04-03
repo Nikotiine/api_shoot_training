@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,14 +32,14 @@ public class CaliberController {
 
         return this.caliberService.create(caliberCreateDto);
     }
-
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @PutMapping("edit")
     @ResponseBody
     public CaliberDto editCaliber(@Valid @RequestBody CaliberDto caliberDto) {
 
         return this.caliberService.update(caliberDto);
     }
-
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @DeleteMapping("delete")
     @ResponseBody
     public List<CaliberDto> disableCaliber(@RequestParam(name = "id") int id) {

@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -36,14 +37,14 @@ public class AmmunitionWeightController {
 
         return this.ammunitionWeightService.getAll();
     }
-
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @DeleteMapping("delete")
     @ResponseBody
     public List<AmmunitionWeightDto> disableAmmunitionWeight(@RequestParam(name = "id") int id) {
 
         return this.ammunitionWeightService.delete(id);
     }
-
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @PutMapping("edit")
     @ResponseBody
     public AmmunitionWeightDto editWeight(@Valid @RequestBody AmmunitionWeightDto ammunitionWeightDto) {
