@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -62,14 +63,14 @@ public class WeaponController {
 
         return this.weaponService.getAll();
     }
-
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @DeleteMapping(value = "delete")
     @ResponseBody
     public List<WeaponDto> disableWeapon(@RequestParam(name = "id") int id) {
 
         return this.weaponService.delete(id);
     }
-
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @PutMapping(value = "edit")
     @ResponseBody
     public WeaponDto editWeapon(@Valid @RequestBody WeaponDto weaponDto) {
