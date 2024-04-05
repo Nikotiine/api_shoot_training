@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1712305455427-2" author="niko (generated)">
+        <createTable tableName="ammunition_speed_histories">
+            <column name="ammunition_id" type="INT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_ammunition_speedhistories"/>
+            </column>
+            <column name="speed_histories_id" type="INT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_ammunition_speedhistories"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="1712305455427-3" author="niko (generated)">
+        <createTable tableName="ammunition_speed_history">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_ammunitionspeedhistory"/>
+            </column>
+            <column defaultValueBoolean="true" name="active" type="boolean"/>
+            <column name="created_at" type="DATETIME"/>
+            <column name="updated_at" type="DATETIME"/>
+            <column name="speed" type="FLOAT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ammunition_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="weapon_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="training_session_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="1712305455427-4" author="niko (generated)">
+        <createTable tableName="training_session">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_trainingsession"/>
+            </column>
+            <column defaultValueBoolean="true" name="active" type="boolean"/>
+            <column name="created_at" type="DATETIME"/>
+            <column name="updated_at" type="DATETIME"/>
+            <column name="date" type="DATETIME"/>
+            <column name="temperature" type="FLOAT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="setup_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="distance" type="FLOAT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="wind_speed" type="FLOAT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ammunition_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="1712305455427-5" author="niko (generated)">
+        <createTable tableName="training_session_speed_histories">
+            <column name="training_session_id" type="INT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_trainingsession_speedhistories"/>
+            </column>
+            <column name="speed_histories_id" type="INT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_trainingsession_speedhistories"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="1712305455427-6" author="niko (generated)">
+        <addUniqueConstraint columnNames="speed_histories_id"
+                             constraintName="uc_ammunition_speed_histories_speedhistories"
+                             tableName="ammunition_speed_histories"/>
+    </changeSet>
+    <changeSet id="1712305455427-7" author="niko (generated)">
+        <addUniqueConstraint columnNames="speed_histories_id"
+                             constraintName="uc_training_session_speed_histories_speedhistories"
+                             tableName="training_session_speed_histories"/>
+    </changeSet>
+    <changeSet id="1712305455427-8" author="niko (generated)">
+        <addForeignKeyConstraint baseColumnNames="ammunition_id" baseTableName="ammunition_speed_history"
+                                 constraintName="FK_AMMUNITIONSPEEDHISTORY_ON_AMMUNITION" referencedColumnNames="id"
+                                 referencedTableName="ammunition"/>
+    </changeSet>
+    <changeSet id="1712305455427-9" author="niko (generated)">
+        <addForeignKeyConstraint baseColumnNames="training_session_id" baseTableName="ammunition_speed_history"
+                                 constraintName="FK_AMMUNITIONSPEEDHISTORY_ON_TRAINING_SESSION"
+                                 referencedColumnNames="id" referencedTableName="training_session"/>
+    </changeSet>
+    <changeSet id="1712305455427-10" author="niko (generated)">
+        <addForeignKeyConstraint baseColumnNames="weapon_id" baseTableName="ammunition_speed_history"
+                                 constraintName="FK_AMMUNITIONSPEEDHISTORY_ON_WEAPON" referencedColumnNames="id"
+                                 referencedTableName="weapon"/>
+    </changeSet>
+    <changeSet id="1712305455427-11" author="niko (generated)">
+        <addForeignKeyConstraint baseColumnNames="ammunition_id" baseTableName="training_session"
+                                 constraintName="FK_TRAININGSESSION_ON_AMMUNITION" referencedColumnNames="id"
+                                 referencedTableName="ammunition"/>
+    </changeSet>
+    <changeSet id="1712305455427-12" author="niko (generated)">
+        <addForeignKeyConstraint baseColumnNames="setup_id" baseTableName="training_session"
+                                 constraintName="FK_TRAININGSESSION_ON_SETUP" referencedColumnNames="id"
+                                 referencedTableName="user_weapon_setup"/>
+    </changeSet>
+    <changeSet id="1712305455427-13" author="niko (generated)">
+        <addForeignKeyConstraint baseColumnNames="ammunition_id" baseTableName="ammunition_speed_histories"
+                                 constraintName="fk_ammspehis_on_ammunition" referencedColumnNames="id"
+                                 referencedTableName="ammunition"/>
+    </changeSet>
+    <changeSet id="1712305455427-14" author="niko (generated)">
+        <addForeignKeyConstraint baseColumnNames="speed_histories_id" baseTableName="ammunition_speed_histories"
+                                 constraintName="fk_ammspehis_on_ammunition_speed_history" referencedColumnNames="id"
+                                 referencedTableName="ammunition_speed_history"/>
+    </changeSet>
+    <changeSet id="1712305455427-15" author="niko (generated)">
+        <addForeignKeyConstraint baseColumnNames="speed_histories_id" baseTableName="training_session_speed_histories"
+                                 constraintName="fk_trasesspehis_on_ammunition_speed_history" referencedColumnNames="id"
+                                 referencedTableName="ammunition_speed_history"/>
+    </changeSet>
+    <changeSet id="1712305455427-16" author="niko (generated)">
+        <addForeignKeyConstraint baseColumnNames="training_session_id" baseTableName="training_session_speed_histories"
+                                 constraintName="fk_trasesspehis_on_training_session" referencedColumnNames="id"
+                                 referencedTableName="training_session"/>
+    </changeSet>
+    <changeSet id="1712305455427-1" author="niko (generated)">
+        <addNotNullConstraint columnDataType="DOUBLE" columnName="grains" tableName="ammunition_weight"
+                              validate="true"/>
+    </changeSet>
+
+</databaseChangeLog>
