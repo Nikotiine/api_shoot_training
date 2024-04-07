@@ -106,4 +106,9 @@ public class AmmunitionService implements AdminInterface<AmmunitionDto, Ammuniti
         return ModelMapperTool.mapList(this.ammunitionRepository.findAllByActiveIsTrue(), AmmunitionDto.class);
 
     }
+
+    public List<AmmunitionDto> getAllActiveByCaliber(int id) {
+
+        return ModelMapperTool.mapList(this.ammunitionRepository.findAllByActiveIsTrueAndCaliber_Id(id), AmmunitionDto.class);
+    }
 }

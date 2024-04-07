@@ -52,4 +52,11 @@ public class AmmunitionController {
         return this.ammunitionService.update(ammunitionDto);
     }
 
+    @GetMapping(value = "by-caliber")
+    @ResponseBody
+    public List<AmmunitionDto> getAmmunitionByCaliber(@RequestParam(name = "id") int id) {
+
+        return this.ammunitionService.getAllActiveByCaliber(id);
+    }
+
 }

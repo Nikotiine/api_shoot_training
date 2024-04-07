@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -29,7 +30,6 @@ public class TrainingSessionCreateDto implements Serializable {
     @Positive
     float distance;
 
-    @Positive
     float windSpeed;
 
     @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)

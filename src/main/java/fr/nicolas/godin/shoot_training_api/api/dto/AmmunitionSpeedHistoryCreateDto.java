@@ -31,5 +31,4 @@ public class AmmunitionSpeedHistoryCreateDto implements Serializable {
     @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)
     WeaponDto weapon;
 
-    TrainingSession trainingSession;
 }

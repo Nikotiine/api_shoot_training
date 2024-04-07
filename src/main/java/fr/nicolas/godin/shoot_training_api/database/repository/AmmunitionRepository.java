@@ -13,4 +13,6 @@ public interface AmmunitionRepository extends JpaRepository<Ammunition, Integer>
     List<Ammunition> findAllByActiveIsTrue();
 
     Ammunition findById(int id);
+
+    List<Ammunition> findAllByActiveIsTrueAndCaliber_Id(int id);
 }
