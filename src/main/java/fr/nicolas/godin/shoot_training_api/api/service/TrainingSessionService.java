@@ -3,15 +3,14 @@ package fr.nicolas.godin.shoot_training_api.api.service;
 import fr.nicolas.godin.shoot_training_api.api.dto.AmmunitionSpeedHistoryCreateDto;
 import fr.nicolas.godin.shoot_training_api.api.dto.TrainingSessionCreateDto;
 import fr.nicolas.godin.shoot_training_api.api.dto.TrainingSessionDto;
+import fr.nicolas.godin.shoot_training_api.api.dto.TrainingSessionGroupCreateDto;
 import fr.nicolas.godin.shoot_training_api.api.enums.CustomExceptionMessage;
 import fr.nicolas.godin.shoot_training_api.api.interfaces.CommonInterface;
 import fr.nicolas.godin.shoot_training_api.api.tools.ModelMapperTool;
 import fr.nicolas.godin.shoot_training_api.configuration.CustomException;
-import fr.nicolas.godin.shoot_training_api.database.entity.Ammunition;
-import fr.nicolas.godin.shoot_training_api.database.entity.AmmunitionSpeedHistory;
-import fr.nicolas.godin.shoot_training_api.database.entity.TrainingSession;
-import fr.nicolas.godin.shoot_training_api.database.entity.UserWeaponSetup;
+import fr.nicolas.godin.shoot_training_api.database.entity.*;
 import fr.nicolas.godin.shoot_training_api.database.repository.AmmunitionSpeedHistoryRepository;
+import fr.nicolas.godin.shoot_training_api.database.repository.TrainingSessionGroupRepository;
 import fr.nicolas.godin.shoot_training_api.database.repository.TrainingSessionRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -27,6 +26,7 @@ import java.util.Set;
 public class TrainingSessionService implements CommonInterface<TrainingSessionDto, TrainingSessionCreateDto> {
     private TrainingSessionRepository trainingSessionRepository;
     private AmmunitionSpeedHistoryRepository ammunitionSpeedHistoryRepository;
+    private TrainingSessionGroupRepository trainingSessionGroupRepository;
 
     /**
      * Retourne la liste T des element actif
@@ -39,9 +39,9 @@ public class TrainingSessionService implements CommonInterface<TrainingSessionDt
     }
 
     /**
-     * Creation de l'objet T avec son Dto de creation D
+     * Creation de l'objet TrainingSession avec son Dto de creation D
      *
-     * @param trainingSessionCreateDto D
+     * @param trainingSessionCreateDto TrainingSessionCreateDto
      * @return T
      */
     @Override
@@ -52,6 +52,7 @@ public class TrainingSessionService implements CommonInterface<TrainingSessionDt
 
             TrainingSession trainingSession = ModelMapperTool.mapDto(trainingSessionCreateDto, TrainingSession.class);
 
+            // Enregistrement de vitesse de munition renseigner pdt la session
             Set<AmmunitionSpeedHistory> speedHistories = new HashSet<>();
             for (AmmunitionSpeedHistoryCreateDto speedHistoryDto : trainingSessionCreateDto.getSpeedHistories()) {
                 AmmunitionSpeedHistory speedHistory = ModelMapperTool.mapDto(speedHistoryDto,AmmunitionSpeedHistory.class);
@@ -60,8 +61,18 @@ public class TrainingSessionService implements CommonInterface<TrainingSessionDt
             }
             trainingSession.setSpeedHistories(speedHistories);
 
+            // Enregistemrnt des groupement de tir pdt la session
+            Set<TrainingSessionGroup> trainingSessionGroups = new HashSet<>();
+            for (TrainingSessionGroupCreateDto groupDto : trainingSessionCreateDto.getTrainingSessionGroups()) {
+                TrainingSessionGroup sessionGroup = ModelMapperTool.mapDto(groupDto, TrainingSessionGroup.class);
+                sessionGroup.setTrainingSession(trainingSession);
+                trainingSessionGroups.add(sessionGroup);
+            }
+
+            trainingSession.setTrainingSessionGroups(trainingSessionGroups);
             TrainingSession created = this.trainingSessionRepository.save(trainingSession);
             this.ammunitionSpeedHistoryRepository.saveAll(speedHistories);
+            this.trainingSessionGroupRepository.saveAll(trainingSessionGroups);
             return ModelMapperTool.mapDto(created, TrainingSessionDto.class);
         } catch (DataIntegrityViolationException e) {
 

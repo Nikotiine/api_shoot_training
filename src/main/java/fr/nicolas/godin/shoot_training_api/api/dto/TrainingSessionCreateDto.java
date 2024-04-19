@@ -1,14 +1,14 @@
 package fr.nicolas.godin.shoot_training_api.api.dto;
 
+import fr.nicolas.godin.shoot_training_api.api.enums.TrainingPosition;
+import fr.nicolas.godin.shoot_training_api.api.enums.WeaponSupport;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -36,4 +36,12 @@ public class TrainingSessionCreateDto implements Serializable {
     AmmunitionDto ammunition;
 
     Set<AmmunitionSpeedHistoryCreateDto> speedHistories;
+
+    float pressure;
+
+    TrainingPosition position;
+
+    WeaponSupport support;
+
+    Set<TrainingSessionGroupCreateDto> trainingSessionGroups;
 }

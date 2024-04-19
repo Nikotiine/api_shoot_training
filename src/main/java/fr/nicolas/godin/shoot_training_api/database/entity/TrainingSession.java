@@ -1,6 +1,7 @@
 package fr.nicolas.godin.shoot_training_api.database.entity;
 
-import jakarta.persistence.CascadeType;
+import fr.nicolas.godin.shoot_training_api.api.enums.TrainingPosition;
+import fr.nicolas.godin.shoot_training_api.api.enums.WeaponSupport;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
@@ -8,8 +9,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
@@ -21,7 +20,7 @@ import java.util.Set;
 @NoArgsConstructor
 public class TrainingSession extends BaseEntity implements Serializable {
 
-    private  Date date;
+    private Date date;
 
     private float temperature;
 
@@ -37,4 +36,14 @@ public class TrainingSession extends BaseEntity implements Serializable {
 
     @OneToMany
     private Set<AmmunitionSpeedHistory> speedHistories;
+
+    private float pressure;
+
+    private TrainingPosition position;
+
+    private WeaponSupport support;
+
+    @OneToMany
+    private Set<TrainingSessionGroup> trainingSessionGroups;
+
 }

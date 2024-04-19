@@ -14,12 +14,11 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(uniqueConstraints ={
-        @UniqueConstraint(columnNames = {"grams","grains"})
-})
+
 public class AmmunitionWeight extends BaseEntity implements Serializable {
 
 
+    @Column(unique = true)
     private double grains;
 
     private double grams;
