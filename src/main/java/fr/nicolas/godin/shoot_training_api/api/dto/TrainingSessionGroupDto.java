@@ -1,12 +1,13 @@
 package fr.nicolas.godin.shoot_training_api.api.dto;
 
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.PositiveOrZero;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.Value;
+
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * DTO for {@link fr.nicolas.godin.shoot_training_api.database.entity.TrainingSessionGroup}
@@ -14,18 +15,13 @@ import java.io.Serializable;
 @Getter
 @Setter
 @NoArgsConstructor
-public class TrainingSessionGroupCreateDto implements Serializable {
-
-    @PositiveOrZero
+public class TrainingSessionGroupDto extends TrainingSessionGroupCreateDto implements Serializable {
     @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)
-    int totalShoots;
+    int id;
 
-    @PositiveOrZero
-    float score;
+    @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)
+    boolean active;
 
-    @PositiveOrZero
-    float horizontalGap;
-
-    @PositiveOrZero
-    float verticalGap;
+    @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)
+    Date createdAt;
 }

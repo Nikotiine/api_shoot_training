@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@Tag(name = "TrainingSession",description = "Training Session Controller")
+@Tag(name = "API_TrainingSession",description = "Training Session Controller")
 @RequestMapping(value = "/api/training/session",produces = MediaType.APPLICATION_JSON_VALUE)
 @AllArgsConstructor
 public class TrainingSessionController {
