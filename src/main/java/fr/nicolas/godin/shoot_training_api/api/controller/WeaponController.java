@@ -1,9 +1,6 @@
 package fr.nicolas.godin.shoot_training_api.api.controller;
 
 import fr.nicolas.godin.shoot_training_api.api.dto.*;
-import fr.nicolas.godin.shoot_training_api.api.enums.FactoryType;
-import fr.nicolas.godin.shoot_training_api.api.service.CaliberService;
-import fr.nicolas.godin.shoot_training_api.api.service.FactoryService;
 import fr.nicolas.godin.shoot_training_api.api.service.weapon.WeaponCategoryService;
 import fr.nicolas.godin.shoot_training_api.api.service.weapon.WeaponService;
 import fr.nicolas.godin.shoot_training_api.api.service.weapon.WeaponTypeService;
@@ -16,16 +13,15 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@Tag(name = "Weapon",description = "Weapon Controller")
+@Tag(name = "API_Weapon",description = "Weapon Controller")
 @RequestMapping(value = "/api/weapon",produces = MediaType.APPLICATION_JSON_VALUE)
 @AllArgsConstructor
 public class WeaponController {
 
     private WeaponService weaponService;
-    private FactoryService factoryService;
     private WeaponTypeService weaponTypeService;
     private WeaponCategoryService weaponCategoryService;
-    private CaliberService caliberService;
+
 
 
     @PostMapping(value = "save")
@@ -37,17 +33,16 @@ public class WeaponController {
     }
 
 
-
-    @GetMapping(value = "data-collection")
+    @GetMapping(value = "all-types")
     @ResponseBody
-    public WeaponDataCollection getWeaponDataCollection(){
+    public List<WeaponTypeDto> getAllActiveType(){
+        return this.weaponTypeService.getAll();
+    }
 
-        return new WeaponDataCollection(
-                this.factoryService.getAllByType(FactoryType.WEAPON),
-                this.weaponTypeService.getAll(),
-                this.weaponCategoryService.getAll(),
-                this.caliberService.getAllActive()
-        );
+    @GetMapping(value = "all-categories")
+    @ResponseBody
+    public List<WeaponCategoryDto> getAllActiveCategories(){
+        return this.weaponCategoryService.getAll();
     }
 
     @GetMapping(value = "active")
@@ -63,6 +58,7 @@ public class WeaponController {
 
         return this.weaponService.getAll();
     }
+
     @PreAuthorize("hasAnyRole('ADMIN')")
     @DeleteMapping(value = "delete")
     @ResponseBody
@@ -70,6 +66,7 @@ public class WeaponController {
 
         return this.weaponService.delete(id);
     }
+
     @PreAuthorize("hasAnyRole('ADMIN')")
     @PutMapping(value = "edit")
     @ResponseBody

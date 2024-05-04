@@ -1,8 +1,6 @@
 package fr.nicolas.godin.shoot_training_api.api.controller;
 
 import fr.nicolas.godin.shoot_training_api.api.dto.*;
-import fr.nicolas.godin.shoot_training_api.api.enums.FactoryType;
-import fr.nicolas.godin.shoot_training_api.api.service.FactoryService;
 import fr.nicolas.godin.shoot_training_api.api.service.optics.*;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -14,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@Tag(name = "Optics",description = "Optics Controller")
+@Tag(name = "API_Optics",description = "Optics Controller")
 @RequestMapping(value = "/api/optics",produces = MediaType.APPLICATION_JSON_VALUE)
 @AllArgsConstructor
 public class OpticsController {
@@ -22,7 +20,6 @@ public class OpticsController {
     private OpticsService opticsService;
     private OpticsBodyDiameterService opticsBodyDiameterService;
     private OpticsOutletDiameterService opticsOutletDiameterService;
-    private FactoryService factoryService;
     private OpticsUnitService opticsUnitService;
     private OpticsFocalPlaneService opticsFocalPlaneService;
 
@@ -40,18 +37,6 @@ public class OpticsController {
     }
 
 
-    @GetMapping(value = "data-collection")
-    @ResponseBody
-    public OpticsDataCollection getOpticsDataCollection() {
-
-        return new OpticsDataCollection(
-                this.factoryService.getAllByType(FactoryType.OPTICS),
-                this.opticsBodyDiameterService.getAll(),
-                this.opticsUnitService.getAll(),
-                this.opticsFocalPlaneService.getAll(),
-                this.opticsOutletDiameterService.getAll()
-        );
-    }
 
     @PostMapping("save")
     @ResponseBody
@@ -72,5 +57,29 @@ public class OpticsController {
     public OpticsDto editOptics(@Valid @RequestBody OpticsDto opticsDto) {
 
         return this.opticsService.update(opticsDto);
+    }
+
+    @GetMapping(value = "body-diameter")
+    @ResponseBody
+    public List<OpticsBodyDiameterDto> getOpticsBodyDiameter() {
+        return this.opticsBodyDiameterService.getAll();
+    }
+
+    @GetMapping(value = "outlet-diameter")
+    @ResponseBody
+    public List<OpticsOutletDiameterDto> getOpticsOutletDiameter() {
+        return this.opticsOutletDiameterService.getAll();
+    }
+
+    @GetMapping(value = "units")
+    @ResponseBody
+    public List<OpticsUnitDto> getOpticsUnits() {
+        return this.opticsUnitService.getAll();
+    }
+
+    @GetMapping(value = "focal-plane")
+    @ResponseBody
+    public List<OpticsFocalPlaneDto> getOpticsFocalPlane() {
+        return this.opticsFocalPlaneService.getAll();
     }
  }

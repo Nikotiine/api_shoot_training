@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@Tag(name = "Ammunition",description = "Ammunition Controller")
+@Tag(name = "API_Ammunition",description = "Ammunition Controller")
 @RequestMapping(value = "/api/ammunition",produces = MediaType.APPLICATION_JSON_VALUE)
 @AllArgsConstructor
 public class AmmunitionController {

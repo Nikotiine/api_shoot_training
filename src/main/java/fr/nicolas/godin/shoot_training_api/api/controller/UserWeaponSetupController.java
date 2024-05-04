@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@Tag(name = "Weapon Setup",description = "User Weapon Setup Controller")
+@Tag(name = "API_UserWeaponSetup",description = "User Weapon Setup Controller")
 @RequestMapping(value = "/api/setup",produces = MediaType.APPLICATION_JSON_VALUE)
 @AllArgsConstructor
 public class UserWeaponSetupController {

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@Tag(name = "Weight",description = "Ammunition Weight Controller")
+@Tag(name = "API_AmmunitionWeight",description = "Ammunition Weight Controller")
 @RequestMapping(value = "/api/weight",produces = MediaType.APPLICATION_JSON_VALUE)
 @AllArgsConstructor
 public class AmmunitionWeightController {

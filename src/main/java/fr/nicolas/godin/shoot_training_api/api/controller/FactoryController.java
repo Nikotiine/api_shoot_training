@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@Tag(name = "Factory",description = "Factory Controller")
+@Tag(name = "API_Factory",description = "Factory Controller")
 @RequestMapping(value = "/api/factory",produces = MediaType.APPLICATION_JSON_VALUE)
 @AllArgsConstructor
 public class FactoryController {

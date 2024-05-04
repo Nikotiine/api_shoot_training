@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@Tag(name = "Caliber",description = "Caliber Controller")
+@Tag(name = "API_Caliber",description = "Caliber Controller")
 @RequestMapping(value = "/api/caliber",produces = MediaType.APPLICATION_JSON_VALUE)
 @AllArgsConstructor
 public class CaliberController {
