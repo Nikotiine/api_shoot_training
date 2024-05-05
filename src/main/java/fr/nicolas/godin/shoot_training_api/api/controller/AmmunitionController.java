@@ -58,5 +58,4 @@ public class AmmunitionController {
 
         return this.ammunitionService.getAllActiveByCaliber(id);
     }
-
 }

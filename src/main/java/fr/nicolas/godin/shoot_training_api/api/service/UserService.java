@@ -48,10 +48,11 @@ public class UserService {
      * Met a jour le role de l'utilisateuer
      * @param user UserProfileDto
      */
-    public void updateUserRole(UserProfileDto user) {
+    public UserProfileDto updateUserRole(UserProfileDto user) {
 
         User updateUser = ModelMapperTool.mapDto(user,User.class);
-        this.userRepository.save(updateUser);
+        User saved = this.userRepository.save(updateUser);
+       return ModelMapperTool.mapDto(saved,UserProfileDto.class);
     }
 
     /**
@@ -63,12 +64,13 @@ public class UserService {
         return ModelMapperTool.mapList(this.userRepository.findAll(), UserProfileDto.class);
     }
 
-    public void disableUser(int id) {
+    public List<UserProfileDto> disableUser(int id) {
         try {
 
             User user = this.userRepository.findById(id);
             user.setActive(false);
             this.userRepository.save(user);
+            return this.getAll();
         } catch (NullPointerException e) {
 
             throw new CustomException(CustomExceptionMessage.NULL_POINTER_EXCEPTION.getMessage());
@@ -76,13 +78,10 @@ public class UserService {
 
     }
 
-
     public long countTotalEntry() {
 
         return this.userRepository.count();
     }
-
-
 
     public UserProfileDto getLastEntry() {
 

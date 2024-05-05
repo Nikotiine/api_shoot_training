@@ -19,9 +19,8 @@ import java.util.List;
 public class WeaponController {
 
     private WeaponService weaponService;
-    private WeaponTypeService weaponTypeService;
     private WeaponCategoryService weaponCategoryService;
-
+    private WeaponTypeService weaponTypeService;
 
 
     @PostMapping(value = "save")
@@ -32,29 +31,17 @@ public class WeaponController {
 
     }
 
-
-    @GetMapping(value = "all-types")
+    @GetMapping(value = "actives")
     @ResponseBody
-    public List<WeaponTypeDto> getAllActiveType(){
-        return this.weaponTypeService.getAll();
-    }
-
-    @GetMapping(value = "all-categories")
-    @ResponseBody
-    public List<WeaponCategoryDto> getAllActiveCategories(){
-        return this.weaponCategoryService.getAll();
-    }
-
-    @GetMapping(value = "active")
-    @ResponseBody
-    public List<WeaponDto> getActiveAllWeapon(){
+    public List<WeaponDto> getAllActiveWeapons(){
 
         return this.weaponService.getAllActive();
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping(value = "all")
     @ResponseBody
-    public List<WeaponDto> getAllWeapon(){
+    public List<WeaponDto> getAllWeapons(){
 
         return this.weaponService.getAll();
     }
@@ -73,5 +60,17 @@ public class WeaponController {
     public WeaponDto editWeapon(@Valid @RequestBody WeaponDto weaponDto) {
 
         return this.weaponService.update(weaponDto);
+    }
+
+    @GetMapping(value = "categories")
+    @ResponseBody
+    public List<WeaponCategoryDto> getAllCategories(){
+        return this.weaponCategoryService.getAll();
+    }
+
+    @GetMapping(value = "types")
+    @ResponseBody
+    public List<WeaponTypeDto> getAllType(){
+        return this.weaponTypeService.getAll();
     }
 }

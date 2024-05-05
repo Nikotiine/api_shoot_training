@@ -23,12 +23,14 @@ public class OpticsController {
     private OpticsUnitService opticsUnitService;
     private OpticsFocalPlaneService opticsFocalPlaneService;
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping("all")
     @ResponseBody
     public List<OpticsDto> getAllOptics() {
 
         return this.opticsService.getAll();
     }
+
     @GetMapping("actives")
     @ResponseBody
     public List<OpticsDto> getAllActiveOptics() {
@@ -37,13 +39,13 @@ public class OpticsController {
     }
 
 
-
     @PostMapping("save")
     @ResponseBody
     public OpticsDto newOptics(@Valid @RequestBody OpticsCreateDto newOptics) {
 
         return this.opticsService.create(newOptics);
     }
+
     @PreAuthorize("hasAnyRole('ADMIN')")
     @DeleteMapping("delete")
     @ResponseBody
@@ -51,6 +53,7 @@ public class OpticsController {
 
         return this.opticsService.delete(id);
     }
+
     @PreAuthorize("hasAnyRole('ADMIN')")
     @PutMapping("edit")
     @ResponseBody
@@ -62,24 +65,29 @@ public class OpticsController {
     @GetMapping(value = "body-diameter")
     @ResponseBody
     public List<OpticsBodyDiameterDto> getOpticsBodyDiameter() {
+
         return this.opticsBodyDiameterService.getAll();
     }
 
     @GetMapping(value = "outlet-diameter")
     @ResponseBody
     public List<OpticsOutletDiameterDto> getOpticsOutletDiameter() {
+
         return this.opticsOutletDiameterService.getAll();
     }
 
     @GetMapping(value = "units")
     @ResponseBody
     public List<OpticsUnitDto> getOpticsUnits() {
+
         return this.opticsUnitService.getAll();
     }
 
     @GetMapping(value = "focal-plane")
     @ResponseBody
     public List<OpticsFocalPlaneDto> getOpticsFocalPlane() {
+
         return this.opticsFocalPlaneService.getAll();
     }
+
  }
