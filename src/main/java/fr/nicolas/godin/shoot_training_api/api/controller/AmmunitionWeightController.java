@@ -19,33 +19,33 @@ import java.util.List;
 public class AmmunitionWeightController {
     private AmmunitionWeightService ammunitionWeightService;
 
-    @GetMapping("by-caliber")
+    @GetMapping(value ="by/caliber")
     @ResponseBody
     public List<AmmunitionWeightDto> getWeightByCaliber(@RequestParam(name = "id")int id){
 
         return this.ammunitionWeightService.findAmmunitionWeightByCaliberId(id);
     }
 
-    @PostMapping("save")
+    @PostMapping(value ="save")
     @ResponseBody
     public AmmunitionWeightDto newWeight(@Valid @RequestBody AmmunitionWeightCreateDto ammunitionWeightCreateDto){
         return this.ammunitionWeightService.create(ammunitionWeightCreateDto);
     }
-    @GetMapping("all")
+    @GetMapping(value ="all")
     @ResponseBody
     public List<AmmunitionWeightDto> getAllWeight(){
 
         return this.ammunitionWeightService.getAll();
     }
     @PreAuthorize("hasAnyRole('ADMIN')")
-    @DeleteMapping("delete")
+    @DeleteMapping(value ="admin/delete")
     @ResponseBody
     public List<AmmunitionWeightDto> disableAmmunitionWeight(@RequestParam(name = "id") int id) {
 
         return this.ammunitionWeightService.delete(id);
     }
     @PreAuthorize("hasAnyRole('ADMIN')")
-    @PutMapping("edit")
+    @PutMapping(value ="admin/edit")
     @ResponseBody
     public AmmunitionWeightDto editWeight(@Valid @RequestBody AmmunitionWeightDto ammunitionWeightDto) {
 

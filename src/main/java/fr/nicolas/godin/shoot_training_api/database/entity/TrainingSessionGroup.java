@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 import java.io.Serializable;
 @Entity
@@ -24,5 +26,6 @@ public class TrainingSessionGroup extends BaseEntity implements Serializable {
     private float verticalGap;
 
     @ManyToOne(optional = false)
+    @Cascade(CascadeType.ALL)
     private TrainingSession trainingSession;
 }

@@ -25,10 +25,38 @@ public class TrainingSessionController {
         return this.trainingSessionService.create(trainingSessionCreateDto);
     }
 
-    @GetMapping(value = "by-user")
+    @GetMapping(value = "active/by/user")
     @ResponseBody
-    public List<TrainingSessionDto> getTrainingSessionByUserId(@RequestParam(name = "id")int id) {
+    public List<TrainingSessionDto> getActiveTrainingSessionByUserId(@RequestParam(name = "id")int id) {
+
+        return this.trainingSessionService.getAllActiveByUserId(id);
+    }
+
+    @GetMapping(value = "find/one")
+    @ResponseBody
+    public TrainingSessionDto getTrainingSessionById(@RequestParam(name = "id")int id) {
+
+        return this.trainingSessionService.getById(id);
+    }
+
+    @GetMapping(value = "all/by/user")
+    @ResponseBody
+    public List<TrainingSessionDto> getAllTrainingSessionByUserId(@RequestParam(name = "id")int id) {
 
         return this.trainingSessionService.getAllByUserId(id);
+    }
+
+    @DeleteMapping(value = "delete")
+    @ResponseBody
+    public List<TrainingSessionDto> deleteTrainingSession(@RequestParam(name = "id")int id) {
+
+        return this.trainingSessionService.delete(id);
+    }
+
+    @PutMapping(value = "edit")
+    @ResponseBody
+    public TrainingSessionDto updateTrainingSession(@Valid @RequestBody TrainingSessionDto trainingSessionDto) {
+
+        return this.trainingSessionService.update(trainingSessionDto);
     }
 }

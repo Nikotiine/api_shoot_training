@@ -35,6 +35,7 @@ public class TrainingSessionCreateDto implements Serializable {
     @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)
     AmmunitionDto ammunition;
 
+    @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)
     Set<AmmunitionSpeedHistoryCreateDto> speedHistories;
 
     float pressure;
@@ -43,5 +44,6 @@ public class TrainingSessionCreateDto implements Serializable {
 
     WeaponSupport support;
 
+    @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)
     Set<TrainingSessionGroupCreateDto> trainingSessionGroups;
 }

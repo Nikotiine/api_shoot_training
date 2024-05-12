@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 import java.io.Serializable;
 
@@ -25,5 +27,6 @@ public class AmmunitionSpeedHistory extends BaseEntity implements Serializable {
     private Weapon weapon;
 
     @ManyToOne(optional = false)
+    @Cascade(CascadeType.ALL)
     private TrainingSession trainingSession;
 }

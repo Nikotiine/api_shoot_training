@@ -19,7 +19,7 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-public class TrainingSessionDto  implements Serializable {
+public class TrainingSessionDto extends TrainingSessionCreateDto implements Serializable {
 
     @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)
     int id;
@@ -30,28 +30,6 @@ public class TrainingSessionDto  implements Serializable {
     @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)
     Date createdAt;
 
-    @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)
-    Date date;
 
-    float temperature;
 
-    @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)
-    UserWeaponSetupDto setup;
-
-    @Positive
-    float distance;
-
-    float windSpeed;
-
-    @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)
-    AmmunitionDto ammunition;
-
-    float pressure;
-
-    TrainingPosition position;
-
-    WeaponSupport support;
-
-    @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)
-    Set<TrainingSessionGroupDto> trainingSessionGroups;
 }

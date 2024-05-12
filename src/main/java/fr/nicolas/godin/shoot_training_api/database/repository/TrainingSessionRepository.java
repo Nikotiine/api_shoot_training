@@ -15,6 +15,9 @@ public interface TrainingSessionRepository extends JpaRepository<TrainingSession
     @Query("SELECT ts FROM TrainingSession ts " +
             "JOIN ts.setup uws " +
             "JOIN uws.user u " +
-            "WHERE u.id = :userId")
-    List<TrainingSession> findTrainingSessionsByUserId(@Param("userId") int userId);
+            "WHERE u.id = :userId and ts.active = true"
+            )
+    List<TrainingSession> findTrainingSessionsByUserIdAAndActiveIsTrue(@Param("userId") int userId);
+
+    TrainingSession findTrainingSessionById(int id);
 }

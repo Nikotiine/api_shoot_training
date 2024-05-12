@@ -36,7 +36,7 @@ public class RegistrationController {
     }
 
 
-    @PostMapping(value ="validation-code")
+    @PostMapping(value ="code/validation")
     public ResponseEntity<ResponseMessage> codeValidation(@Valid @RequestBody ActivationCodeDto activationCodeDto) {
 
         this.registrationService.validationCode(activationCodeDto);
@@ -44,7 +44,7 @@ public class RegistrationController {
 
     }
 
-    @PostMapping(value ="refresh-code")
+    @PostMapping(value ="code/refresh")
     public ResponseEntity<ResponseMessage> refreshCode(@Valid @RequestBody RefreshCodeRequest request) {
 
         this.registrationService.refreshValidationCode(request);

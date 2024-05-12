@@ -22,7 +22,7 @@ public class AmmunitionController {
     private AmmunitionService ammunitionService;
 
 
-    @PostMapping("save")
+    @PostMapping(value ="save")
     @ResponseBody
     public AmmunitionDto newAmmunition(@Valid @RequestBody AmmunitionCreateDto ammunitionCreateDto) {
 
@@ -30,7 +30,7 @@ public class AmmunitionController {
     }
 
 
-    @GetMapping("all")
+    @GetMapping(value ="all")
     @ResponseBody
     public List<AmmunitionDto> getAllAmmunition() {
 
@@ -38,14 +38,14 @@ public class AmmunitionController {
     }
 
     @PreAuthorize("hasAnyRole('ADMIN')")
-    @DeleteMapping("delete")
+    @DeleteMapping(value ="admin/delete")
     @ResponseBody
     public List<AmmunitionDto> disableAmmunition(@RequestParam(name = "id") int id) {
 
         return this.ammunitionService.delete(id);
     }
     @PreAuthorize("hasAnyRole('ADMIN')")
-    @PutMapping("edit")
+    @PutMapping(value ="admin/edit")
     @ResponseBody
     public AmmunitionDto editAmmunition(@Valid @RequestBody AmmunitionDto ammunitionDto) {
 

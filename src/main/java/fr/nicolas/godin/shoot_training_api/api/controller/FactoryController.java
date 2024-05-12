@@ -19,7 +19,7 @@ import java.util.List;
 @AllArgsConstructor
 public class FactoryController {
     private FactoryService factoryService;
-    @GetMapping("all-by-type")
+    @GetMapping(value ="by/type")
     @ResponseBody
     public List<FactoryDto> getAllFactoryByType(@RequestParam(name = "type")FactoryType type) {
 
@@ -33,14 +33,14 @@ public class FactoryController {
         return this.factoryService.create(factoryCreateDto);
     }
     @PreAuthorize("hasAnyRole('ADMIN')")
-    @PutMapping("edit")
+    @PutMapping(value ="admin/edit")
     @ResponseBody
     public FactoryDto editFactory(@Valid @RequestBody FactoryDto factoryDto) {
 
         return this.factoryService.update(factoryDto);
     }
     @PreAuthorize("hasAnyRole('ADMIN')")
-    @DeleteMapping("delete")
+    @DeleteMapping(value ="admin/delete")
     @ResponseBody
     public List<FactoryDto> disableFactory(@RequestParam(name = "id") int id) {
 

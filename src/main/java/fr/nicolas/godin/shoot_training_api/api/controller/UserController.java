@@ -24,7 +24,7 @@ public class UserController {
     private ModelMapper modelMapper;
     private UserService userService;
 
-    @PostMapping("edit")
+    @PostMapping(value ="edit")
     @ResponseBody
 
     public UserProfileDto editProfile(@RequestBody UserEditDto userEditDto) {
@@ -44,7 +44,7 @@ public class UserController {
 
     @PreAuthorize("hasAnyRole('ADMIN')")
     @ResponseBody
-    @PostMapping("user/edit-role")
+    @PostMapping(value ="admin/edit-role")
     public UserProfileDto editUserRole(@Valid @RequestBody UserProfileDto user) {
 
         return this.userService.updateUserRole(user);
@@ -52,7 +52,7 @@ public class UserController {
 
     @PreAuthorize("hasAnyRole('ADMIN')")
     @ResponseBody
-    @DeleteMapping("user/disable")
+    @DeleteMapping(value ="admin/disable")
     public  List<UserProfileDto> disableUser(@RequestParam(name = "id") int id) {
         return this.userService.disableUser(id);
     }

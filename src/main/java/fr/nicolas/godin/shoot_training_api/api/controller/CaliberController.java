@@ -19,28 +19,28 @@ import java.util.List;
 public class CaliberController {
 
     private CaliberService caliberService;
-    @GetMapping("all")
+    @GetMapping(value ="all")
     @ResponseBody
     public List<CaliberDto> getAllCalibers() {
 
         return this.caliberService.getAllActive();
     }
 
-    @PostMapping("save")
+    @PostMapping(value ="save")
     @ResponseBody
     public CaliberDto saveCaliber(@Valid @RequestBody CaliberCreateDto caliberCreateDto) {
 
         return this.caliberService.create(caliberCreateDto);
     }
     @PreAuthorize("hasAnyRole('ADMIN')")
-    @PutMapping("edit")
+    @PutMapping(value ="admin/edit")
     @ResponseBody
     public CaliberDto editCaliber(@Valid @RequestBody CaliberDto caliberDto) {
 
         return this.caliberService.update(caliberDto);
     }
     @PreAuthorize("hasAnyRole('ADMIN')")
-    @DeleteMapping("delete")
+    @DeleteMapping(value ="admin/delete")
     @ResponseBody
     public List<CaliberDto> disableCaliber(@RequestParam(name = "id") int id) {
 
