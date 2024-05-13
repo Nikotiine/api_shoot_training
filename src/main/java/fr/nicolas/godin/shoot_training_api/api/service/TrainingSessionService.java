@@ -32,7 +32,7 @@ public class TrainingSessionService implements CommonInterface<TrainingSessionDt
     /**
      * Retourne la liste T des element actif
      *
-     * @return List<T>
+     * @return List<TrainingSessionDto>
      */
     @Override
     public List<TrainingSessionDto> getAllActive() {
@@ -40,29 +40,21 @@ public class TrainingSessionService implements CommonInterface<TrainingSessionDt
     }
 
     /**
-     * Creation de l'objet TrainingSession avec son Dto de creation D
+     * Creation de l'objet TrainingSession avec son Dto de creation TrainingSessionCreateDto
      *
      * @param trainingSessionCreateDto TrainingSessionCreateDto
-     * @return T
+     * @return TrainingSessionDto
      */
     @Override
     @Transactional
     public TrainingSessionDto create(TrainingSessionCreateDto trainingSessionCreateDto) {
-
         try {
 
             TrainingSession trainingSession = ModelMapperTool.mapDto(trainingSessionCreateDto, TrainingSession.class);
+            Set<AmmunitionSpeedHistoryCreateDto> ammunitionSpeedHistories = trainingSessionCreateDto.getSpeedHistories();
+            Set<TrainingSessionGroupCreateDto> trainingSessionGroups = trainingSessionCreateDto.getTrainingSessionGroups();
 
-            Set<AmmunitionSpeedHistory> speedHistories = getAmmunitionSpeedHistories(trainingSessionCreateDto.getSpeedHistories(), trainingSession);
-            trainingSession.setSpeedHistories(speedHistories);
-
-            Set<TrainingSessionGroup> trainingSessionGroups = getTrainingSessionGroups(trainingSessionCreateDto.getTrainingSessionGroups(), trainingSession);
-            trainingSession.setTrainingSessionGroups(trainingSessionGroups);
-
-            TrainingSession created = this.trainingSessionRepository.save(trainingSession);
-            this.ammunitionSpeedHistoryRepository.saveAll(speedHistories);
-            this.trainingSessionGroupRepository.saveAll(trainingSessionGroups);
-            return ModelMapperTool.mapDto(created, TrainingSessionDto.class);
+            return this.getTrainingSession(ammunitionSpeedHistories, trainingSessionGroups, trainingSession);
         } catch (DataIntegrityViolationException e) {
 
             throw new CustomException(CustomExceptionMessage.TRAINING_SESSION.getMessage());
@@ -70,69 +62,41 @@ public class TrainingSessionService implements CommonInterface<TrainingSessionDt
 
     }
 
-    private Set<AmmunitionSpeedHistory> getAmmunitionSpeedHistories(Set<AmmunitionSpeedHistoryCreateDto> ammunitionSpeedHistoryCreateDto, TrainingSession trainingSession) {
-        Set<AmmunitionSpeedHistory> speedHistories = new HashSet<>();
-        for (AmmunitionSpeedHistoryCreateDto speedHistoryDto : ammunitionSpeedHistoryCreateDto) {
-            AmmunitionSpeedHistory speedHistory = ModelMapperTool.mapDto(speedHistoryDto,AmmunitionSpeedHistory.class);
-            speedHistory.setTrainingSession(trainingSession);
-            speedHistories.add(speedHistory);
-        }
-        return speedHistories;
-    }
-
-    private Set<TrainingSessionGroup> getTrainingSessionGroups(Set<TrainingSessionGroupCreateDto> trainingSessionGroupCreateDto, TrainingSession trainingSession) {
-        Set<TrainingSessionGroup> trainingSessionGroups = new HashSet<>();
-        for (TrainingSessionGroupCreateDto groupDto : trainingSessionGroupCreateDto) {
-            TrainingSessionGroup sessionGroup = ModelMapperTool.mapDto(groupDto, TrainingSessionGroup.class);
-            sessionGroup.setTrainingSession(trainingSession);
-            trainingSessionGroups.add(sessionGroup);
-        }
-        return trainingSessionGroups;
-    }
 
 
     /**
-     * Mise a jour de l'objet sous son format Dto
+     * Mise a jour de TrainingSession sous son format Dto
      *
-     * @param trainingSessionDto T
-     * @return T
+     * @param trainingSessionDto TrainingSessionDto
+     * @return TrainingSessionDto
      */
     @Override
     @Transactional
     public TrainingSessionDto update(TrainingSessionDto trainingSessionDto) {
         try {
-            List<AmmunitionSpeedHistory> ammunitionSpeedHistoryList = this.ammunitionSpeedHistoryRepository.findAllByTrainingSessionId(trainingSessionDto.getId());
-            List<TrainingSessionGroup> trainingSessionGroupList = this.trainingSessionGroupRepository.findAllByTrainingSessionId(trainingSessionDto.getId());
-            if (!ammunitionSpeedHistoryList.isEmpty()){
+
+            TrainingSession trainingSession = ModelMapperTool.mapDto(trainingSessionDto, TrainingSession.class);
+            List<AmmunitionSpeedHistory> ammunitionSpeedHistoryList = this.ammunitionSpeedHistoryRepository.findAllByTrainingSessionId(trainingSession.getId());
+            List<TrainingSessionGroup> trainingSessionGroupList = this.trainingSessionGroupRepository.findAllByTrainingSessionId(trainingSession.getId());
+            if (!ammunitionSpeedHistoryList.isEmpty()) {
                 this.ammunitionSpeedHistoryRepository.deleteAllByTrainingSessionId(trainingSessionDto.getId());
             }
-            if (!trainingSessionGroupList.isEmpty()){
+            if (!trainingSessionGroupList.isEmpty()) {
                 this.trainingSessionGroupRepository.deleteAllByTrainingSessionId(trainingSessionDto.getId());
             }
 
-
-            TrainingSession trainingSession = ModelMapperTool.mapDto(trainingSessionDto, TrainingSession.class);
-            Set<AmmunitionSpeedHistory> speedHistories = getAmmunitionSpeedHistories(trainingSessionDto.getSpeedHistories(), trainingSession);
-            trainingSession.setSpeedHistories(speedHistories);
-            Set<TrainingSessionGroup> trainingSessionGroups = getTrainingSessionGroups(trainingSessionDto.getTrainingSessionGroups(), trainingSession);
-            trainingSession.setTrainingSessionGroups(trainingSessionGroups);
-
-            TrainingSession updated = this.trainingSessionRepository.save(trainingSession);
-            this.ammunitionSpeedHistoryRepository.saveAll(speedHistories);
-            this.trainingSessionGroupRepository.saveAll(trainingSessionGroups);
-            return ModelMapperTool.mapDto(updated, TrainingSessionDto.class);
-
+            return this.getTrainingSession(trainingSessionDto.getSpeedHistories(), trainingSessionDto.getTrainingSessionGroups(), trainingSession);
         } catch (DataIntegrityViolationException e) {
+
             throw new CustomException(CustomExceptionMessage.TRAINING_SESSION.getMessage());
         }
-
     }
 
     /**
-     * Suppression de l'objet avec son id en param
+     * Suppression de la TrainingSessionDto avec son id en param
      *
      * @param id int
-     * @return List<T>
+     * @return List<TrainingSessionDto> de l'utilisateur connecté
      */
     @Override
     public List<TrainingSessionDto> delete(int id) {
@@ -149,16 +113,31 @@ public class TrainingSessionService implements CommonInterface<TrainingSessionDt
 
     }
 
+    /**
+     * Retourne les sessions active de l'utilisateur connecté
+     * @param id int id de l'user
+     * @return List<TrainingSessionDto>
+     */
     public List<TrainingSessionDto> getAllActiveByUserId(int id) {
 
         return ModelMapperTool.mapList(this.trainingSessionRepository.findTrainingSessionsByUserIdAAndActiveIsTrue(id), TrainingSessionDto.class);
     }
 
+    /**
+     * Retourne toutes les session de l'utilisateur active ou non
+     * @param id int id de l'user
+     * @return List<TrainingSessionDto>
+     */
     public List<TrainingSessionDto> getAllByUserId(int id) {
 
         return ModelMapperTool.mapList(this.trainingSessionRepository.findTrainingSessionBySetup_UserId(id), TrainingSessionDto.class);
     }
 
+    /**
+     * Retourne une session
+     * @param id de la session
+     * @return TrainingSessionDto
+     */
     public TrainingSessionDto getById(int id) {
         try {
             TrainingSession trainingSession = this.trainingSessionRepository.findTrainingSessionById(id);
@@ -168,5 +147,59 @@ public class TrainingSessionService implements CommonInterface<TrainingSessionDt
             throw new CustomException(CustomExceptionMessage.NULL_POINTER_EXCEPTION.getMessage());
         }
 
+    }
+
+
+    /**
+     * Enregistre en base de donne la nouvelle session ou met a jour si la session envoye a un ID
+     * @param ammunitionSpeedHistoryList la liste des vitesses
+     * @param trainingSessionGroupCreateDtoList la liste de groupement
+     * @param trainingSession la session
+     * @return TrainingSessionDto pour le retour au front
+     */
+    private TrainingSessionDto getTrainingSession(Set<AmmunitionSpeedHistoryCreateDto> ammunitionSpeedHistoryList, Set<TrainingSessionGroupCreateDto> trainingSessionGroupCreateDtoList, TrainingSession trainingSession) {
+        Set<AmmunitionSpeedHistory> speedHistories = getAmmunitionSpeedHistories(ammunitionSpeedHistoryList, trainingSession);
+        trainingSession.setSpeedHistories(speedHistories);
+
+
+        Set<TrainingSessionGroup> trainingSessionGroups = getTrainingSessionGroups(trainingSessionGroupCreateDtoList, trainingSession);
+        trainingSession.setTrainingSessionGroups(trainingSessionGroups);
+
+        TrainingSession created = this.trainingSessionRepository.save(trainingSession);
+        this.ammunitionSpeedHistoryRepository.saveAll(speedHistories);
+        this.trainingSessionGroupRepository.saveAll(trainingSessionGroups);
+        return ModelMapperTool.mapDto(created, TrainingSessionDto.class);
+    }
+
+    /**
+     * Map le hashSet a partir de la  TrainingSessionCreateDto , les attibue la trainingSession pour la sauvegarde et retourne le HashSet sous Format d'objet hibernate
+     * @param ammunitionSpeedHistoryCreateDto Set<AmmunitionSpeedHistoryCreateDto>
+     * @param trainingSession TrainingSession
+     * @return Set<AmmunitionSpeedHistory>
+     */
+    private Set<AmmunitionSpeedHistory> getAmmunitionSpeedHistories(Set<AmmunitionSpeedHistoryCreateDto> ammunitionSpeedHistoryCreateDto, TrainingSession trainingSession) {
+        Set<AmmunitionSpeedHistory> speedHistories = new HashSet<>();
+        for (AmmunitionSpeedHistoryCreateDto speedHistoryDto : ammunitionSpeedHistoryCreateDto) {
+            AmmunitionSpeedHistory speedHistory = ModelMapperTool.mapDto(speedHistoryDto,AmmunitionSpeedHistory.class);
+            speedHistory.setTrainingSession(trainingSession);
+            speedHistories.add(speedHistory);
+        }
+        return speedHistories;
+    }
+
+    /**
+     * Map le hashSet a partir de la  TrainingSessionCreateDto , les attibue la trainingSession pour la sauvegarde et retourne le HashSet sous Format d'objet hibernate
+     * @param trainingSessionGroupCreateDto Set<TrainingSessionGroupCreateDto>
+     * @param trainingSession TrainingSession
+     * @return Set<TrainingSessionGroup>
+     */
+    private Set<TrainingSessionGroup> getTrainingSessionGroups(Set<TrainingSessionGroupCreateDto> trainingSessionGroupCreateDto, TrainingSession trainingSession) {
+        Set<TrainingSessionGroup> trainingSessionGroups = new HashSet<>();
+        for (TrainingSessionGroupCreateDto groupDto : trainingSessionGroupCreateDto) {
+            TrainingSessionGroup sessionGroup = ModelMapperTool.mapDto(groupDto, TrainingSessionGroup.class);
+            sessionGroup.setTrainingSession(trainingSession);
+            trainingSessionGroups.add(sessionGroup);
+        }
+        return trainingSessionGroups;
     }
 }

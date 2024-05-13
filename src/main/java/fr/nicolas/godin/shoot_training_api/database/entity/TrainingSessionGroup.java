@@ -26,6 +26,5 @@ public class TrainingSessionGroup extends BaseEntity implements Serializable {
     private float verticalGap;
 
     @ManyToOne(optional = false)
-    @Cascade(CascadeType.ALL)
     private TrainingSession trainingSession;
 }

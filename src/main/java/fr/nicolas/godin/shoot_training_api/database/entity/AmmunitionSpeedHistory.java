@@ -27,6 +27,5 @@ public class AmmunitionSpeedHistory extends BaseEntity implements Serializable {
     private Weapon weapon;
 
     @ManyToOne(optional = false)
-    @Cascade(CascadeType.ALL)
     private TrainingSession trainingSession;
 }

@@ -37,7 +37,7 @@ public class TrainingSession extends BaseEntity implements Serializable {
     @ManyToOne(optional = false)
     private Ammunition ammunition;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.MERGE, orphanRemoval = true)
     private Set<AmmunitionSpeedHistory> speedHistories;
 
     private float pressure;
@@ -46,7 +46,7 @@ public class TrainingSession extends BaseEntity implements Serializable {
 
     private WeaponSupport support;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.MERGE, orphanRemoval = true)
     private Set<TrainingSessionGroup> trainingSessionGroups;
 
 }
