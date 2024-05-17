@@ -120,7 +120,7 @@ public class TrainingSessionService implements CommonInterface<TrainingSessionDt
      */
     public List<TrainingSessionDto> getAllActiveByUserId(int id) {
 
-        return ModelMapperTool.mapList(this.trainingSessionRepository.findTrainingSessionsByUserIdAAndActiveIsTrue(id), TrainingSessionDto.class);
+        return ModelMapperTool.mapList(this.trainingSessionRepository.findTrainingSessionsByUserIdAndActiveIsTrueOrderByCreatedAtAsc(id), TrainingSessionDto.class);
     }
 
     /**
@@ -130,7 +130,7 @@ public class TrainingSessionService implements CommonInterface<TrainingSessionDt
      */
     public List<TrainingSessionDto> getAllByUserId(int id) {
 
-        return ModelMapperTool.mapList(this.trainingSessionRepository.findTrainingSessionBySetup_UserId(id), TrainingSessionDto.class);
+        return ModelMapperTool.mapList(this.trainingSessionRepository.findTrainingSessionsByUserIdAndOrderByCreatedAtAsc(id), TrainingSessionDto.class);
     }
 
     /**
