@@ -1,5 +1,6 @@
 package fr.nicolas.godin.shoot_training_api.api.controller;
 
+import fr.nicolas.godin.shoot_training_api.api.dto.TrainingSessionGroupByMouthDto;
 import fr.nicolas.godin.shoot_training_api.api.dto.TrainingSessionCreateDto;
 import fr.nicolas.godin.shoot_training_api.api.dto.TrainingSessionDto;
 import fr.nicolas.godin.shoot_training_api.api.service.TrainingSessionService;
@@ -58,5 +59,11 @@ public class TrainingSessionController {
     public TrainingSessionDto updateTrainingSession(@Valid @RequestBody TrainingSessionDto trainingSessionDto) {
 
         return this.trainingSessionService.update(trainingSessionDto);
+    }
+
+    @GetMapping(value = "all/user/session/by-mouth")
+    @ResponseBody
+    public TrainingSessionGroupByMouthDto getTrainingSessionByUserIdGroupByMouth(@RequestParam(name = "id")int id){
+       return this.trainingSessionService.getSessionByUserIdGroupByMouth(id);
     }
 }

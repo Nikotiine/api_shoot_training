@@ -1,9 +1,6 @@
 package fr.nicolas.godin.shoot_training_api.api.service;
 
-import fr.nicolas.godin.shoot_training_api.api.dto.AmmunitionSpeedHistoryCreateDto;
-import fr.nicolas.godin.shoot_training_api.api.dto.TrainingSessionCreateDto;
-import fr.nicolas.godin.shoot_training_api.api.dto.TrainingSessionDto;
-import fr.nicolas.godin.shoot_training_api.api.dto.TrainingSessionGroupCreateDto;
+import fr.nicolas.godin.shoot_training_api.api.dto.*;
 import fr.nicolas.godin.shoot_training_api.api.enums.CustomExceptionMessage;
 import fr.nicolas.godin.shoot_training_api.api.interfaces.CommonInterface;
 import fr.nicolas.godin.shoot_training_api.api.tools.ModelMapperTool;
@@ -17,10 +14,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Set;
+import java.util.*;
 
 @Service
 @AllArgsConstructor
@@ -182,6 +176,7 @@ public class TrainingSessionService implements CommonInterface<TrainingSessionDt
         for (AmmunitionSpeedHistoryCreateDto speedHistoryDto : ammunitionSpeedHistoryCreateDto) {
             AmmunitionSpeedHistory speedHistory = ModelMapperTool.mapDto(speedHistoryDto,AmmunitionSpeedHistory.class);
             speedHistory.setTrainingSession(trainingSession);
+            speedHistory.setAmmunition(trainingSession.getAmmunition());
             speedHistories.add(speedHistory);
         }
         return speedHistories;
@@ -201,5 +196,37 @@ public class TrainingSessionService implements CommonInterface<TrainingSessionDt
             trainingSessionGroups.add(sessionGroup);
         }
         return trainingSessionGroups;
+    }
+
+    public TrainingSessionGroupByMouthDto getSessionByUserIdGroupByMouth(int id){
+        try {
+
+            List<TrainingSession> trainingSessionList = this.trainingSessionRepository.findTrainingSessionsByUserIdAndActiveIsTrueOrderByCreatedAtAsc(id);
+            List<TrainingSessionDto> trainingSessionDtoList = ModelMapperTool.mapList(trainingSessionList, TrainingSessionDto.class);
+            Map<Integer, List<TrainingSessionDto>> groupsByMonth = new HashMap<>();
+
+            // Remplir la map avec les groupes triés par mois
+            for (TrainingSessionDto group : trainingSessionDtoList) {
+                Date createdAt = group.getDate();
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(createdAt);
+                Integer month = calendar.get(Calendar.MONTH);
+                groupsByMonth
+                        .computeIfAbsent(month, k -> new ArrayList<>())
+                        .add(group);
+            }
+
+            // Trier les groupes dans chaque mois par date de création
+            for (List<TrainingSessionDto> monthGroups : groupsByMonth.values()) {
+                monthGroups.sort(Comparator.comparing(TrainingSessionDto::getDate));
+            }
+
+            return new TrainingSessionGroupByMouthDto(groupsByMonth);
+
+       } catch (NoSuchElementException e) {
+
+           throw new CustomException(CustomExceptionMessage.NULL_POINTER_EXCEPTION.getMessage());
+       }
+
     }
 }

@@ -28,4 +28,10 @@ public class TrainingSessionGroupCreateDto implements Serializable {
 
     @PositiveOrZero
     float verticalGap;
+
+    @PositiveOrZero
+    float averageGap;
+
+
+
 }
