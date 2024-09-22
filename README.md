@@ -8,7 +8,7 @@
 docker-compose up -d
 ```
 * Initialiser une nouvelle base de données
-* Creer un fichier .env a la racine du projet et mettre les variable suivantes:
+* Creer un fichier .env a la racine du projet et mettre les variables suivantes:
 ```
 DB_PASSWORD=postgres
 DB_USERNAME=postgres

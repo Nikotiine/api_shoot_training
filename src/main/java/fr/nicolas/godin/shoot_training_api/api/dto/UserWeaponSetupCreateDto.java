@@ -19,7 +19,6 @@ public class UserWeaponSetupCreateDto implements Serializable {
     @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)
     WeaponDto weapon;
 
-    @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)
     OpticsDto optics;
 
     @NotNull(message =  DtoDecoratorConfiguration.NOT_NULL_MESSAGE)

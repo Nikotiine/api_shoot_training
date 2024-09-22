@@ -3,6 +3,7 @@ package fr.nicolas.godin.shoot_training_api.api.service;
 import fr.nicolas.godin.shoot_training_api.api.dto.UserWeaponSetupCreateDto;
 import fr.nicolas.godin.shoot_training_api.api.dto.UserWeaponSetupDto;
 import fr.nicolas.godin.shoot_training_api.api.enums.CustomExceptionMessage;
+import fr.nicolas.godin.shoot_training_api.api.enums.WeaponTypes;
 import fr.nicolas.godin.shoot_training_api.api.tools.ModelMapperTool;
 import fr.nicolas.godin.shoot_training_api.configuration.CustomException;
 import fr.nicolas.godin.shoot_training_api.database.entity.UserWeaponSetup;
@@ -23,7 +24,9 @@ public class UserSetupService {
     public UserWeaponSetupDto create(UserWeaponSetupCreateDto userWeaponSetupCreateDto) {
 
         try {
-
+            if (userWeaponSetupCreateDto.getWeapon().getType().getType() == WeaponTypes.RIFFLE && userWeaponSetupCreateDto.getOptics() == null){
+                throw new CustomException(CustomExceptionMessage.WEAPON_SETUP_NEED_OPTIC.getMessage());
+            }
             UserWeaponSetup userWeaponSetup = ModelMapperTool.mapDto(userWeaponSetupCreateDto,UserWeaponSetup.class);
             UserWeaponSetup saved =  this.weaponSetupRepository.save(userWeaponSetup);
             return ModelMapperTool.mapDto(saved, UserWeaponSetupDto.class);

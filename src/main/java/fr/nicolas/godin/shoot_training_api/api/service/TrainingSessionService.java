@@ -198,10 +198,10 @@ public class TrainingSessionService implements CommonInterface<TrainingSessionDt
         return trainingSessionGroups;
     }
 
-    public TrainingSessionGroupByMouthDto getSessionByUserIdGroupByMouth(int id){
+    public TrainingSessionGroupByMouthDto getSessionByUserIdGroupByMouth(int id,int year){
         try {
 
-            List<TrainingSession> trainingSessionList = this.trainingSessionRepository.findTrainingSessionsByUserIdAndActiveIsTrueOrderByCreatedAtAsc(id);
+            List<TrainingSession> trainingSessionList = this.trainingSessionRepository.findTrainingSessionsByUserIdAndActiveIsTrueAndYearOrderByCreatedAtAsc(id,year);
             List<TrainingSessionDto> trainingSessionDtoList = ModelMapperTool.mapList(trainingSessionList, TrainingSessionDto.class);
             Map<Integer, List<TrainingSessionDto>> groupsByMonth = new HashMap<>();
 

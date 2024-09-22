@@ -63,7 +63,7 @@ public class TrainingSessionController {
 
     @GetMapping(value = "all/user/session/by-mouth")
     @ResponseBody
-    public TrainingSessionGroupByMouthDto getTrainingSessionByUserIdGroupByMouth(@RequestParam(name = "id")int id){
-       return this.trainingSessionService.getSessionByUserIdGroupByMouth(id);
+    public TrainingSessionGroupByMouthDto getTrainingSessionByUserIdGroupByMouth(@RequestParam(name = "id")int id,@RequestParam(name = "year")int year){
+       return this.trainingSessionService.getSessionByUserIdGroupByMouth(id,year);
     }
 }

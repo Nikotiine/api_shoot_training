@@ -20,6 +20,16 @@ public interface TrainingSessionRepository extends JpaRepository<TrainingSession
             )
     List<TrainingSession> findTrainingSessionsByUserIdAndActiveIsTrueOrderByCreatedAtAsc(@Param("userId") int userId);
 
+    @Query("SELECT ts FROM TrainingSession ts " +
+            "JOIN ts.setup uws " +
+            "JOIN uws.user u " +
+            "WHERE u.id = :userId AND ts.active = true AND YEAR(ts.createdAt) = :year " +
+            "ORDER BY ts.createdAt ASC")
+    List<TrainingSession> findTrainingSessionsByUserIdAndActiveIsTrueAndYearOrderByCreatedAtAsc(
+            @Param("userId") int userId,
+            @Param("year") int year
+    );
+
     TrainingSession findTrainingSessionById(int id);
 
 

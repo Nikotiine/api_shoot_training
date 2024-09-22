@@ -16,6 +16,7 @@ public enum CustomExceptionMessage {
     OPTIC_MODEL_IS_EXIST(HttpStatus.BAD_REQUEST,"Cette lunette existe deja"),
     NULL_POINTER_EXCEPTION(HttpStatus.BAD_REQUEST,"Erreur de parametre dans la requete (ID inconnu)"),
     WEAPON_SETUP_IS_EXIST(HttpStatus.BAD_REQUEST,"Ce setup existe deja"),
+    WEAPON_SETUP_NEED_OPTIC(HttpStatus.BAD_REQUEST,"Ce setup necesitte une optique"),
     CALIBER_IS_EXIST(HttpStatus.BAD_REQUEST,"Ce calibre existe deja"),
     WEIGHT_IS_EXIST(HttpStatus.BAD_REQUEST,"Ce poids existe deja"),
     AMMUNITION_NAME_AND_FACTORY_EXIST(HttpStatus.BAD_REQUEST,"Ce model existe deja dans cette marque"),
